@@ -9,6 +9,7 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
+    # user: "501:20" # on macOS and Linux, replace this with your real user id and group id
     volumes:
      - ./api:/app
 
@@ -40,6 +41,7 @@ services:
     working_dir: /app
     volumes:
       - ./ghi:/app
+    # user: "501:20" # on macOS and Linux, replace this with your real user id and group id
     ports:
       - "5173:5173"
     environment:
