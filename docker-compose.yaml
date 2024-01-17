@@ -3,7 +3,7 @@ services:
   fastapi:
     environment:
       DATABASE_URL: postgresql://admin:admin@postgres:5432/postgres-data
-      CORS_HOST: http://localhost:3000
+      CORS_HOST: http://localhost:5173
     build:
       context: api
       dockerfile: Dockerfile.dev
@@ -41,7 +41,7 @@ services:
     volumes:
       - ./ghi:/app
     ports:
-      - "3000:3000"
+      - "5173:5173"
     environment:
       HOST_OS: ${OS}
       NODE_ENV: development
