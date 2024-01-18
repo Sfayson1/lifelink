@@ -2,7 +2,8 @@
 services:
   fastapi:
     environment:
-      DATABASE_URL: postgresql://admin:admin@postgres:5432/postgres-data
+      DATABASE_URL: ${DATABASE_URL_FROM_ENV_FILE}
+      SIGNING_KEY: ${SIGNING_KEY_FROM_ENV_FILE}
       CORS_HOST: http://localhost:5173
     build:
       context: api
