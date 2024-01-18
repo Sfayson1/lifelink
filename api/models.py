@@ -1,5 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from datetime import datetime
 from jwtdown_fastapi.authentication import Token
+from datetime import datetime
 
 
 class UserIn(BaseModel):
@@ -33,3 +35,18 @@ class UserOut(BaseModel):
 
 class UserToken(Token):
     user: UserOut
+
+class PostIn(BaseModel):
+    post_id: int
+    first_name: str
+    last_name: str
+    content: str
+    date_posted: datetime = Field(default_factory=datetime.utcnow)
+
+
+class PostOut(BaseModel):
+    post_id: int
+    first_name: str
+    last_name: str
+    content: str
+    date_posted: datetime
