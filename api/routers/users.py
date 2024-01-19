@@ -6,8 +6,8 @@ from fastapi import (
     APIRouter,
     Request,
 )
-from models import UserToken, UserIn, UserForm, UserOut
-from queries.users import UserQueries, DuplicateAccountError, UserOutWithPassword, UserOutWithBoth
+from models import UserToken, UserIn, UserForm, UserOut, UserInNoPass
+from queries.users import UserQueries, DuplicateAccountError
 from authenticator import authenticator
 from pydantic import BaseModel
 from typing import List, Optional, Union
@@ -53,25 +53,16 @@ async def create_user(
     token = await authenticator.login(response, request, form, repo)
     return UserToken(user=user, **token.dict())
 
-@router.put("/users/{user_id}/", response_model=Union[UserOutWithBoth, Error])
-async def update_user(
-    info: UserOutWithBoth,
-    request: Request,
-    response: Response,
+@router.put("/users/{user_id}/", response_model=Union[UserOut, Error])
+def update_user(
+    user_id: int,
+    user: UserInNoPass,
     repo: UserQueries = Depends(),
-):
-    hashed_password = authenticator.hash_password(info.password)
-    try:
-        user = repo.update_user(info, hashed_password=hashed_password)
-    except DuplicateAccountError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot update the account",
-        )
-    form = UserForm(username=info.username, password=info.password)
+) -> Union[Error, UserOut]:
+    return repo.update_user(user_id, user)
 
 @router.delete("/users/{user_id}/", response_model=bool)
-async def delete_user(
+def delete_user(
     user_id:int,
     repo: UserQueries = Depends(),
 ) ->bool:

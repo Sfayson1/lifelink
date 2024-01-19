@@ -1,7 +1,7 @@
 # James Bratcher's journal
 
 ## 3
-1/19/2024: Worked on and tested all endpoints, I was able to get update to work, but the hashed_password would not change thus the new changed password would not work to log in the user. currently debugging it.
+1/19/2024: Was stuck on update_user, able to figure it out, had to create a new model. Ready to git add, commit, and push. Going to have the team pull and double check it to make sure there are no other bugs. Going to see where Zack is on post 
 
 ## 2
 1/18/2024: Had to debug the authentication for creating user and getting user. At end of day, Create_user, Get_all, and Get_user are completed and tested, Debugging update User. Error I receive is
@@ -54,5 +54,6 @@ CREATE TABLE users (
 	grad_class VARCHAR(255),
     hashed_password VARCHAR(255)
 );
+
 
 Open Swagger with http://localhost:8000/docs#/
