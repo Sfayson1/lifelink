@@ -1,5 +1,16 @@
 # James Bratcher's journal
 
+## 3
+1/19/2024: Worked on and tested all endpoints, I was able to get update to work, but the hashed_password would not change thus the new changed password would not work to log in the user. currently debugging it.
+
+## 2
+1/18/2024: Had to debug the authentication for creating user and getting user. At end of day, Create_user, Get_all, and Get_user are completed and tested, Debugging update User. Error I receive is
+
+2024-01-18 17:07:03 column "password" of relation "users" does not exist
+2024-01-18 17:07:03 LINE 6:                             , password = $4
+
+Talking to SEIR Eli Spicer, he recommended I create an update query which essentially does the same as create but updates the table. I'll have to try this tomorrow.
+
 
 ## 1
 1/17/2024: Set up authentication for creating user, getting user (login), and token creation. Ran into issue of examples showing how to do it with Mongo, not Postgres. Tried to get the Create User to work with an email instead of username, kept running into a bug. Changed to use username and got a code200! Working on Get user to work. Running into error:

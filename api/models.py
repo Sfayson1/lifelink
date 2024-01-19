@@ -25,9 +25,19 @@ class UserOutWithPassword(BaseModel):
     grad_class: str
     hashed_password: str
 
-class UserOut(BaseModel):
-    id: str
+class UserOutWithBoth(BaseModel):
+    id:str
     username: str
+    first_name: str
+    last_name: str
+    password: str
+    email: str
+    grad_class: str
+    hashed_password: str
+
+class UserOut(BaseModel):
+    id: int
+    username:str
     first_name: str
     last_name: str
     email: str
