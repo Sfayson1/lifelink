@@ -44,3 +44,8 @@ async def delete_post(
             detail="Post not found",
         )
     return {"message": "Post deleted successfully"}
+
+@router.put("/posts/{post_id}")
+async def update_post(
+
+)

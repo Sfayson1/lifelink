@@ -5,10 +5,10 @@ from datetime import datetime
 
 
 class UserIn(BaseModel):
-    username:str
+    username: str
     first_name: str
     last_name: str
-    password:str
+    password: str
     email: str
     grad_class: str
 
@@ -17,7 +17,7 @@ class UserForm(BaseModel):
     password: str
 
 class UserOutWithPassword(BaseModel):
-    id:str
+    id: str
     username: str
     first_name: str
     last_name: str
@@ -26,8 +26,8 @@ class UserOutWithPassword(BaseModel):
     hashed_password: str
 
 class UserOut(BaseModel):
-    id:str
-    username:str
+    id: str
+    username: str
     first_name: str
     last_name: str
     email: str

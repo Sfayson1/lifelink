@@ -56,3 +56,25 @@ class UserQueries:
                     for i, column in enumerate(db.description):
                         record[column.name] = row[i]
                 return UserOutWithPassword(**record)
+
+    def update_user(self, username: str, updated_data) -> UserOutWithPassword:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                set_clause = ", ".join(f"{column} = %s" for column in updated_data.keys())
+                params = list(updated_data.values()) + [username]
+                db.execute(
+                    f"""
+                    UPDATE users
+                    SET {set_clause}
+                    WHERE username = %s
+                    RETURNING id, username, first_name, last_name, email, grad_class, hashed_password
+                    """,
+                    params,
+                )
+                record = None
+                row = db.fetchone()
+                if row is not None:
+                    record = {}
+                    for i, column in enumerate(db.description):
+                        record[column.name] = row[i]
+                return UserOutWithPassword(**record)

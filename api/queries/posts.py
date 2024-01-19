@@ -66,3 +66,8 @@ class PostQueries:
                     [post_id],
                 )
                 return db.rowcount > 0
+
+    def update(self, post_id: int, PostIn) -> Union[PostOut, Error]:
+        with.pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute()

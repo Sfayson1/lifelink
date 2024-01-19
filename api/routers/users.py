@@ -55,3 +55,14 @@ async def get_token(
             "type": "Bearer",
             "user": user,
         }
+
+@router.put("/users/{user_id}", response_model=UserOut)
+async def update_user_profile(user_id: int, updated_info: UserIn, queries: UserQueries = Depends()):
+    try:
+        updated_user = queries.update_user_profile(user_id, updated_info)
+        return updated_user
+    except UserNotFoundError:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Username does not exist"
+        )
