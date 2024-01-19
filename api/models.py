@@ -10,6 +10,13 @@ class UserIn(BaseModel):
     email: str
     grad_class: str
 
+class UserInNoPass(BaseModel):
+    username:str
+    first_name: str
+    last_name: str
+    email: str
+    grad_class: str
+
 class UserForm(BaseModel):
     username: str
     password: str
@@ -19,16 +26,6 @@ class UserOutWithPassword(BaseModel):
     username: str
     first_name: str
     last_name: str
-    email: str
-    grad_class: str
-    hashed_password: str
-
-class UserOutWithBoth(BaseModel):
-    id:str
-    username: str
-    first_name: str
-    last_name: str
-    password: str
     email: str
     grad_class: str
     hashed_password: str
