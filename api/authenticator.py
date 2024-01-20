@@ -2,7 +2,7 @@ import os
 from fastapi import Depends
 from jwtdown_fastapi.authentication import Authenticator
 from queries.users import UserQueries
-from models import UserOutWithPassword
+from models import UserOutWithPassword, UserOut
 
 
 class LifeLinkAuthenticator(Authenticator):
@@ -26,12 +26,12 @@ class LifeLinkAuthenticator(Authenticator):
         # account object
         return account.hashed_password
 
-    def get_account_data_for_cookie(self, account):
+    def get_account_data_for_cookie(self, account: UserOutWithPassword):
         # Return the username and the data for the cookie.
         # You must return TWO values from this method.
-        if isinstance(account, dict):
-            account = UserOutWithPassword(**account)
-        return account.username, account.dict()
+        return account.username, UserOut(**account.dict())
+
+
 
 
 authenticator = LifeLinkAuthenticator(os.environ["SIGNING_KEY"])
