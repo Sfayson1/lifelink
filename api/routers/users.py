@@ -88,3 +88,4 @@ async def get_token(
             "type": "Bearer",
             "user": user,
         }
+
