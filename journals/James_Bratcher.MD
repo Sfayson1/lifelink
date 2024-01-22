@@ -1,7 +1,16 @@
 # James Bratcher's journal
+## 4
+1/20/2024: Wanted to spend ~2 hours today to look at the Post model and endpoints. Primarily focused on the code for create_post. Was able to get create_post to work, then was able to have create_post to require a user login. Now upon submission "user_id" is not pulled from the user logged in, will need to work on this. As of right now, when using pgAdmin, the following code is needed in the SQL query to generate the "posts" table:
+
+CREATE TABLE posts (
+	id SERIAL PRIMARY KEY,
+	content VARCHAR,
+    date_posted DATE,
+	user_id VARCHAR
+);
 
 ## 3
-1/19/2024: Worked on and tested all endpoints, I was able to get update to work, but the hashed_password would not change thus the new changed password would not work to log in the user. currently debugging it.
+1/19/2024: Was stuck on update_user, able to figure it out, had to create a new model. Ready to git add, commit, and push. Going to have the team pull and double check it to make sure there are no other bugs. Going to see where Zack is on post 
 
 ## 2
 1/18/2024: Had to debug the authentication for creating user and getting user. At end of day, Create_user, Get_all, and Get_user are completed and tested, Debugging update User. Error I receive is
@@ -54,5 +63,6 @@ CREATE TABLE users (
 	grad_class VARCHAR(255),
     hashed_password VARCHAR(255)
 );
+
 
 Open Swagger with http://localhost:8000/docs#/

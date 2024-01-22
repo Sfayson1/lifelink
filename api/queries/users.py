@@ -1,8 +1,8 @@
 import os
 from psycopg_pool import ConnectionPool
-from models import UserOutWithPassword, UserOut, UserIn, UserOutWithBoth
+from models import UserOutWithPassword, UserOut, UserInNoPass
 from typing import List, Optional, Union
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel
 
 pool = ConnectionPool(conninfo=os.environ.get("DATABASE_URL"))
 
@@ -57,23 +57,27 @@ class UserQueries:
                     db.execute(
                         """
                         UPDATE users
-                        SET username=%s, first_name=%s, last_name=%s, password=%s, email=%s, grad_class=%s, hashed_password=%s
-                        WHERE id=%s
-                        RETURNING id, username, first_name, last_name, password, email, grad_class, hashed_password
+                        SET username = %s
+                            , first_name = %s
+                            , last_name = %s
+                            , email = %s
+                            , grad_class = %s
+                        WHERE id = %s
                         """,
-                        params,
+                        [
+                            user.username,
+                            user.first_name,
+                            user.last_name,
+                            user.email,
+                            user.grad_class,
+                            user_id
+                        ]
                     )
-
-                    record = None
-                    row = db.fetchone()
-                    if row is not None:
-                        record = {}
-                        for i, column in enumerate(db.description):
-                            record[column.name] = row[i]
-                    return UserOutWithBoth(**record)
+                    old_data = user.dict()
+                    return UserOut(id=user_id, **old_data)
         except Exception as e:
             print(e)
-            return {"message": "Could not update"}
+            return{"message": "Could not update user"}
 
     def delete_user(self, user_id: int) -> bool:
         try:

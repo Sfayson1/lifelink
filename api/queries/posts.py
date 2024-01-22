@@ -2,6 +2,7 @@ import os
 from psycopg_pool import ConnectionPool
 from models import PostOut
 from fastapi import FastAPI
+from typing import Optional
 
 
 app = FastAPI()
@@ -33,27 +34,32 @@ class PostQueries:
                 except Exception:
                     return {"message": "Could not get post record for this id"}
 
-    def create_post(self, data) -> PostOut:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                params = [
-                    data.post_id,
-                    data.content,
-                ]
-                db.execute(
-                    """
-                    INSERT INTO posts (post_id, content, created_at, updated_at)
-                    VALUES (%s, %s, NOW(), NOW())
-                    RETURNING id, post_id, content, created_at, updated_at;
-                    """,
-                    params,
-                )
-                record = None
-                for row in db.fetchall():
-                    record = {}
-                    for i, column in enumerate(db.description):
-                        record[column.name] = row[i]
-                return PostOut(**record)
+    def create_post(self, data, user_id: Optional[int] = None) -> PostOut:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    params = [
+                        data.content,
+                        data.date_posted,
+                        user_id
+                    ]
+                    db.execute(
+                        """
+                        INSERT INTO posts (content, date_posted, user_id)
+                        VALUES (%s, %s, %s)
+                        RETURNING id, content, date_posted;
+                        """,
+                        params,
+                    )
+                    record = None
+                    row = db.fetchone()
+                    if row is not None:
+                        record = {}
+                        for i, column in enumerate(db.description):
+                            record[column.name] = row[i]
+                        return PostOut(**record)
+        except Exception as e:
+            print(e)
 
     def delete_post(self, post_id: int) -> bool:
         with pool.connection() as conn:
