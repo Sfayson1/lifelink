@@ -32,16 +32,19 @@ class UserOutWithPassword(BaseModel):
     grad_class: str
     hashed_password: str
 
+
 class UserOut(BaseModel):
     id: int
-    username:str
+    username: str
     first_name: str
     last_name: str
     email: str
     grad_class: str
 
+
 class UserToken(Token):
     user: UserOut
+
 
 class PostIn(BaseModel):
     content: str

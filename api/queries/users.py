@@ -1,6 +1,6 @@
 import os
 from psycopg_pool import ConnectionPool
-from models import UserOutWithPassword, UserOut, UserInNoPass
+from models import UserOutWithPassword, UserOut
 from typing import List, Optional, Union
 from pydantic import BaseModel
 
