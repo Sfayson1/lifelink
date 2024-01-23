@@ -37,13 +37,12 @@ async def create_post(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
-    user_id = account_data.get("user_id")
-    return repo.create_post(post)
+    print('****ACCOUNT DATA****', account_data)
+    return repo.create_post(data=post, user_id=account_data['username'])
 
 @router.delete("/posts/{post_id}/", response_model=bool)
 async def delete_post(
     post_id: int,
     repo: PostQueries = Depends(),
 ) ->bool:
-    return repo.dete_post(post_id)
-    
+    return repo.delete_post(post_id)
