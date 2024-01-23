@@ -89,3 +89,23 @@ class PostQueries:
                         record[column.name] = row[i]
                     records.append(PostOut(**record))
                 return {"posts": records}
+
+
+    def get_user_posts(self, username: str) -> dict:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT *
+                    FROM posts
+                    WHERE user_id = %s;
+                    """,
+                    [username],
+                )
+                records = []
+                for row in db.fetchall():
+                    record = {}
+                    for i, column in enumerate(db.description):
+                        record[column.name] = row[i]
+                    records.append(PostOut(**record))
+                return {"posts": records}
