@@ -50,9 +50,11 @@ class PostIn(BaseModel):
     date_posted: date = Field(default_factory=lambda: datetime.utcnow().date())
 
 
+
 class PostOut(PostIn):
     id: int
     content: str
+
 
 
 class PostList(BaseModel):
