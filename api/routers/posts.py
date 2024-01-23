@@ -17,6 +17,12 @@ router = APIRouter()
 class HttpError(BaseModel):
     detail: str
 
+@router.get("/posts/all", response_model=PostList)
+async def list_all_posts(
+    repo: PostQueries = Depends(),
+):
+    return repo.get_all()
+
 @router.get("/posts/", response_model=PostList)
 async def list_users_posts(
     post_id: int,
