@@ -26,10 +26,11 @@ async def list_users_posts(
 
 @router.get("/posts/mine", response_model=PostList)
 async def list_my_posts(
-    post_id: int,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
-    return repo.get_post(post_id)
+    print('****ACCOUNT DATA****', account_data)
+    return repo.post_mine(username = account_data['username'])
 
 @router.post("/posts", response_model=PostOut)
 async def create_post(

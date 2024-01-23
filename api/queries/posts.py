@@ -18,7 +18,7 @@ class PostQueries:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    SELECT id, user_id, content, created_at, updated_at
+                    SELECT id, user_id, content, date_posted
                     FROM posts
                     WHERE id = %s;
                     """,
@@ -72,3 +72,20 @@ class PostQueries:
                     [post_id],
                 )
                 return db.rowcount > 0
+            
+    def post_mine(self, username) -> Optional[PostOut]:
+        try:
+            with pool.connection() as conn, conn.cursor() as cursor:
+                cursor.execute(
+                        """
+                        SELECT *
+                        FROM posts
+                        WHERE user_id = %s
+                        """,
+                        [username]
+                )
+                record = cursor.fetchone()
+                return self.record_to_post_out(record)
+        except Exception as e:
+            print(f"Error fetching post with id {username}: {e}")
+            return {"message": "Could not get that post"}
