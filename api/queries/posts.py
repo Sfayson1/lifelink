@@ -42,7 +42,7 @@ class PostQueries:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    SELECT id, user_id, content, created_at, updated_at
+                    SELECT id, user_id, content
                     FROM posts
                     WHERE id = %s;
                     """,
@@ -96,3 +96,20 @@ class PostQueries:
                     [post_id],
                 )
                 return db.rowcount > 0
+
+    def get_all(self) -> dict:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT *
+                    FROM posts;
+                    """
+                )
+                records = []
+                for row in db.fetchall():
+                    record = {}
+                    for i, column in enumerate(db.description):
+                        record[column.name] = row[i]
+                    records.append(PostOut(**record))
+                return {"posts": records}
