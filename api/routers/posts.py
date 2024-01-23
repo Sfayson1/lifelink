@@ -17,12 +17,12 @@ router = APIRouter()
 class HttpError(BaseModel):
     detail: str
 
-@router.get("/posts/", response_model=PostList)
-async def list_users_posts(
-    post_id: int,
+@router.get("/posts/all", response_model=PostList)
+async def list_all_posts(
     repo: PostQueries = Depends(),
 ):
-    return repo.get_post(post_id)
+    return repo.get_all()
+
 
 @router.get("/posts/mine", response_model=PostList)
 async def list_my_posts(
@@ -47,3 +47,10 @@ async def delete_post(
     repo: PostQueries = Depends(),
 ) ->bool:
     return repo.delete_post(post_id)
+
+@router.get("/posts/{username}", response_model=PostList)
+async def list_users_posts(
+    username: str,
+    repo: PostQueries = Depends(),
+):
+    return repo.get_user_posts(username)
