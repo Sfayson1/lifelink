@@ -1,6 +1,6 @@
 import os
 from psycopg_pool import ConnectionPool
-from models import PostOut
+from models import PostOut, PostIn
 from fastapi import FastAPI
 from typing import Optional
 
@@ -13,29 +13,28 @@ class DuplicateAccountError(ValueError):
     pass
 
 class PostQueries:
-    def list_user_posts(self, user_id: int) -> Optional[PostOut]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    print(user_id)
-                    result = db.execute(
-                        """
-                        Select id, content, date_posted
-                        FROM posts
-                        WHERE user_id = %s
-                        """,
-                        [user_id],
-                    )
-                    record = result.fetchall()
-                    if not record:
-                        return None
-                    return PostOut(
-                        id=record[0],
-                        content=record[1],
-                        date_posted=record[2]
-                    )
-        except Exception:
-            return {"message": "Could not get user record for this id"}
+    def list_user_posts(self, user_id: int) -> dict:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                print(user_id)
+                db.execute(
+                    """
+                    SELECT *
+                    FROM posts
+                    WHERE user_id = %s;
+                    """,
+                    [str(user_id)],
+                )
+                records = []
+                while True:
+                    row = db.fetchone()
+                    if row is None:
+                        break
+                    record = {}
+                    for i, column in enumerate(db.description):
+                        record[column.name] = row[i]
+                    records.append(PostOut(**record))
+                return {"posts": records}
 
     def get_post(self, post_id: int) -> PostOut:
         with pool.connection() as conn:
@@ -58,19 +57,20 @@ class PostQueries:
                 except Exception:
                     return {"message": "Could not get post record for this id"}
 
-    def create_post(self, data, user_id: Optional[int] = None) -> PostOut:
+    def create_post(self, data, user_id: Optional[int] = None, username: Optional[str] = None) -> PostOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     params = [
                         data.content,
                         data.date_posted,
-                        user_id
+                        user_id,
+                        username
                     ]
                     db.execute(
                         """
-                        INSERT INTO posts (content, date_posted, user_id)
-                        VALUES (%s, %s, %s)
+                        INSERT INTO posts (content, date_posted, user_id, username)
+                        VALUES (%s, %s, %s, %s)
                         RETURNING id, content, date_posted;
                         """,
                         params,
