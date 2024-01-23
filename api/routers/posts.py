@@ -5,10 +5,11 @@ from fastapi import (
     APIRouter,
 
 )
-from models import PostIn, PostOut, PostList
+from models import PostIn, PostOut
 from queries.posts import PostQueries
 from pydantic import BaseModel
 from authenticator import authenticator
+from typing import Optional
 
 
 router = APIRouter()
@@ -17,14 +18,22 @@ router = APIRouter()
 class HttpError(BaseModel):
     detail: str
 
-@router.get("/posts/", response_model=PostList)
-async def list_users_posts(
+@router.get("/posts/{user_id}", response_model=Optional[PostOut])
+async def list_user_posts(
+    user_id: int,
+    repo: PostQueries = Depends()
+) -> Optional[PostOut]:
+    print('****DATA****', user_id)
+    return repo.list_user_posts(user_id)
+
+@router.get("/posts/", response_model=PostOut)
+async def list_all_posts(
     post_id: int,
     repo: PostQueries = Depends(),
 ):
     return repo.get_post(post_id)
 
-@router.get("/posts/mine", response_model=PostList)
+@router.get("/posts/mine", response_model=PostOut)
 async def list_my_posts(
     post_id: int,
     repo: PostQueries = Depends(),

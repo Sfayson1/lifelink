@@ -13,6 +13,30 @@ class DuplicateAccountError(ValueError):
     pass
 
 class PostQueries:
+    def list_user_posts(self, user_id: int) -> Optional[PostOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    print(user_id)
+                    result = db.execute(
+                        """
+                        Select id, content, date_posted
+                        FROM posts
+                        WHERE user_id = %s
+                        """,
+                        [user_id],
+                    )
+                    record = result.fetchall()
+                    if not record:
+                        return None
+                    return PostOut(
+                        id=record[0],
+                        content=record[1],
+                        date_posted=record[2]
+                    )
+        except Exception:
+            return {"message": "Could not get user record for this id"}
+
     def get_post(self, post_id: int) -> PostOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
