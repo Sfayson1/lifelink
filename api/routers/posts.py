@@ -63,3 +63,4 @@ async def update_post(
     repo: PostQueries = Depends(),
 ) -> Union[Error, PostOut]:
     return repo.update
+
