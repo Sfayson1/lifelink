@@ -1,4 +1,18 @@
 # James Bratcher's journal
+## 7
+1/24/2024: Assisted Leah with update_post, were able to get it done
+
+## 6
+1/23/2024: Worked on get_user_posts today with Zack, spent most of the day on it. Kept hitting an error:
+2024-01-23 15:40:54 psycopg.errors.UndefinedFunction: operator does not exist: character varying = integer
+2024-01-23 15:40:54 LINE 4:                     WHERE user_id = $1::int;
+2024-01-23 15:40:54                                           ^
+2024-01-23 15:40:54 HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+Both Zack and I found out different fixes at about the same time, we decided to go with his fix and put mine in a separate branch "Backup" in case we needed it. We're going to assist Leah and Sherika with update_post and get_mine tomorrow.
+
+## 5
+1/22/2024: Debugging madness, worked with Zack, Leah, and Sherika to try and get the User endpoints to work with their databases. Turns out you have to use postgres-data instead of postgres in pgadmin. Verified everything worked by end of day. Onto Posts.
+
 ## 4
 1/20/2024: Wanted to spend ~2 hours today to look at the Post model and endpoints. Primarily focused on the code for create_post. Was able to get create_post to work, then was able to have create_post to require a user login. Now upon submission "user_id" is not pulled from the user logged in, will need to work on this. As of right now, when using pgAdmin, the following code is needed in the SQL query to generate the "posts" table:
 

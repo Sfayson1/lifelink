@@ -1,6 +1,6 @@
 import os
 from psycopg_pool import ConnectionPool
-from models import PostOut
+from models import PostOut, PostIn
 from fastapi import FastAPI
 from typing import Optional
 
@@ -13,30 +13,6 @@ class DuplicateAccountError(ValueError):
     pass
 
 class PostQueries:
-    def list_user_posts(self, user_id: int) -> Optional[PostOut]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    print(user_id)
-                    result = db.execute(
-                        """
-                        Select id, content, date_posted
-                        FROM posts
-                        WHERE user_id = %s
-                        """,
-                        [user_id],
-                    )
-                    record = result.fetchall()
-                    if not record:
-                        return None
-                    return PostOut(
-                        id=record[0],
-                        content=record[1],
-                        date_posted=record[2]
-                    )
-        except Exception:
-            return {"message": "Could not get user record for this id"}
-
     def get_post(self, post_id: int) -> PostOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -84,6 +60,7 @@ class PostQueries:
                         return PostOut(**record)
         except Exception as e:
             print(e)
+            return{"message": "Could not create user"}
 
     def delete_post(self, post_id: int) -> bool:
         with pool.connection() as conn:
@@ -113,3 +90,44 @@ class PostQueries:
                         record[column.name] = row[i]
                     records.append(PostOut(**record))
                 return {"posts": records}
+
+
+    def get_user_posts(self, username: str) -> dict:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT *
+                    FROM posts
+                    WHERE user_id = %s;
+                    """,
+                    [username],
+                )
+                records = []
+                for row in db.fetchall():
+                    record = {}
+                    for i, column in enumerate(db.description):
+                        record[column.name] = row[i]
+                    records.append(PostOut(**record))
+                return {"posts": records}
+
+    def update_post(self, post_id: int, post: PostIn) -> PostOut:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE posts
+                        SET content = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            post.content,
+                            post_id
+                        ]
+                    )
+                    old_data = post.dict()
+                    return PostOut(id=post_id, **old_data)
+        except Exception as e:
+            print(e)
+            return{"message": "Could not update user"}
