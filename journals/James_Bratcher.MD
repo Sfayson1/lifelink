@@ -1,6 +1,6 @@
 # James Bratcher's journal
 ## 7
-1/24/2024: Assisted Leah with update_post, were able to get it done
+1/24/2024: Assisted Leah with update_post, we're able to get it done. Testing completed on all Endpoints and Auths
 
 ## 6
 1/23/2024: Worked on get_user_posts today with Zack, spent most of the day on it. Kept hitting an error:
