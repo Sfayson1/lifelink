@@ -9,10 +9,14 @@ from models import PostIn, PostOut, PostList
 from queries.posts import PostQueries
 from pydantic import BaseModel
 from authenticator import authenticator
+from typing import Union
 
 
 router = APIRouter()
 
+
+class Error(BaseModel):
+    message: str
 
 class HttpError(BaseModel):
     detail: str
@@ -29,7 +33,7 @@ async def list_my_posts(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
-    return repo.get_user_posts(username = account_data['username'])
+    return repo.get_user_posts(username=account_data['username'])
 
 @router.post("/posts", response_model=PostOut)
 async def create_post(
@@ -53,3 +57,12 @@ async def list_users_posts(
     repo: PostQueries = Depends(),
 ):
     return repo.get_user_posts(username)
+
+
+@router.put("/posts/{post_id}/", response_model=Union[PostOut, Error])
+def update_post(
+    post_id: int,
+    post: PostIn,
+    repo: PostQueries = Depends(),
+) -> Union[Error, PostOut]:
+    return repo.update_post(post_id, post)
