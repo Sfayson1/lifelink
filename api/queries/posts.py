@@ -18,7 +18,7 @@ class PostQueries:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    SELECT id, user_id, content, created_at, updated_at
+                    SELECT id, user_id, content
                     FROM posts
                     WHERE id = %s;
                     """,
@@ -73,15 +73,39 @@ class PostQueries:
                 )
                 return db.rowcount > 0
 
-    def update(self, post_id: int, PostIn) -> Union[PostOut, Error]:
+    def get_all(self) -> dict:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    UPDATE post
-                    SET name = %s
-                     , from = %s
+                    SELECT *
+                    FROM posts;
                     """
                 )
-                old_data = post.dict()
-                return Pod
+                records = []
+                for row in db.fetchall():
+                    record = {}
+                    for i, column in enumerate(db.description):
+                        record[column.name] = row[i]
+                    records.append(PostOut(**record))
+                return {"posts": records}
+
+
+    def get_user_posts(self, username: str) -> dict:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT *
+                    FROM posts
+                    WHERE user_id = %s;
+                    """,
+                    [username],
+                )
+                records = []
+                for row in db.fetchall():
+                    record = {}
+                    for i, column in enumerate(db.description):
+                        record[column.name] = row[i]
+                    records.append(PostOut(**record))
+                return {"posts": records}
