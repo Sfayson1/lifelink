@@ -45,4 +45,7 @@ that is the skeleton of the database, the rest is getting the actual data in the
 
 
 ## 2
-the last couple days have been spent working on Posts backend, mostly debugging. a big mistake i made without knowing, was we were executing the database queries in a copy called postgres, and nothing was working. after that was straightened out, things started moving a lot more quickly. all our work began to
+the last couple days have been spent working on Posts backend, mostly debugging. a big mistake i made without knowing, was we were executing the database queries in a copy called postgres, and nothing was working. after that was straightened out, things started moving a lot more quickly.
+
+## 3
+this morning, i finished the posts/mine backend api endpoint. this function uses the same logic as the "get_users_posts" that will serve as a the back end for the "profile" page in the browser later on. the difference is that it will automatically get the account data from the logged in user, and 
