@@ -4,6 +4,7 @@ from jwtdown_fastapi.authentication import Token
 
 
 
+
 class UserIn(BaseModel):
     username: str
     first_name: str
