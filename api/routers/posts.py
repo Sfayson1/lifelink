@@ -53,3 +53,12 @@ async def delete_post(
     repo: PostQueries = Depends(),
 ) ->bool:
     return repo.dete_post(post_id)
+
+
+@router.put("/posts/{post_id}/", response_model=Union[PostOut, Error])
+def update_post(
+    post_id: int,
+    post: PostIn,
+    repo: PostQueries = Depends(),
+) -> Union[Error, PostOut]:
+    return repo.update_post(post_id, post)

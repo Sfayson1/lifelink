@@ -109,3 +109,25 @@ class PostQueries:
                         record[column.name] = row[i]
                     records.append(PostOut(**record))
                 return {"posts": records}
+
+    def update(self, post_id: int, data) -> Optional[PostOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE posts
+                        SET content = %s
+                        WHERE id = %s
+                        RETURNING id, content, date_posted;
+                        """,
+                        [
+                            data.content,
+                            post_id
+                        ]
+                    )
+                    old_data = data.dict()
+                    return PostOut(id=post_id, **old_data)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update post"}
