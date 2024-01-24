@@ -72,23 +72,6 @@ class PostQueries:
                     [post_id],
                 )
                 return db.rowcount > 0
-            
-    def post_mine(self, username) -> Optional[PostOut]:
-        try:
-            with pool.connection() as conn, conn.cursor() as cursor:
-                cursor.execute(
-                        """
-                        SELECT *
-                        FROM posts
-                        WHERE user_id = %s
-                        """,
-                        [username]
-                )
-                record = cursor.fetchone()
-                return self.record_to_post_out(record)
-        except Exception as e:
-            print(f"Error fetching post with id {username}: {e}")
-            return {"message": "Could not get that post"}
 
     def get_all(self) -> dict:
         with pool.connection() as conn:
