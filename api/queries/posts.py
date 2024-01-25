@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from typing import Optional
 
 
+
 app = FastAPI()
 
 pool = ConnectionPool(conninfo=os.environ.get("DATABASE_URL"))
@@ -13,7 +14,7 @@ class DuplicateAccountError(ValueError):
     pass
 
 class PostQueries:
-    def get_post(self, post_id: int) -> PostOut:
+    def list_my_posts(self, post_id: int) -> PostOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(

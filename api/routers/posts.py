@@ -33,6 +33,7 @@ async def list_my_posts(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
+    # return repo.get_user_posts(account_data['username'])
     return repo.get_user_posts(username=account_data['username'])
 
 @router.post("/posts", response_model=PostOut)
