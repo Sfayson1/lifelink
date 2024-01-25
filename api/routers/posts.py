@@ -12,8 +12,6 @@ from authenticator import authenticator
 from typing import Union
 
 
-
-
 router = APIRouter()
 
 
@@ -30,7 +28,7 @@ async def list_all_posts(
     return repo.get_all()
 
 
-@router.get("/posts/mine", response_model=PostOut)
+@router.get("/posts/mine", response_model=PostList)
 async def list_my_posts(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
@@ -43,6 +41,7 @@ async def create_post(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
+    print('****ACCOUNT DATA****', account_data)
     return repo.create_post(data=post, user_id=account_data['username'])
 
 @router.delete("/posts/{post_id}/", response_model=bool)

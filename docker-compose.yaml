@@ -12,7 +12,7 @@ services:
       - 8000:8000
     # user: "501:20" # on macOS and Linux, replace this with your real user id and group id
     volumes:
-     - ./api:/app
+      - ./api:/app
 
   pg-admin:
     image: dpage/pgadmin4
@@ -50,7 +50,7 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+      VITE_API_HOST: ${VITE_API_HOST}
 
 volumes:
     postgres-data:
