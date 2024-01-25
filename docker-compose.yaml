@@ -49,8 +49,8 @@ services:
       HOST_OS: ${OS}
       NODE_ENV: development
       HOST: "0.0.0.0"
-      PUBLIC_URL: http://localhost:3000
-      REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+      # PUBLIC_URL: http://localhost:3000
+      VITE_API_HOST: ${VITE_API_HOST}
 
 volumes:
     postgres-data:
