@@ -9,7 +9,7 @@ from models import PostIn, PostOut, PostList
 from queries.posts import PostQueries
 from pydantic import BaseModel
 from authenticator import authenticator
-from typing import Union
+from typing import Union, Optional
 
 
 router = APIRouter()
@@ -33,8 +33,7 @@ async def list_my_posts(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
-    # return repo.get_user_posts(account_data['username'])
-    return repo.get_user_posts(username=account_data['username'])
+    return repo.get_user_posts(user_id=account_data['id'])
 
 @router.post("/posts", response_model=PostOut)
 async def create_post(
@@ -43,7 +42,7 @@ async def create_post(
     repo: PostQueries = Depends(),
 ):
     print('****ACCOUNT DATA****', account_data)
-    return repo.create_post(data=post, user_id=account_data['username'])
+    return repo.create_post(data=post, user_id = account_data['id'], username=account_data['username'])
 
 @router.delete("/posts/{post_id}/", response_model=bool)
 async def delete_post(
@@ -52,12 +51,14 @@ async def delete_post(
 ) ->bool:
     return repo.delete_post(post_id)
 
-@router.get("/posts/{username}", response_model=PostList)
-async def list_users_posts(
-    username: str,
-    repo: PostQueries = Depends(),
-):
-    return repo.get_user_posts(username)
+@router.get("/posts/{user_id}/", response_model=Optional[PostList])
+async def list_user_posts(
+    user_id: int,
+    repo: PostQueries = Depends()
+) -> Optional[PostList]:
+    print('****DATA****', user_id)
+    return repo.get_user_posts(user_id)
+
 
 
 @router.put("/posts/{post_id}/", response_model=Union[PostOut, Error])

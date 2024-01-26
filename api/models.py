@@ -45,8 +45,6 @@ class UserToken(Token):
 
 class PostIn(BaseModel):
     content: str
-class PostIn(BaseModel):
-    content: str
     date_posted: date = Field(default_factory=lambda: datetime.utcnow().date())
 
 class PostOut(PostIn):
