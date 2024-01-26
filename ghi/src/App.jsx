@@ -1,9 +1,13 @@
 // This makes VSCode check types as if you are using TypeScript
 //@ts-check
 import { useState, useEffect } from 'react'
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import ErrorNotification from './ErrorNotification'
 import Construct from './Construct'
 import './App.css'
+import UserList from './ListOfUsers.jsx'
+import Nav from './navbars/Mainnavbar.jsx'
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
@@ -54,10 +58,23 @@ function App() {
     }, [])
 
     return (
+        // <BrowserRouter>
+        //     <Nav />
+        //     <div className='container'>
+        //         <Routes>
+        //             <Route path='/error' element={<ErrorNotification error={error} />} />
+        //             <Route path='/construct' element={<Construct info={launchInfo} />} />
+        //             <Route path='/users/list' element={<UserList />} />
+        //         </Routes>
+        //     </div>
+        // </BrowserRouter>
         <div>
             <ErrorNotification error={error} />
             <Construct info={launchInfo} />
+            <UserList />
         </div>
+
+
     )
 }
 
