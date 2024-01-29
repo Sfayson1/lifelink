@@ -1,6 +1,6 @@
 import os
 from psycopg_pool import ConnectionPool
-from models import UserOutWithPassword, UserOut, UserInNoPass
+from models import UserInNoPassOrUsername, UserOutNoUsername, UserOutWithPassword, UserOut, UserInNoPass
 from typing import List, Optional, Union
 from pydantic import BaseModel
 
@@ -39,23 +39,21 @@ class UserQueries:
         except Exception as e:
             print(e)
             return{"message": "Could not get all users"}
-        
-    def update_user(self, user_id: int, user: UserInNoPass) -> Union[UserOut, Error]:
+
+    def update_user(self, user_id: int, user: UserInNoPassOrUsername) -> Union[UserOutNoUsername, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         UPDATE users
-                        SET username = %s
-                            , first_name = %s
+                        SET first_name = %s
                             , last_name = %s
                             , email = %s
                             , grad_class = %s
                         WHERE id = %s
                         """,
                         [
-                            user.username,
                             user.first_name,
                             user.last_name,
                             user.email,
@@ -64,11 +62,11 @@ class UserQueries:
                         ]
                     )
                     old_data = user.dict()
-                    return UserOut(id=user_id, **old_data)
+                    return UserOutNoUsername(id=user_id, **old_data)
         except Exception as e:
             print(e)
             return{"message": "Could not update user"}
-    
+
     def delete_user(self, user_id: int) -> bool:
         try:
             with pool.connection() as conn:
@@ -84,7 +82,7 @@ class UserQueries:
         except Exception as e:
             print(e)
             return False
-                
+
     def get_user(self, user_id: int) -> Optional[UserOut]:
         try:
             with pool.connection() as conn:
@@ -108,7 +106,7 @@ class UserQueries:
                     )
         except Exception:
             return {"message": "Could not get user record for this id"}
-                
+
 
     def create_user(self, data, hashed_password) -> UserOutWithPassword:
         with pool.connection() as conn:
@@ -137,7 +135,7 @@ class UserQueries:
                     for i, column in enumerate(db.description):
                         record[column.name] = row[i]
                 return UserOutWithPassword(**record)
-            
+
     def get(self, username: str) -> UserOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:

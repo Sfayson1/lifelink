@@ -1,4 +1,13 @@
 # James Bratcher's journal
+## 10
+1/29/2024: During testing, noticed that if you allow the users to update username, the posts remain connected to the old username. Adjusted update_user endpoint to not allow username update.
+
+## 9
+1/26/2024: same as 1/25/2024, minimal gains made.
+
+## 8
+1/25/2024: finished up front end for login/sign up endpoints, helping sherika with show user's page/posts, getting a "user_id not defined"
+
 ## 7
 1/24/2024: Assisted Leah with update_post, we're able to get it done. Testing completed on all Endpoints and Auths, made 10 Users with 10 Posts each, Everything works as advertised.
 
@@ -24,7 +33,7 @@ CREATE TABLE posts (
 );
 
 ## 3
-1/19/2024: Was stuck on update_user, able to figure it out, had to create a new model. Ready to git add, commit, and push. Going to have the team pull and double check it to make sure there are no other bugs. Going to see where Zack is on post 
+1/19/2024: Was stuck on update_user, able to figure it out, had to create a new model. Ready to git add, commit, and push. Going to have the team pull and double check it to make sure there are no other bugs. Going to see where Zack is on post
 
 ## 2
 1/18/2024: Had to debug the authentication for creating user and getting user. At end of day, Create_user, Get_all, and Get_user are completed and tested, Debugging update User. Error I receive is

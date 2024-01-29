@@ -14,16 +14,16 @@ class DuplicateAccountError(ValueError):
     pass
 
 class PostQueries:
-    def list_my_posts(self, user_id: int) -> PostOut:
+    def list_my_posts(self, post_id: int) -> PostOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    SELECT id, username, content
+                    SELECT id, user_id, content
                     FROM posts
                     WHERE id = %s;
                     """,
-                    [user_id],
+                    [post_id],
                 )
                 try:
                     record = None
@@ -35,20 +35,19 @@ class PostQueries:
                 except Exception:
                     return {"message": "Could not get post record for this id"}
 
-    def create_post(self, data, user_id: Optional[int] = None, username: Optional[str] = None) -> PostOut:
+    def create_post(self, data, user_id: Optional[int] = None) -> PostOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     params = [
                         data.content,
                         data.date_posted,
-                        user_id,
-                        username
+                        user_id
                     ]
                     db.execute(
                         """
-                        INSERT INTO posts (content, date_posted, user_id, username)
-                        VALUES (%s, %s, %s, %s)
+                        INSERT INTO posts (content, date_posted, user_id)
+                        VALUES (%s, %s, %s)
                         RETURNING id, content, date_posted;
                         """,
                         params,
@@ -93,30 +92,24 @@ class PostQueries:
                 return {"posts": records}
 
 
-    def get_user_posts(self, user_id: str) -> dict:
+    def get_user_posts(self, username: str) -> dict:
         with pool.connection() as conn:
             with conn.cursor() as db:
-                print(user_id)
                 db.execute(
                     """
                     SELECT *
                     FROM posts
                     WHERE user_id = %s;
                     """,
-                    [str(user_id)],
+                    [username],
                 )
                 records = []
-                while True:
-                    row = db.fetchone()
-                    if row is None:
-                        break
+                for row in db.fetchall():
                     record = {}
                     for i, column in enumerate(db.description):
                         record[column.name] = row[i]
                     records.append(PostOut(**record))
                 return {"posts": records}
-
-
 
     def update_post(self, post_id: int, data) -> Optional[PostOut]:
         try:
