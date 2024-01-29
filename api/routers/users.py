@@ -6,7 +6,7 @@ from fastapi import (
     APIRouter,
     Request,
 )
-from models import UserToken, UserIn, UserForm, UserOut, UserInNoPass
+from models import UserInNoPassOrUsername, UserOutNoUsername, UserToken, UserIn, UserForm, UserOut
 from queries.users import UserQueries, DuplicateAccountError
 from authenticator import authenticator
 from pydantic import BaseModel
@@ -53,12 +53,12 @@ async def create_user(
     token = await authenticator.login(response, request, form, repo)
     return UserToken(user=user, **token.dict())
 
-@router.put("/users/{user_id}/", response_model=Union[UserOut, Error])
+@router.put("/users/{user_id}/", response_model=Union[UserOutNoUsername, Error])
 def update_user(
     user_id: int,
-    user: UserInNoPass,
+    user: UserInNoPassOrUsername,
     repo: UserQueries = Depends(),
-) -> Union[Error, UserOut]:
+) -> Union[Error, UserOutNoUsername]:
     return repo.update_user(user_id, user)
 
 @router.delete("/users/{user_id}/", response_model=bool)
