@@ -17,7 +17,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const tokenURL = 'http://localhost:8000/token/'
+    const tokenURL = 'http://localhost:8000/token'
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(formData),
@@ -27,9 +27,14 @@ function Login() {
     };
     const response = await fetch (tokenURL, fetchConfig);
     if (response.ok) {
-      console.log('Login successful')
-      };
+      console.log('Login successful');
+    } else {
+      const errorData = await response.json();
+      console.error('Login failed:', errorData);
     }
+    }
+
+    
 
   return(
     <div className="row">
@@ -54,7 +59,7 @@ function Login() {
               onChange={handleFormChange}
               value={formData.password}
               placeholder="Password"
-              required type="password"
+              required type="text"
               name="password"
               id="password"
               className="form-control"
