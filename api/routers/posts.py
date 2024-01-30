@@ -21,9 +21,10 @@ class Error(BaseModel):
 class HttpError(BaseModel):
     detail: str
 
-@router.get("/posts/all", response_model=PostList)
+@router.get("/posts/all", response_model=PostListWithUser)
 async def list_all_posts(
     repo: PostQueries = Depends(),
+    
 ):
     return repo.get_all()
 
