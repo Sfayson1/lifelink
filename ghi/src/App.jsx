@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './login';
 import Signup from './Signup';
 import Nav from './navbars/Mainnavbar.jsx'
+import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
 
 
 // All your environment variables in vite are in this object
@@ -27,9 +28,11 @@ const Home = () => (
   </div>
 );
 
-const App = () => {
+function App() {
+  const baseUrl = API_HOST;
   return (
     <BrowserRouter>
+      <AuthProvider baseUrl={baseUrl}>
       <Nav />
       <div className="my-5 container">
         <Routes>
@@ -38,6 +41,7 @@ const App = () => {
           <Route path="/Signup" element={<Signup />} />
         </Routes>
       </div>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
