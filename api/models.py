@@ -4,7 +4,6 @@ from jwtdown_fastapi.authentication import Token
 
 
 
-
 class UserIn(BaseModel):
     username:str
     first_name: str
@@ -15,6 +14,12 @@ class UserIn(BaseModel):
 
 class UserInNoPass(BaseModel):
     username:str
+    first_name: str
+    last_name: str
+    email: str
+    grad_class: str
+
+class UserInNoPassOrUsername(BaseModel):
     first_name: str
     last_name: str
     email: str
@@ -41,16 +46,19 @@ class UserOut(BaseModel):
     email: str
     grad_class: str
 
+class UserOutNoUsername(BaseModel):
+    id: int
+    first_name: str
+    last_name: str
+    email: str
+    grad_class: str
+
 class UserToken(Token):
     user: UserOut
 
 class PostIn(BaseModel):
     content: str
-class PostIn(BaseModel):
-    content: str
     date_posted: date = Field(default_factory=lambda: datetime.utcnow().date())
-
-
 
 class PostOut(PostIn):
     id: int
