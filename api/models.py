@@ -64,5 +64,15 @@ class PostOut(PostIn):
     id: int
     content: str
 
+class PostOutWithUser(PostIn):
+    id: int
+    content: str
+    user_id: str
+
+
 class PostList(BaseModel):
     posts: list[PostOut]
+
+
+class PostListWithUser(BaseModel):
+    posts: list[PostOutWithUser]
