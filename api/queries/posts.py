@@ -31,7 +31,7 @@ class PostQueries:
                         record = {}
                         for i, column in enumerate(db.description):
                             record[column.name] = row[i]
-                    return PostOut(**record)
+                    return PostOutWithUser(**record)
                 except Exception:
                     return {"message": "Could not get post record for this id"}
 
@@ -80,15 +80,15 @@ class PostQueries:
                 db.execute(
                     """
                     SELECT *
-                    FROM posts;
-                    """
+                    FROM posts
+                """
                 )
                 records = []
                 for row in db.fetchall():
                     record = {}
                     for i, column in enumerate(db.description):
                         record[column.name] = row[i]
-                    records.append(PostOut(**record))
+                    records.append(PostOutWithUser(**record))
                 return {"posts": records}
 
 
