@@ -81,7 +81,7 @@ class PostQueries:
                     """
                     SELECT *
                     FROM posts
-                """
+                    """
                 )
                 records = []
                 for row in db.fetchall():
