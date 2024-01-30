@@ -12,7 +12,8 @@ app.include_router(users.router, tags=['Auth'])
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        os.environ.get("CORS_HOST")
+        os.environ.get("CORS_HOST"),
+        "http://localhost:5173"
     ],
     allow_credentials=True,
     allow_methods=["*"],
