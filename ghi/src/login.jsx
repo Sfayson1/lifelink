@@ -1,73 +1,51 @@
 import React, { useState } from 'react';
+import useToken, { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
 
-function Login() {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useToken();
+  const { token } = useAuthContext();
 
-  const handleFormChange = (event) => {
-    const value = event.target.value;
-    const inputName = event.target.name;
-    setFormData({
-      ...formData,
-      [inputName]: value
-    });
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(username, password);
+    e.target.reset();
+  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const tokenURL = 'http://localhost:8000/token/'
-    const fetchConfig = {
-      method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    const response = await fetch (tokenURL, fetchConfig);
-    if (response.ok) {
-      console.log('Login successful')
-      };
-    }
 
-  return(
-    <div className="row">
-      <div className='offset-3 col-6'>
-        <div className='shadow p-4 mt-4'>
-          <h1>Log in</h1>
-          <form onSubmit={handleSubmit} id="signup">
-            <div className='form-floating mb-3'>
-              <input
-              onChange={handleFormChange}
-              value={formData.username}
-              placeholder="Username"
-              required type="text"
+
+  return (
+    <div className="card text-bg-light mb-3">
+      <h5 className="card-header">Login</h5>
+      <div className="card-body">
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="mb-3">
+            <label className="form-label">Username:</label>
+            <input
               name="username"
-              id="username"
+              type="text"
               className="form-control"
-              />
-              <label htmlFor="username">Username</label>
-            </div>
-            <div className='form-floating mb-3'>
-              <input
-              onChange={handleFormChange}
-              value={formData.password}
-              placeholder="Password"
-              required type="password"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Password:</label>
+            <input
               name="password"
-              id="password"
+              type="password"
               className="form-control"
-              />
-              <label htmlFor="password">Password</label>
-            </div>
-              <button className='btn btn-primary'>Log in</button>
-          </form>
-        </div>
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <input className="btn btn-primary" type="submit" value="Login" />
+          </div>
+        </form>
       </div>
     </div>
   );
-}
+};
 
 
 export default Login;
