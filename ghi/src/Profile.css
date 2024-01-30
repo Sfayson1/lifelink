@@ -1,0 +1,68 @@
+
+/* Profile container styles */
+.profile-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* User info styles */
+.user-info {
+  text-align: center;
+}
+
+.user-info img {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.user-info h2 {
+  color: #1877f2; 
+  margin-bottom: 10px;
+}
+
+.user-info p {
+  color: #333;
+}
+
+/* Posts feed styles */
+.posts-feed {
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card h5 {
+  color: #1877f2; 
+}
+
+.card span small {
+  color: #888;
+}
+
+.card p {
+  color: #333;
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 600px) {
+  .user-info img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .user-info h2 {
+    font-size: 1.5rem;
+  }
+}
