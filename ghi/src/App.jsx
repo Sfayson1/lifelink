@@ -1,14 +1,15 @@
 // This makes VSCode check types as if you are using TypeScript
 //@ts-check
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import ErrorNotification from './ErrorNotification'
 import Construct from './Construct'
 import './App.css'
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './login';
 import Signup from './Signup';
 import Nav from './navbars/Mainnavbar.jsx'
+import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
+import UserList from './ListOfUsers';
 
 
 // All your environment variables in vite are in this object
@@ -27,18 +28,35 @@ const Home = () => (
   </div>
 );
 
-const App = () => {
+function App() {
+      const baseUrl = API_HOST;
+      const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
-    <BrowserRouter>
-      <Nav />
-      <div className="my-5 container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Signup" element={<Signup />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+
+
+
+
+    function App() {
+      return (
+        <Nav />
+        // <BrowserRouter>
+        //   <AuthProvider baseUrl={baseUrl}>
+        //     {/* <Nav isAuthenticated={isAuthenticated} /> */}
+        //     <div className="my-5 container">
+        //       <Routes>
+        //         <Route path="/" element={<Home />} />
+        //         <Route path="/Login" element={<Login />} />
+        //         <Route path="/Signup" element={<Signup />} />
+        //         {/* <Route path="/Logout" element={<Logout />} /> */}
+        //         <Route path="/ListOfUsers" element={<UserList />} />
+        //       </Routes>
+        //     </div>
+        //   </AuthProvider>
+        // </BrowserRouter>
+      );
+    }
+
+
   );
 }
 

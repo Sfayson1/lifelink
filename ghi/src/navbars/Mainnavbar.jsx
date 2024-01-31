@@ -1,14 +1,18 @@
-// import React from 'react';
+import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 
-const Nav = () => {
+const Nav = ({ isAuthenticated }) => {
     return (
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/Login">Log in</a></li>
-                <li><a href="/Signup">Sign up</a></li>
-            </ul>
-        </nav>
+        <BrowserRouter>
+            <AuthProvider baseUrl={baseUrl}>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/Login" element={<Login />} />
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
     );
 };
-export default Nav
+
+export default Nav;
