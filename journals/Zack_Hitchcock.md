@@ -59,3 +59,11 @@ this morning, i finished the posts/mine backend api endpoint. this function uses
 
 
 
+!!!!!!!!!!!  if NOT data! FFS!!!!!!!!!!!!!!!!
+'''
+```javascript
+const fetchConfig = {credentials: 'include'};
+```
+token *is* in credentials,
+omitted by default, need to ask nicely to see
+s

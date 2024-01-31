@@ -8,6 +8,7 @@ import Signup from './Signup';
 import Nav from './navbars/Mainnavbar.jsx'
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
 import UserList from './ListOfUsers';
+import Home from './Home.jsx';
 
 
 
@@ -22,12 +23,7 @@ if (!API_HOST) {
     throw new Error('VITE_API_HOST is not defined')
 }
 
-const Home = () => (
-  <div>
-    <h1>Welcome to the Home Page!</h1>
-    <p>Click on the links above to navigate to different pages.</p>
-  </div>
-);
+
 function App() {
 
 

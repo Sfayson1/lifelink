@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 const Home = () => {
     const [posts, setPosts] = useState([])
     const [newPost, setNewPosts] = useState('')
+    const [token, setToken] = useState();
 
     const fetchPosts = async () => {
         const postUrl = 'http://localhost:8000/posts/all'
@@ -11,32 +12,61 @@ const Home = () => {
             if (data === undefined) {
                 return null
             }
-            console.log(data)
-            setPosts(data.posts) 
+
+            setPosts(data.posts)
         }
     }
 
+
+
+    const fetchToken = async () => {
+        const tokenUrl = "http://localhost:8000/token";
+        const fetchConfig = {credentials: 'include'};
+
+        const response = await fetch(tokenUrl, fetchConfig);
+
+
+        if (response.ok) {
+            const data = await response.json();
+
+
+            if (!data) {
+                return null;
+            }
+
+            setToken(data.access_token);
+        }
+    }
+
+    useEffect(() => {
+        fetchPosts(),
+        fetchToken()
+    }, [])
+
+
     const handleNewPostSubmit = async () => {
         const createPostUrl = 'http://localhost:8000/posts'
+        const currentDate = new Date().toISOString().slice(0, 10);
         const response = await fetch(createPostUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization':`Bearer ${token}`,
             },
             body: JSON.stringify({
                 content: newPost,
+                date_posted: currentDate,
             }),
         })
         if (response.ok) {
             fetchPosts()
-
             setNewPosts('')
         } else {
             console.error('Failed to create a new post')
         }
     }
 
-    const formatTimeDifference = (hours) => {
+    const formatTimeDifference = (hours,postDate) => {
         if (hours < 1) {
             return `${Math.floor(hours * 60)}m`
         } else if (hours < 24) {
@@ -61,9 +91,6 @@ const Home = () => {
         return timeDifference
     }
 
-    useEffect(() => {
-        fetchPosts()
-    }, [])
     return (
         <div className="home-container">
             <div className="new-post-container">
@@ -88,7 +115,7 @@ const Home = () => {
                                             {formatTimeDifference(
                                                 calculateTimeDifference(
                                                     post.date_posted
-                                                )
+                                                ), post.date_posted
                                             )}
                                         </small>
                                     </span>
@@ -101,4 +128,4 @@ const Home = () => {
         </div>
     )
 }
-export default Home
+export default Home;
