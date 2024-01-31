@@ -5,9 +5,9 @@ import App from './App.jsx'
 import './index.css'
 import Nav from './navbars/Mainnavbar.jsx'
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <Nav />
-
+        <App />
     </React.StrictMode>
 )

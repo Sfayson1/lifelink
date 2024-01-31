@@ -10,6 +10,8 @@ import Login from './login';
 import Signup from './Signup';
 import Nav from './navbars/Mainnavbar.jsx'
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
+import Homepage from './Homepage.jsx'
+import Profile from './Profile.jsx'
 
 
 // All your environment variables in vite are in this object
@@ -22,11 +24,7 @@ console.log('API_HOST: ', import.meta.env.VITE_API_HOST)
 if (!API_HOST) {
     throw new Error('VITE_API_HOST is not defined')
 }
-const Home = () => (
-  <div>
-    <h1>Welcome to the Home Page!</h1>
-  </div>
-);
+
 
 function App() {
   const baseUrl = API_HOST;
@@ -36,9 +34,10 @@ function App() {
       <Nav />
       <div className="my-5 container">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </div>
       </AuthProvider>
