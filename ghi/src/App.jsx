@@ -10,6 +10,7 @@ import Login from './login';
 import Signup from './Signup';
 import Nav from './navbars/Mainnavbar.jsx'
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
+import UpdateUser from './updateUser';
 
 
 // All your environment variables in vite are in this object
@@ -39,6 +40,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
+          <Route path="/Update" element={<UpdateUser />} />
         </Routes>
       </div>
       </AuthProvider>
