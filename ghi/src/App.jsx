@@ -1,10 +1,8 @@
 // This makes VSCode check types as if you are using TypeScript
 //@ts-check
 import { useState } from 'react'
-import ErrorNotification from './ErrorNotification'
-import Construct from './Construct'
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Login from './login';
 import Signup from './Signup';
 import Nav from './navbars/Mainnavbar.jsx'
@@ -25,39 +23,32 @@ if (!API_HOST) {
 const Home = () => (
   <div>
     <h1>Welcome to the Home Page!</h1>
+    <p>Click on the links above to navigate to different pages.</p>
   </div>
 );
 
 function App() {
       const baseUrl = API_HOST;
-      const [isAuthenticated, setIsAuthenticated] = useState(false);
+      const [isAuthenticated, setIsAuthenticated] = useState();
   return (
+        <>
 
-
-
-
-    function App() {
-      return (
-        <Nav />
-        // <BrowserRouter>
-        //   <AuthProvider baseUrl={baseUrl}>
-        //     {/* <Nav isAuthenticated={isAuthenticated} /> */}
-        //     <div className="my-5 container">
-        //       <Routes>
-        //         <Route path="/" element={<Home />} />
-        //         <Route path="/Login" element={<Login />} />
-        //         <Route path="/Signup" element={<Signup />} />
-        //         {/* <Route path="/Logout" element={<Logout />} /> */}
-        //         <Route path="/ListOfUsers" element={<UserList />} />
-        //       </Routes>
-        //     </div>
-        //   </AuthProvider>
-        // </BrowserRouter>
+          <AuthProvider baseUrl={baseUrl}>
+            <Nav isAuthenticated={isAuthenticated} />
+            <div className="my-5 container">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Signup" element={<Signup />} />
+                <Route path="/ListOfUsers" element={<UserList />} />
+              </Routes>
+            </div>
+          </AuthProvider>
+        </>
       );
     }
 
 
-  );
-}
+
 
 export default App;
