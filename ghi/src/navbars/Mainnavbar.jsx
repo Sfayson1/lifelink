@@ -1,6 +1,12 @@
 import { NavLink } from 'react-router-dom';
+import useToken from '@galvanize-inc/jwtdown-for-react';
+
 
 function Nav() {
+  const { token, logout } = useToken();
+  const isAuthenticatedFromToken = token !== null;
+
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
       <div className="container-fluid">
@@ -10,9 +16,23 @@ function Nav() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li> <NavLink className="nav-link" to="/signup">Sign Up</NavLink> </li>
-            <li> <NavLink className="nav-link" to="/login">Login</NavLink> </li>
-            <li> <NavLink className="nav-link" to="/ListOfUsers">List of Users</NavLink> </li>
+            {isAuthenticatedFromToken ? (
+              <>
+                <li> <NavLink className="nav-link" to="/ListOfUsers">List of Users</NavLink> </li>
+                <li><button className="btn btn-danger" onClick={async () => {
+                await logout();
+                }}>Logout</button></li>
+
+                {/* Add links here that should be visible when the user IS logged in */}
+
+              </>
+            ) : (
+              <>
+                <li> <NavLink className="nav-link" to="/signup">Sign Up</NavLink> </li>
+                <li> <NavLink className="nav-link" to="/login">Login</NavLink> </li>
+                {/* Add links here that should be visible when the user IS NOT logged in */}
+              </>
+            )}
           </ul>
         </div>
       </div>

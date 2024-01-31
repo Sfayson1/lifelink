@@ -10,6 +10,7 @@ import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
 import UserList from './ListOfUsers';
 
 
+
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
 
@@ -20,35 +21,42 @@ console.log('API_HOST: ', import.meta.env.VITE_API_HOST)
 if (!API_HOST) {
     throw new Error('VITE_API_HOST is not defined')
 }
+
 const Home = () => (
   <div>
     <h1>Welcome to the Home Page!</h1>
     <p>Click on the links above to navigate to different pages.</p>
   </div>
 );
-
 function App() {
-      const baseUrl = API_HOST;
-      const [isAuthenticated, setIsAuthenticated] = useState();
+
+
+
+
+
   return (
-        <>
+    <>
+      <Nav   />
+      <div className="my-5 container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Login" element={<Login  />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/ListOfUsers" element={<UserList />} />
 
-          <AuthProvider baseUrl={baseUrl}>
-            <Nav isAuthenticated={isAuthenticated} />
-            <div className="my-5 container">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/Login" element={<Login />} />
-                <Route path="/Signup" element={<Signup />} />
-                <Route path="/ListOfUsers" element={<UserList />} />
-              </Routes>
-            </div>
-          </AuthProvider>
-        </>
-      );
-    }
+        </Routes>
+      </div>
+    </>
+  );
+}
+
+function Root() {
+  return (
+    <AuthProvider baseUrl={API_HOST}>
+      <App />
+    </AuthProvider>
+  );
+}
 
 
-
-
-export default App;
+export default Root;
