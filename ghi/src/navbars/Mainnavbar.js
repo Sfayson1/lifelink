@@ -6,6 +6,7 @@ import {
     NavbarLink,
     NavbarToggle,
 } from 'flowbite-react'
+import Signup from 'Signup'
 
 const Mainnavbar = () => {
     return (
@@ -27,7 +28,7 @@ const Mainnavbar = () => {
                         Home
                     </NavbarLink>
                     <NavbarLink as={Link} href="#">Login</NavbarLink>
-                    <NavbarLink href="#">Signup</NavbarLink>
+                    <NavbarLink href={Signup}>Signup</NavbarLink>
                 </NavbarCollapse>
             </Navbar>
         </div>

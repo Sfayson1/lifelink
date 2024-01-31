@@ -8,8 +8,6 @@ import Profile from './Profile.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <Nav />
-        <Profile />
-
+        <App />
     </React.StrictMode>
 )
