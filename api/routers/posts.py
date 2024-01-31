@@ -5,7 +5,7 @@ from fastapi import (
     APIRouter,
 
 )
-from models import PostIn, PostOut, PostList
+from models import PostIn, PostListWithUser, PostOut, PostList
 from queries.posts import PostQueries
 from pydantic import BaseModel
 from authenticator import authenticator
@@ -21,9 +21,10 @@ class Error(BaseModel):
 class HttpError(BaseModel):
     detail: str
 
-@router.get("/posts/all", response_model=PostList)
+@router.get("/posts/all", response_model=PostListWithUser)
 async def list_all_posts(
     repo: PostQueries = Depends(),
+    
 ):
     return repo.get_all()
 
@@ -52,7 +53,7 @@ async def delete_post(
 ) ->bool:
     return repo.delete_post(post_id)
 
-@router.get("/posts/{username}", response_model=PostList)
+@router.get("/posts/{username}", response_model=PostListWithUser)
 async def list_users_posts(
     username: str,
     repo: PostQueries = Depends(),
