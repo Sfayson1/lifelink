@@ -7,11 +7,11 @@ const Profile = () => {
 
     const formatTimeDifference = (hours) => {
         if (hours < 1) {
-            return `${Math.floor(hours * 60)}m` 
+            return `${Math.floor(hours * 60)}m`
         } else if (hours < 24) {
-            return `${Math.floor(hours)}h` 
+            return `${Math.floor(hours)}h`
         } else if (hours < 24 * 7) {
-            return `${Math.floor(hours / 24)}d` 
+            return `${Math.floor(hours / 24)}d`
         } else {
             const postDateTime = new Date(postDate)
             return postDateTime.toLocaleDateString('en-US', {
@@ -31,7 +31,7 @@ const Profile = () => {
     }
 
     const fetchPosts = async (user_id) => {
-        const postUrl = ('http://localhost:8000/posts/bbrown')
+        const postUrl = `http://localhost:8000/posts/${username}`
         const response = await fetch(postUrl)
         if (response.ok) {
             const data = await response.json()
@@ -39,12 +39,12 @@ const Profile = () => {
                 return null
             }
             console.log(data)
-            setPosts(data.posts) 
+            setPosts(data.posts)
         }
     }
 
     const fetchUser = async () => {
-        const userUrl = 'http://localhost:8000/users/2'
+        const userUrl = `http://localhost:8000/users/${user_id}`
         const response = await fetch(userUrl)
         if (response.ok) {
             const users = await response.json()
@@ -61,7 +61,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (users.length > 0) {
-            fetchPosts(users[0].id) 
+            fetchPosts(users[0].id)
         }
     }, [users])
 
