@@ -50,17 +50,19 @@ the last couple days have been spent working on Posts backend, mostly debugging.
 ## 3
 this morning, i finished the posts/mine backend api endpoint. this function uses the same logic as the "get_users_posts" that will serve as a the back end for the "profile" page in the browser later on. the difference is that it will automatically get the account data from the logged in user, and
 
+## journal entries lost in the wind
+will come back for these
+
+## x
+today was a big day for production. we got a lot of the frontend issues taken care of, including the navbars "isAuthenticated" functionality, which basically shows a different set of nav options if a user is logged in vs if theyre not. once that was done, i was able fix a problem in the home page that proved rather challenging. the issue was that we werent able to make new posts, because there was no user to assign it to. i traced through the problem, and realized we needed a token in the request header for it to take. to do this, i made a simple little fetchToken function, but was surprised to find out it returned null, as opposed to the 400 character token we were looking for. one of the seirs, thomas, was able to see the issue immediately, i needed to configure the fetch and include the credentials. to my knowledge, this is just one of reacts many little quirks. its ommitted by default, and when i want the token data, i need to manually include it. ill never forget now!
 
 
 
+i was also able to make the homepage show differently when the user is logged in, using a ternary style operator logic identical to the one i mentioned above for the navbar. now, the home page for a new (non authenticated) user is a dummy page, with intriguing false posts designed to make you want to interact. when you do interact, youre redirected to the signup page. cool!
 
-
-
-
-
-
+notes from today:
 !!!!!!!!!!!  if NOT data! FFS!!!!!!!!!!!!!!!!
-'''
+
 ```javascript
 const fetchConfig = {credentials: 'include'};
 ```
