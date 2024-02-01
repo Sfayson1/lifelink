@@ -1,8 +1,11 @@
 # Sherika Fayson's Journal
+## 8
+1/31/2024
+Updated Homepage so that when the submit button is click it will redirect the user to the signup page. At first I was attempting to use useHistory but learned that it was deprecated. I used this article: https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430 to help walk me through how to implement its use.
+
 ## 7
 1/30/2024
 With user profile at a good stopping place. I started on the homepage after sign up. My current blocker is that the way the model is currently written there is not way to access the username to display who wrote the posts. The only thing that displays is the posts and the time/date that they were posted.
-
 
 ## 6
 1/29/2024
