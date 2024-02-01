@@ -1,6 +1,6 @@
 // This makes VSCode check types as if you are using TypeScript
 //@ts-check
-import { useState } from 'react'
+
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import Login from './login';
@@ -8,6 +8,10 @@ import Signup from './Signup';
 import Nav from './navbars/Mainnavbar.jsx'
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
 import UserList from './ListOfUsers';
+import Home from './Home.jsx';
+import UpdateUser from './updateUser.jsx';
+import Profile from './Profile.jsx';
+import Homepage from './Homepage.jsx';
 
 
 
@@ -22,17 +26,8 @@ if (!API_HOST) {
     throw new Error('VITE_API_HOST is not defined')
 }
 
-const Home = () => (
-  <div>
-    <h1>Welcome to the Home Page!</h1>
-    <p>Click on the links above to navigate to different pages.</p>
-  </div>
-);
+
 function App() {
-
-
-
-
 
   return (
     <>
@@ -43,6 +38,10 @@ function App() {
           <Route path="/Login" element={<Login  />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/ListOfUsers" element={<UserList />} />
+          <Route path="/user/update" element={<UpdateUser />} />
+          <Route path="/users/profile/mine"element={<Profile />} />
+          <Route path="/welcome" element={<Homepage />} />
+
 
         </Routes>
       </div>
