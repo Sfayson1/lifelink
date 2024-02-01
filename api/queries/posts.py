@@ -22,6 +22,7 @@ class PostQueries:
                     SELECT id, user_id, content
                     FROM posts
                     WHERE id = %s;
+                    ORDER BY date_posted DESC;
                     """,
                     [post_id],
                 )
@@ -81,7 +82,7 @@ class PostQueries:
                     """
                     SELECT *
                     FROM posts
-                    ORDER BY date_posted DESC;
+                    ORDER BY date_posted DESC, id DESC;
                     """
                 )
                 records = []
@@ -101,6 +102,7 @@ class PostQueries:
                     SELECT *
                     FROM posts
                     WHERE user_id = %s;
+                    ORDER BY date_posted DESC;
                     """,
                     [username],
                 )
