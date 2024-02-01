@@ -9,7 +9,6 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useToken();
-  const { token } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

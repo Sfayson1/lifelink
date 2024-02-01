@@ -8,6 +8,7 @@ import Signup from './Signup';
 import Nav from './navbars/Mainnavbar.jsx'
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
 import UserList from './ListOfUsers';
+import UpdateUser from './updateUser';
 
 
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/Login" element={<Login  />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/ListOfUsers" element={<UserList />} />
+          <Route path="/UpdateUser" element={<UpdateUser />} />
 
         </Routes>
       </div>
