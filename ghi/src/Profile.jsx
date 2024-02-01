@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import './Profile.css'
 
 const Profile = () => {
+    let { user_id } = useParams()
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
+    const [username, setUsername] = useState(null)
 
     const formatTimeDifference = (hours) => {
         if (hours < 1) {
@@ -30,7 +33,7 @@ const Profile = () => {
         return timeDifference
     }
 
-    const fetchPosts = async (user_id) => {
+    const fetchPosts = async (username) => {
         const postUrl = `http://localhost:8000/posts/${username}`
         const response = await fetch(postUrl)
         if (response.ok) {
@@ -38,7 +41,6 @@ const Profile = () => {
             if (data === undefined) {
                 return null
             }
-            console.log(data)
             setPosts(data.posts)
         }
     }
@@ -51,8 +53,8 @@ const Profile = () => {
             if (users === undefined) {
                 return null
             }
-            console.log(users)
             setUsers([users])
+            setUsername(users.username)
         }
     }
     useEffect(() => {
@@ -60,23 +62,17 @@ const Profile = () => {
     }, [])
 
     useEffect(() => {
-        if (users.length > 0) {
-            fetchPosts(users[0].id)
+        if (username) {
+            fetchPosts(username)
         }
-    }, [users])
+    }, [username])
 
     return (
-        <div className='profile-container'>
+        <div className="profile-container">
             <div className="relative pb-2 h-full justify-center items-center">
                 <div className="flex flex-col pb-5">
                     <div className="relative flex flex-col mb-7">
-                        <div className="flex flex-col justify-center items-center">
-                            <img
-                                className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
-                                src="#"
-                                alt="user-pic"
-                            />
-                        </div>
+                        <div className="flex flex-col justify-center items-center"></div>
                     </div>
                 </div>
             </div>
@@ -94,7 +90,7 @@ const Profile = () => {
             })}
             <div className="posts-feed">
                 {posts.map((post) => {
-                   return (
+                    return (
                         <div className="card mb-3" key={post.id}>
                             <div className="card-body">
                                 <h5>{post.user_id}</h5>

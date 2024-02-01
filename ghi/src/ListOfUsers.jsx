@@ -1,18 +1,17 @@
-import  { useState, useEffect } from "react";
-
+import { useState, useEffect } from 'react'
+import {Link} from 'react-router-dom'
 
 function UserList() {
-    const [users, setUsers] = useState([]);
-
+    const [users, setUsers] = useState([])
 
     const fetchUsers = async () => {
-        const userApiUrl = "http://localhost:8000/users";
-        const response = await fetch(userApiUrl);
+        const userApiUrl = 'http://localhost:8000/users'
+        const response = await fetch(userApiUrl)
         if (response.ok) {
-            const data = await response.json();
+            const data = await response.json()
 
             if (data === undefined) {
-                return null;
+                return null
             }
 
             setUsers(data)
@@ -20,27 +19,29 @@ function UserList() {
     }
 
     useEffect(() => {
-        fetchUsers();
+        fetchUsers()
     }, [])
-
-
-
-
 
     return (
         <div className="container mt-5">
-            {users.map(user => (
-                <div className="card mb-3" key={ user.id }>
+            {users.map((user) => (
+                <div className="card mb-3" key={user.id}>
                     <div className="card-header">
-                        <h2 className="text-center">{ user.first_name } { user.last_name }</h2>
+                        <Link to={`/profile/${user.id}`}>
+                        <h2 className="text-center">
+                            {user.first_name} {user.last_name}
+                        </h2>
+                        </Link>
                     </div>
                     <div className="card-body">
-                        <h5 className="card-title">Graduating Class: { user.grad_class }</h5>
+                        <h5 className="card-title">
+                            Graduating Class: {user.grad_class}
+                        </h5>
                     </div>
                 </div>
             ))}
         </div>
-    );
+    )
 }
 
-export default UserList;
+export default UserList

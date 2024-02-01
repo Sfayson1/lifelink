@@ -1,4 +1,7 @@
 # Sherika Fayson's Journal
+## 9
+2/1/2024
+I made the user's name clickable. When the user clicks on a users profile card they are taken the that particular user's profile that lists all of their posts. When attempting to add the same functionality to the home page. I found that it would require the posts models and queries to be rewritten because how they are written currently they only associate the username to the posts. This cause an issue when trying to route to a page that requires the userid to get the user info.
 ## 8
 1/31/2024
 Updated Homepage so that when the submit button is click it will redirect the user to the signup page. At first I was attempting to use useHistory but learned that it was deprecated. I used this article: https://medium.com/@bobjunior542/using-usenavigate-in-react-router-6-a-complete-guide-46f51403f430 to help walk me through how to implement its use.
