@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react'
 const Home = () => {
     const [posts, setPosts] = useState([])
     const [newPost, setNewPosts] = useState('')
-    const [token, setToken] = useState();
-
-
+    const [token, setToken] = useState()
 
     const fetchPosts = async () => {
         const postUrl = 'http://localhost:8000/posts/all'
@@ -17,51 +15,44 @@ const Home = () => {
             }
 
             setPosts(data.posts)
-
         }
     }
 
-
-
     const fetchToken = async () => {
-        const tokenUrl = "http://localhost:8000/token";
-        const fetchConfig = {credentials: 'include'};
+        const tokenUrl = 'http://localhost:8000/token'
+        const fetchConfig = { credentials: 'include' }
 
-        const response = await fetch(tokenUrl, fetchConfig);
+        const response = await fetch(tokenUrl, fetchConfig)
 
         if (response.ok) {
-            const data = await response.json();
-
+            const data = await response.json()
 
             if (!data) {
-                return null;
+                return null
             }
 
-            setToken(data.access_token);
-
+            setToken(data.access_token)
         }
     }
 
     useEffect(() => {
-        fetchPosts(),
-        fetchToken()
+        fetchPosts(), fetchToken()
     }, [])
-
 
     const handleNewPostSubmit = async () => {
         const createPostUrl = 'http://localhost:8000/posts'
-        const currentDate = new Date();
-        currentDate.setHours(currentDate.getHours() + 5);
-        const datePosted = currentDate.toISOString().slice(0, 10);
+        const currentDate = new Date()
+        currentDate.setHours(currentDate.getHours() + 5)
+        const datePosted = currentDate.toISOString().slice(0, 10)
         const response = await fetch(createPostUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization':`Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
                 content: newPost,
-                date_posted: datePosted
+                date_posted: datePosted,
             }),
         })
         if (response.ok) {
@@ -72,7 +63,7 @@ const Home = () => {
         }
     }
 
-    const formatTimeDifference = (hours,postDate) => {
+    const formatTimeDifference = (hours, postDate) => {
         if (hours < 1) {
             return `${Math.floor(hours * 60)}m`
         } else if (hours < 24) {
@@ -93,7 +84,6 @@ const Home = () => {
         const postDateTime = new Date(postDate)
         const timeDifference = Math.floor(
             (currentDate - postDateTime) / (60 * 60 * 1000)
-
         )
 
         return timeDifference
@@ -102,14 +92,22 @@ const Home = () => {
     return (
         <div className="home-container">
             <div className="new-post-container position-relative">
-            <div className="input-group mb-3">
-                <textarea className="form-control" placeholder="What's new?"
-                    value={newPost}
-                    onChange={(e) => setNewPosts(e.target.value)}
-                />
+                <div className="input-group mb-3">
+                    <textarea
+                        className="form-control"
+                        placeholder="What's new?"
+                        value={newPost}
+                        onChange={(e) => setNewPosts(e.target.value)}
+                    />
 
-                <button type="button" className="btn btn-outline-primary" onClick={handleNewPostSubmit}>Submit</button>
-            </div>
+                    <button
+                        type="button"
+                        className="btn btn-outline-primary"
+                        onClick={handleNewPostSubmit}
+                    >
+                        Submit
+                    </button>
+                </div>
             </div>
             <h1>LifeLink Feed</h1>
             <div className="posts-feed">
@@ -124,7 +122,8 @@ const Home = () => {
                                             {formatTimeDifference(
                                                 calculateTimeDifference(
                                                     post.date_posted
-                                                ), post.date_posted
+                                                ),
+                                                post.date_posted
                                             )}
                                         </small>
                                     </span>
@@ -137,4 +136,4 @@ const Home = () => {
         </div>
     )
 }
-export default Home;
+export default Home
