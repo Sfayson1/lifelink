@@ -1,6 +1,6 @@
 // This makes VSCode check types as if you are using TypeScript
 //@ts-check
-import { useState } from 'react'
+
 import './App.css'
 import { Route, Routes } from 'react-router-dom';
 import Login from './login';
@@ -10,6 +10,8 @@ import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
 import UserList from './ListOfUsers';
 import Home from './Home.jsx';
 import UpdateUser from './updateUser.jsx';
+import Profile from './Profile.jsx';
+import Homepage from './Homepage.jsx';
 
 
 
@@ -40,7 +42,9 @@ function App() {
           <Route path="/Login" element={<Login  />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/ListOfUsers" element={<UserList />} />
-          <Route path="/update/user" element={<UpdateUser />} />
+          <Route path="/user/update" element={<UpdateUser />} />
+          <Route path="/users/profile/mine"element={<Profile />} />
+          <Route path="/welcome" element={<Homepage />} />
 
         </Routes>
       </div>
