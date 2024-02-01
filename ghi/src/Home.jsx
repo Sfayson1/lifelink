@@ -4,9 +4,12 @@ const Home = () => {
     const [newPost, setNewPosts] = useState('')
     const [token, setToken] = useState();
 
+
+
     const fetchPosts = async () => {
         const postUrl = 'http://localhost:8000/posts/all'
         const response = await fetch(postUrl)
+        const postDate = posts
         if (response.ok) {
             const data = await response.json()
             if (data === undefined) {
@@ -14,6 +17,7 @@ const Home = () => {
             }
 
             setPosts(data.posts)
+
         }
     }
 
@@ -25,7 +29,6 @@ const Home = () => {
 
         const response = await fetch(tokenUrl, fetchConfig);
 
-
         if (response.ok) {
             const data = await response.json();
 
@@ -35,6 +38,7 @@ const Home = () => {
             }
 
             setToken(data.access_token);
+
         }
     }
 
@@ -46,7 +50,9 @@ const Home = () => {
 
     const handleNewPostSubmit = async () => {
         const createPostUrl = 'http://localhost:8000/posts'
-        const currentDate = new Date().toISOString().slice(0, 10);
+        const currentDate = new Date();
+        currentDate.setHours(currentDate.getHours() + 5);
+        const datePosted = currentDate.toISOString().slice(0, 10);
         const response = await fetch(createPostUrl, {
             method: 'POST',
             headers: {
@@ -55,7 +61,7 @@ const Home = () => {
             },
             body: JSON.stringify({
                 content: newPost,
-                date_posted: currentDate,
+                date_posted: datePosted
             }),
         })
         if (response.ok) {
@@ -87,22 +93,25 @@ const Home = () => {
         const postDateTime = new Date(postDate)
         const timeDifference = Math.floor(
             (currentDate - postDateTime) / (60 * 60 * 1000)
+
         )
+
         return timeDifference
     }
 
     return (
         <div className="home-container">
-            <div className="new-post-container">
-                <input
-                    placeholder="What's new"
+            <div className="new-post-container position-relative">
+            <div className="input-group mb-3">
+                <textarea className="form-control" placeholder="What's new?"
                     value={newPost}
                     onChange={(e) => setNewPosts(e.target.value)}
                 />
 
-                <button onClick={handleNewPostSubmit}>Submit</button>
+                <button type="button" className="btn btn-outline-primary" onClick={handleNewPostSubmit}>Submit</button>
             </div>
-
+            </div>
+            <h1>LifeLink Feed</h1>
             <div className="posts-feed">
                 {posts.length > 0 &&
                     posts.map((post) => {

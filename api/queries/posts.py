@@ -81,6 +81,7 @@ class PostQueries:
                     """
                     SELECT *
                     FROM posts
+                    ORDER BY date_posted DESC;
                     """
                 )
                 records = []
