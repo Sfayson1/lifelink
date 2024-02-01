@@ -7,19 +7,8 @@ export default defineConfig({
     server: {
         host: true,
         strictPort: true,
-    },
-    
-    themeConfig: {
-    nav: [
-      { text: 'Guide', link: '/guide' },
-      {
-        text: 'Dropdown Menu',
-        items: [
-          { text: 'Item A', link: '/item-1' },
-          { text: 'Item B', link: '/item-2' },
-          { text: 'Item C', link: '/item-3' }
-        ]
-      }
-    ]
-  }
+        watch: {
+          usePolling: true
+        }
+    }
 })
