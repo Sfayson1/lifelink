@@ -29,10 +29,6 @@ if (!API_HOST) {
 
 function App() {
 
-
-
-
-
   return (
     <>
       <Nav   />

@@ -28,6 +28,7 @@ function Nav() {
               <>
                 <li> <NavLink className="nav-link" to="/ListOfUsers">List of Users</NavLink> </li>
                 <li> <NavLink className="nav-link" to="/users/profile/mine">My Profile</NavLink> </li>
+                <li> <NavLink className="nav-link" to="/user/update">Update Profile</NavLink> </li>
                 <li><button className="btn btn-danger" onClick={async () => {
                 await logout();
                 }}>Logout</button></li>
@@ -39,6 +40,8 @@ function Nav() {
               <>
                 <li> <NavLink className="nav-link" to="/signup">Sign Up</NavLink> </li>
                 <li> <NavLink className="nav-link" to="/login">Login</NavLink> </li>
+                <li> <NavLink className="nav-link" to="/ListOfUsers">Who's Here?</NavLink> </li>
+
 
 
                 {/* Add links here that should be visible when the user IS NOT logged in */}
