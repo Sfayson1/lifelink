@@ -36,7 +36,7 @@ const Home = () => {
         }
     }
 
-    const formatTimeDifference = (hours) => {
+    const formatTimeDifference = (hours, postDate) => {
         if (hours < 1) {
             return `${Math.floor(hours * 60)}m`
         } else if (hours < 24) {

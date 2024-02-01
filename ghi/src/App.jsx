@@ -12,6 +12,7 @@ import Nav from './navbars/Mainnavbar.jsx'
 import { AuthProvider } from '@galvanize-inc/jwtdown-for-react';
 import Homepage from './Homepage.jsx'
 import Profile from './Profile.jsx'
+import Home from './Home.jsx'
 
 
 // All your environment variables in vite are in this object
@@ -29,20 +30,20 @@ if (!API_HOST) {
 function App() {
   const baseUrl = API_HOST;
   return (
-    <BrowserRouter>
-      <AuthProvider baseUrl={baseUrl}>
-      <Nav />
-      <div className="my-5 container">
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Signup" element={<Signup />} />
-          <Route path="/Profile" element={<Profile />} />
-        </Routes>
-      </div>
-      </AuthProvider>
-    </BrowserRouter>
-  );
+      <BrowserRouter>
+          <AuthProvider baseUrl={baseUrl}>
+              <Nav />
+              <div className="my-5 container">
+                  <Routes>
+                      <Route path="/" element={<Homepage />} />
+                      <Route path="/Login" element={<Login />} />
+                      <Route path="/Signup" element={<Signup />} />
+                      <Route path="/Profile" element={<Profile />} />
+                  </Routes>
+              </div>
+          </AuthProvider>
+      </BrowserRouter>
+  )
 }
 
 export default App;
