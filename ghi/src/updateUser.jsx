@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import  useToken from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from 'react-router-dom'
 
 function UpdateUser({ id }) {
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
+  const { logout } = useToken();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -44,7 +48,24 @@ function UpdateUser({ id }) {
         'Authorization': `Bearer ${token}`,
       },
     });
+    if (response.ok){
+      navigate('/users/profile/mine');
+    }
   }
+
+  const handleDelete = async () => {
+    const userURL = `http://localhost:8000/users/${userId}`;
+    const response = await fetch(userURL, {
+    method:"DELETE",
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  if (response.ok){
+    logout();
+    navigate('/Signup');
+  }
+}
 
 
   useEffect(() => {
@@ -108,6 +129,7 @@ function UpdateUser({ id }) {
             </div>
             <button type="submit" className='btn btn-primary'>Update User</button>
           </form>
+          <button onClick={handleDelete} className='btn btn-danger mt-2'>Delete User</button>
         </div>
       </div>
     </div>

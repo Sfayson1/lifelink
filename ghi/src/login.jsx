@@ -1,20 +1,29 @@
-import { useState } from 'react';
-import useToken from "@galvanize-inc/jwtdown-for-react";
-
-
-
-
+import { useState, useEffect } from 'react';
+import  useToken from "@galvanize-inc/jwtdown-for-react";
+import { useNavigate } from 'react-router-dom'
+import { useAuthContext } from '@galvanize-inc/jwtdown-for-react';
 
 const Login = () => {
+  const { token } = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const { login } = useToken();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (token){
+      navigate('/');
+    };
+  }, [token])
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await login(username, password);
-    e.target.reset();
+    login(username,password);
+
+    if (!token){
+      setErrorMsg("Login failed. Please check your username and password.");
+  }
   };
 
 
@@ -22,6 +31,7 @@ const Login = () => {
     <div className="card text-bg-light mb-3">
       <h5 className="card-header">Login</h5>
       <div className="card-body">
+        {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="mb-3">
             <label className="form-label">Username:</label>
@@ -42,7 +52,11 @@ const Login = () => {
             />
           </div>
           <div>
-            <input className="btn btn-primary" type="submit" value="Login" />
+            <input
+            className="btn btn-primary"
+            type="submit"
+            value="Login"
+            />
           </div>
         </form>
       </div>

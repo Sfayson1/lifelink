@@ -1,7 +1,7 @@
 # James Bratcher's journal
 
 ## 12
-1/31/2024:
+2/1/2024: Added delete to the update user page, may want to consider adding another page to confirm, right now its deleted the second you click. Login's redirect to home vs error message was a challenge, required thomas and eli to get it to work. The ultimate fix was to use the useAuthContext from '@galvanize-inc/jwtdown-for-react' and put the token finder/navigator in the useEffect. Sign up redirect needs to be done, pretty sure it'll be the same set up.
 
 ## 11
 1/30/2024: Worked Routers with Zack while Leah and Sherika worked on "homepage before sign in". Routers went quick, we ran into a large slew of issues when testing log in, referred to Eli (seir) for help. He directed us to jwtdown-for-react documentation. It helped us out greatly until we came across a much bigger issue, two syntax errors when loading (that gave us no direction on where to go) and when trying to log in, getting a POST 404, syntaxerror, and error: failed to get token after login. got undefined. Dalonte came in and helped out. It took a while, but the problem was fixed with a "<AuthProvider baseUrl={baseUrl}>" in App.jsx. Working UpdateUser now, I need to try and make it so you have to be logged in to update the user's profile.
