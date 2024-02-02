@@ -20,7 +20,7 @@ const Home = () => {
 
     const fetchToken = async () => {
         const tokenUrl = 'http://localhost:8000/token'
-        const fetchConfig = { credentials: 'include' }
+        const fetchConfig = {credentials: 'include'}
 
         const response = await fetch(tokenUrl, fetchConfig)
 
@@ -48,7 +48,7 @@ const Home = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({
                 content: newPost,
