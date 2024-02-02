@@ -6,7 +6,6 @@ const Profile = () => {
     let { user_id } = useParams()
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
-    const [username, setUsername] = useState(null)
 
     const formatTimeDifference = (hours) => {
         if (hours < 1) {
@@ -33,14 +32,14 @@ const Profile = () => {
         return timeDifference
     }
 
-    const fetchPosts = async (username) => {
-        const postUrl = `http://localhost:8000/posts/${username}`
+    const fetchPostsWithUser = async () => {
+        const postUrl = `http://localhost:8000/posts/${user_id}`
         const response = await fetch(postUrl)
         if (response.ok) {
             const data = await response.json()
             if (data === undefined) {
                 return null
-            }
+            }  
             setPosts(data.posts)
         }
     }
@@ -54,18 +53,12 @@ const Profile = () => {
                 return null
             }
             setUsers([users])
-            setUsername(users.username)
         }
     }
     useEffect(() => {
         fetchUser()
-    }, [])
-
-    useEffect(() => {
-        if (username) {
-            fetchPosts(username)
-        }
-    }, [username])
+        fetchPostsWithUser()
+    }, [user_id])
 
     return (
         <div className="profile-container">
@@ -93,7 +86,9 @@ const Profile = () => {
                     return (
                         <div className="card mb-3" key={post.id}>
                             <div className="card-body">
-                                <h5>{post.user_id}</h5>
+                                <h5>
+                                    {post.user_first_name} {post.user_last_name}
+                                </h5>
                                 <span>
                                     <small>
                                         {formatTimeDifference(
