@@ -1,8 +1,7 @@
 from pydantic import BaseModel, Field
 from datetime import date, datetime
 from jwtdown_fastapi.authentication import Token
-
-
+from typing import Optional
 
 class UserIn(BaseModel):
     username:str
@@ -63,11 +62,18 @@ class PostIn(BaseModel):
 class PostOut(PostIn):
     id: int
     content: str
+    user_id: int
+    user_first_name: str
+    user_last_name: str
 
 class PostOutWithUser(PostIn):
     id: int
     content: str
-    user_id: str
+    user_id: int
+    user_first_name: str
+    user_last_name: str
+
+
 
 
 class PostList(BaseModel):

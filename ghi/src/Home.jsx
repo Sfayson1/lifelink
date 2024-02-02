@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 const Home = () => {
     const [posts, setPosts] = useState([])
     const [newPost, setNewPosts] = useState('')
     const [token, setToken] = useState()
 
-    const fetchPosts = async () => {
-        const postUrl = 'http://localhost:8000/posts/all'
+    const fetchPost = async () => {
+        const postUrl = `http://localhost:8000/posts/all`
         const response = await fetch(postUrl)
-        const postDate = posts
         if (response.ok) {
             const data = await response.json()
             if (data === undefined) {
@@ -36,7 +36,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        fetchPosts(), fetchToken()
+        fetchPost(), fetchToken()
     }, [])
 
     const handleNewPostSubmit = async () => {
@@ -56,7 +56,7 @@ const Home = () => {
             }),
         })
         if (response.ok) {
-            fetchPosts()
+            fetchPost()
             setNewPosts('')
         } else {
             console.error('Failed to create a new post')
@@ -116,7 +116,12 @@ const Home = () => {
                         return (
                             <div className="card mb-3" key={post.id}>
                                 <div className="card-body">
-                                    <h5>{post.user_id}</h5>
+                                    <Link to={`/profile/${post.user_id}`}>
+                                        <h5>
+                                            {post.user_first_name}{' '}
+                                            {post.user_last_name}
+                                        </h5>
+                                    </Link>
                                     <span>
                                         <small>
                                             {formatTimeDifference(

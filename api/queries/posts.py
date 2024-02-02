@@ -4,8 +4,6 @@ from models import PostOut, PostOutWithUser
 from fastapi import FastAPI
 from typing import Optional
 
-
-
 app = FastAPI()
 
 pool = ConnectionPool(conninfo=os.environ.get("DATABASE_URL"))
@@ -14,28 +12,31 @@ class DuplicateAccountError(ValueError):
     pass
 
 class PostQueries:
-    def list_my_posts(self, post_id: int) -> PostOut:
+    def list_my_posts(self, post_id: int) -> Optional[PostOutWithUser]:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    SELECT id, user_id, content
-                    FROM posts
-                    WHERE id = %s;
+                    SELECT 
+                        p.id AS id, 
+                        p.user_id AS user_id, 
+                        p.content AS content,
+                        p.date_posted AS date_posted,
+                        u.first_name AS user_first_name,
+                        u.last_name AS user_last_name
+                    FROM posts p
+                    INNER JOIN users u ON p.user_id = u.id
+                    WHERE p.id = %s;
                     """,
                     [post_id],
                 )
-                try:
-                    record = None
-                    for row in db.fetchall():
-                        record = {}
-                        for i, column in enumerate(db.description):
-                            record[column.name] = row[i]
+                row = db.fetchone()
+                if row:
+                    record = dict(zip([column[0] for column in db.description], row))
                     return PostOutWithUser(**record)
-                except Exception:
-                    return {"message": "Could not get post record for this id"}
-
-    def create_post(self, data, user_id: Optional[int] = None) -> PostOut:
+                else:
+                    return None
+    def create_post(self, data, user_id: int) -> Optional[PostOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -46,13 +47,14 @@ class PostQueries:
                     ]
                     db.execute(
                         """
-                        INSERT INTO posts (content, date_posted, user_id)
-                        VALUES (%s, %s, %s)
-                        RETURNING id, content, date_posted;
+                        INSERT INTO posts (content, date_posted, user_id, user_first_name, user_last_name)
+                        SELECT %s, %s, u.id, u.first_name, u.last_name
+                        FROM users u
+                        WHERE u.id = %s
+                        RETURNING id, content, date_posted, user_id, user_first_name, user_last_name;
                         """,
-                        params,
+                        [data.content, data.date_posted, user_id],
                     )
-                    record = None
                     row = db.fetchone()
                     if row is not None:
                         record = {}
@@ -60,7 +62,12 @@ class PostQueries:
                             record[column.name] = row[i]
                         return PostOut(**record)
         except Exception as e:
-            print(e)
+            print(f"Error creating post: {e}")
+        return None
+
+
+
+
 
     def delete_post(self, post_id: int) -> bool:
         with pool.connection() as conn:
@@ -92,8 +99,7 @@ class PostQueries:
                     records.append(PostOutWithUser(**record))
                 return {"posts": records}
 
-
-    def get_user_posts(self, username: str) -> dict:
+    def get_user_posts(self, user_id: int) -> dict:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
@@ -102,7 +108,7 @@ class PostQueries:
                     FROM posts
                     WHERE user_id = %s;
                     """,
-                    [username],
+                    [user_id],
                 )
                 records = []
                 for row in db.fetchall():

@@ -43,7 +43,7 @@ async def create_post(
     repo: PostQueries = Depends(),
 ):
     print('****ACCOUNT DATA****', account_data)
-    return repo.create_post(data=post, user_id=account_data['username'])
+    return repo.create_post(data=post, user_id=account_data['id'])
 
 @router.delete("/posts/{post_id}/", response_model=bool)
 async def delete_post(
@@ -52,12 +52,12 @@ async def delete_post(
 ) ->bool:
     return repo.delete_post(post_id)
 
-@router.get("/posts/{username}", response_model=PostListWithUser)
+@router.get("/posts/{user_id}", response_model=PostListWithUser)
 async def list_users_posts(
-    username: str,
+    user_id: int,
     repo: PostQueries = Depends(),
 ):
-    return repo.get_user_posts(username)
+    return repo.get_user_posts(user_id)
 
 
 @router.put("/posts/{post_id}/", response_model=Union[PostOut, Error])
