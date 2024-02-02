@@ -26,6 +26,8 @@ const Home = () => {
 
         if (response.ok) {
             const data = await response.json()
+            console.log(data)
+            
 
             if (!data) {
                 return null
@@ -41,18 +43,18 @@ const Home = () => {
 
     const handleNewPostSubmit = async () => {
         const createPostUrl = 'http://localhost:8000/posts'
-        const currentDate = new Date()
-        currentDate.setHours(currentDate.getHours() + 5)
-        const datePosted = currentDate.toISOString().slice(0, 10)
+        const currentDate = new Date();
+        currentDate.setHours(currentDate.getHours() + 5);
+        const datePosted = currentDate.toISOString().slice(0, 10);
         const response = await fetch(createPostUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+                'Authorization':`Bearer ${token}`,
             },
             body: JSON.stringify({
                 content: newPost,
-                date_posted: datePosted,
+                date_posted: datePosted
             }),
         })
         if (response.ok) {
