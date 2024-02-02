@@ -1,49 +1,31 @@
 import { useState, useEffect } from 'react';
 import  useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from 'react-router-dom'
+import { useAuthContext } from '@galvanize-inc/jwtdown-for-react';
 
 const Login = () => {
-  const [token, setToken] = useState('');
+  const { token } = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const { login } = useToken();
   const navigate = useNavigate();
 
-  const fetchToken = async () => {
-    const tokenURL = "http://localhost:8000/token";
-    const fetchConfig = {credentials:'include'};
-    const response = await fetch(tokenURL, fetchConfig);
-    if (response.ok) {
-      const data = await response.json();
-      if (!data){
-        return null;
-      }
-      setToken(data.access_token)
-      console.log(data.access_token)
-    }
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      login(username,password);
-      console.log('*data*', token)
-      if (token !== null){
-        e.target.reset();
-        navigate('/');
-      } else if (token === null) {
-        setErrorMsg("Login failed. Please check your username and password.");
-      }
-    } catch (error) {
-      console.error("Login failed:", error.message);
-      setErrorMsg("Login failed. Please check your username and password.");
-      }
-    };
-
   useEffect(() => {
-      fetchToken();
-  }, [])
+    if (token){
+      navigate('/');
+    };
+  }, [token])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(username,password);
+
+    if (!token){
+      setErrorMsg("Login failed. Please check your username and password.");
+  }
+  };
+
 
   return (
     <div className="card text-bg-light mb-3">
