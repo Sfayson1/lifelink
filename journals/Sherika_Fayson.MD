@@ -4,7 +4,6 @@
 
 2/2/2024
 After much thought and tinkering like Tinker Bell, I was able to get the Home page to have have the user's name to be a clickable link that takes the user to their profile. To accomplish this I had to update the posts models to include the user_id, the user_first_name, and the user_last_name. From there I updated the post query for create post function and the list my post functions. After that I update the route for get posts to get(/post/user_id). The reason this is necessary is because the user_id is a foreign key for the users table and allows us to obtain data from the user relationship to associate with the posts table. Now I am able to list posts by the users name, the time/date, and content so that the posts can be identified by who created the post.
-git 
 ## 9
 
 2/1/2024
