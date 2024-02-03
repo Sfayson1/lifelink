@@ -10,7 +10,9 @@ from queries.posts import PostQueries
 from pydantic import BaseModel
 from authenticator import authenticator
 from typing import Union
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 router = APIRouter()
 
@@ -43,7 +45,12 @@ async def create_post(
     repo: PostQueries = Depends(),
 ):
     print('****ACCOUNT DATA****', account_data)
-    return repo.create_post(data=post, user_id=account_data['id'])
+    post_out = repo.create_post(data=post, user_id=account_data['id'])
+
+
+    logging.info(f"Inside create_post, PostOut: {post_out}")
+
+    return post_out
 
 @router.delete("/posts/{post_id}/", response_model=bool)
 async def delete_post(

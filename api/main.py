@@ -4,7 +4,7 @@ import os
 from routers import users, posts
 from authenticator import authenticator
 
-app = FastAPI()
+app = FastAPI(debug=True)
 app.include_router(posts.router, tags=['Posts'])
 app.include_router(authenticator.router, tags=['Auth'])
 app.include_router(users.router, tags=['Auth'])

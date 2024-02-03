@@ -7,8 +7,9 @@ steps=[
             content VARCHAR,
             date_posted DATE,
             user_id INT,
-            user_first_name VARCHAR(255),
-            user_last_name VARCHAR(255),
+            CONSTRAINT fk_user
+                FOREIGN KEY(user_id)
+                    REFERENCES users(id)
         );
         """,
         #step 2

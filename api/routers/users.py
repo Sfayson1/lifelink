@@ -80,3 +80,11 @@ async def get_token(
             "type": "Bearer",
             "user": user,
         }
+
+
+@router.get("/users/{user_id}/", response_model=Optional[UserOut])
+async def get_my_info(
+    user: dict = Depends(authenticator.get_current_account_data),
+    repo: UserQueries = Depends(),
+) -> UserOut:
+    return int(repo.get_user(user['id']))

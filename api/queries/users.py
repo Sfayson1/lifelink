@@ -156,3 +156,21 @@ class UserQueries:
                     return UserOutWithPassword(**record)
                 except Exception:
                     return {"message": "Error"}
+
+    def get_my_info(self, user_id: int) -> UserOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT id, username, first_name, last_name, email, grad_class
+                    FROM users
+                    WHERE id = %s;
+                    """,
+                    [user_id],
+                )
+                record = None
+                for row in db.fetchall():
+                    record = {}
+                    for i, column in enumerate(db.description):
+                        record[column.name] = row[i]
+                return UserOut(**record)

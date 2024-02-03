@@ -3,8 +3,9 @@ from psycopg_pool import ConnectionPool
 from models import PostOut, PostOutWithUser
 from fastapi import FastAPI
 from typing import Optional
+from psycopg.rows import dict_row
 
-app = FastAPI()
+app = FastAPI(debug=True)
 
 pool = ConnectionPool(conninfo=os.environ.get("DATABASE_URL"))
 
@@ -17,9 +18,9 @@ class PostQueries:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    SELECT 
-                        p.id AS id, 
-                        p.user_id AS user_id, 
+                    SELECT
+                        p.id AS id,
+                        p.user_id AS user_id,
                         p.content AS content,
                         p.date_posted AS date_posted,
                         u.first_name AS user_first_name,
@@ -36,37 +37,52 @@ class PostQueries:
                     return PostOutWithUser(**record)
                 else:
                     return None
-    def create_post(self, data, user_id: int) -> Optional[PostOut]:
+
+
+    def create_post(self, data, user_id: int) -> PostOut:
         try:
             with pool.connection() as conn:
-                with conn.cursor() as db:
-                    params = [
-                        data.content,
-                        data.date_posted,
-                        user_id
-                    ]
+                with conn.cursor(row_factory=dict_row) as db:
+                    # Insert the new post
                     db.execute(
                         """
-                        INSERT INTO posts (content, date_posted, user_id, user_first_name, user_last_name)
-                        SELECT %s, %s, u.id, u.first_name, u.last_name
-                        FROM users u
-                        WHERE u.id = %s
-                        RETURNING id, content, date_posted, user_id, user_first_name, user_last_name;
+                        INSERT INTO posts (content, date_posted, user_id)
+                        VALUES (%s, %s, %s)
+                        RETURNING id, content, date_posted, user_id;
                         """,
                         [data.content, data.date_posted, user_id],
                     )
-                    row = db.fetchone()
-                    if row is not None:
-                        record = {}
-                        for i, column in enumerate(db.description):
-                            record[column.name] = row[i]
-                        return PostOut(**record)
+                    post = db.fetchone()
+                    if post is not None:
+                        # Fetch the user's first and last name using an INNER JOIN
+                        db.execute(
+                            """
+                            SELECT u.first_name, u.last_name
+                            FROM users u
+                            INNER JOIN posts p ON p.user_id = u.id
+                            WHERE p.id = %s;
+                            """,
+                            [post['id']],
+                        )
+                        user = db.fetchone()
+                        if user is not None:
+                            # Combine the post data with the user's first and last name
+                            post_out = PostOut(
+                                id=post['id'],
+                                content=post['content'],
+                                date_posted=post['date_posted'],
+                                user_id=post['user_id'],
+                                user_first_name=user['first_name'],
+                                user_last_name=user['last_name']
+                            )
+                            return post_out
+                        else:
+                            raise ValueError("Failed to fetch user information")
+                    else:
+                        raise ValueError("Failed to create post")
         except Exception as e:
             print(f"Error creating post: {e}")
-        return None
-
-
-
+            raise
 
 
     def delete_post(self, post_id: int) -> bool:
@@ -86,9 +102,16 @@ class PostQueries:
             with conn.cursor() as db:
                 db.execute(
                     """
-                    SELECT *
-                    FROM posts
-                    ORDER BY date_posted DESC;
+                    SELECT
+                        p.id AS id,
+                        p.content AS content,
+                        p.date_posted AS date_posted,
+                        p.user_id AS user_id,
+                        u.first_name AS user_first_name,
+                        u.last_name AS user_last_name
+                    FROM posts p
+                    INNER JOIN users u ON p.user_id = u.id
+                    ORDER BY p.date_posted DESC, p.id DESC;
                     """
                 )
                 records = []
@@ -99,6 +122,7 @@ class PostQueries:
                     records.append(PostOutWithUser(**record))
                 return {"posts": records}
 
+
     def get_user_posts(self, user_id: int) -> dict:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -106,7 +130,8 @@ class PostQueries:
                     """
                     SELECT *
                     FROM posts
-                    WHERE user_id = %s;
+                    WHERE user_id = %s
+                    ORDER BY date_posted DESC, id DESC;
                     """,
                     [user_id],
                 )
