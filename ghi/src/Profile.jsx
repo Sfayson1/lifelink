@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './Profile.css'
+
+
 
 const Profile = () => {
     let { user_id } = useParams()
@@ -39,7 +41,7 @@ const Profile = () => {
             const data = await response.json()
             if (data === undefined) {
                 return null
-            }  
+            }
             setPosts(data.posts)
         }
     }
