@@ -4,7 +4,7 @@ import os
 from routers import users, posts
 from authenticator import authenticator
 
-app = FastAPI()
+app = FastAPI(debug=True)
 app.include_router(posts.router, tags=['Posts'])
 app.include_router(authenticator.router, tags=['Auth'])
 app.include_router(users.router, tags=['Auth'])
@@ -13,7 +13,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         os.environ.get("CORS_HOST"),
-        "http://localhost:5173"
+        "http://localhost:5173",
+        "http://localhost:8000",
     ],
     allow_credentials=True,
     allow_methods=["*"],

@@ -51,7 +51,6 @@ services:
       HOST: "0.0.0.0"
       # PUBLIC_URL: http://localhost:3000
       VITE_API_HOST: ${VITE_API_HOST}
-
 volumes:
     postgres-data:
     pg-admin:
