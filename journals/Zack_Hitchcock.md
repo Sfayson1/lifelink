@@ -69,3 +69,12 @@ const fetchConfig = {credentials: 'include'};
 token *is* in credentials,
 omitted by default, need to ask nicely to see
 s
+
+
+changes today 2/1/24
+created migration files,
+recreated server in pg admin
+recreate volumes=
+change database_url_from_env_file to database_url (to match everything else, including __main__.py in api/migrations)
+
+fixed migrations, you need a nested list inside steps= for a migration file with a comma at the end for python sql injection to work. i had to completely recreate the project from a docker and pgadmin perspective.
