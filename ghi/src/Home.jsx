@@ -36,7 +36,8 @@ const Home = () => {
     }
 
     useEffect(() => {
-        fetchPost(), fetchToken()
+        fetchPost()
+        fetchToken()
     }, [])
 
     const handleNewPostSubmit = async () => {
@@ -48,7 +49,7 @@ const Home = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({
                 content: newPost,

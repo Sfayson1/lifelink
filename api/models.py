@@ -62,9 +62,6 @@ class PostIn(BaseModel):
 class PostOut(PostIn):
     id: int
     content: str
-    user_id: int
-    user_first_name: str
-    user_last_name: str
 
 class PostOutWithUser(PostIn):
     id: int

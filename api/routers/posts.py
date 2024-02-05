@@ -5,12 +5,14 @@ from fastapi import (
     APIRouter,
 
 )
-from models import PostIn, PostOut, PostList, PostOutWithUser, PostListWithUser
+from models import PostIn, PostOut, PostOutWithUser, PostList, PostListWithUser
 from queries.posts import PostQueries
 from pydantic import BaseModel
 from authenticator import authenticator
 from typing import Union
+import logging
 
+logging.basicConfig(level=logging.INFO)
 
 router = APIRouter()
 
@@ -28,22 +30,27 @@ async def list_all_posts(
     return repo.get_all()
 
 
-@router.get("/posts/mine", response_model=PostListWithUser)
+@router.get("/posts/mine", response_model=PostList)
 async def list_my_posts(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
     # return repo.get_user_posts(account_data['username'])
-    return repo.get_user_posts(username=account_data['username'])
+    return repo.get_user_posts(user_id=account_data['id'])
 
-@router.post("/posts", response_model=PostOut)
+@router.post("/posts", response_model=PostOutWithUser)
 async def create_post(
     post: PostIn,
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
     print('****ACCOUNT DATA****', account_data)
-    return repo.create_post(data=post, user_id=account_data['id'])
+    post_out = repo.create_post(data=post, user_id=account_data['id'])
+
+
+    logging.info(f"Inside create_post, PostOut: {post_out}")
+
+    return post_out
 
 @router.delete("/posts/{post_id}/", response_model=bool)
 async def delete_post(
@@ -52,7 +59,7 @@ async def delete_post(
 ) ->bool:
     return repo.delete_post(post_id)
 
-@router.get("/posts/{user_id}", response_model=PostListWithUser)
+@router.get("/posts/{user_id}", response_model=PostList)
 async def list_users_posts(
     user_id: int,
     repo: PostQueries = Depends(),

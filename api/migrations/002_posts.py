@@ -2,11 +2,12 @@ steps=[
     [
         #step 1
         """
-        CREATE TABLE IF NOT EXISTS posts (
+        CREATE TABLE posts (
             id SERIAL PRIMARY KEY,
             content VARCHAR,
             date_posted DATE,
-            user_id VARCHAR
+            user_id INT,
+            FOREIGN KEY (user_id) REFERENCES users(id)
         );
         """,
         #step 2
