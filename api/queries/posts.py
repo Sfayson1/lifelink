@@ -39,7 +39,7 @@ class PostQueries:
                     return None
 
 
-    def create_post(self, data, user_id: int) -> PostOut:
+    def create_post(self, data, user_id: int) -> PostOutWithUser:
         try:
             with pool.connection() as conn:
                 with conn.cursor(row_factory=dict_row) as db:
@@ -67,7 +67,7 @@ class PostQueries:
                         user = db.fetchone()
                         if user is not None:
                             # Combine the post data with the user's first and last name
-                            post_out = PostOut(
+                            post_out = PostOutWithUser(
                                 id=post['id'],
                                 content=post['content'],
                                 date_posted=post['date_posted'],
@@ -140,7 +140,7 @@ class PostQueries:
                     record = {}
                     for i, column in enumerate(db.description):
                         record[column.name] = row[i]
-                    records.append(PostOutWithUser(**record))
+                    records.append(PostOut(**record))
                 return {"posts": records}
 
     def update_post(self, post_id: int, data) -> Optional[PostOut]:

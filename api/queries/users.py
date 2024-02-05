@@ -38,7 +38,7 @@ class UserQueries:
                     return result
         except Exception as e:
             print(e)
-            return{"message": "Could not get all users"}
+            return{"message": "Could not get all users"} # type: ignore
 
     def update_user(self, user_id: int, user: UserInNoPassOrUsername) -> Union[UserOutNoUsername, Error]:
         try:
@@ -65,7 +65,7 @@ class UserQueries:
                     return UserOutNoUsername(id=user_id, **old_data)
         except Exception as e:
             print(e)
-            return{"message": "Could not update user"}
+            return{"message": "Could not update user"} # type: ignore
 
     def delete_user(self, user_id: int) -> bool:
         try:
@@ -105,7 +105,7 @@ class UserQueries:
                         grad_class=record[5]
                     )
         except Exception:
-            return {"message": "Could not get user record for this id"}
+            return {"message": "Could not get user record for this id"} # type: ignore
 
 
     def create_user(self, data, hashed_password) -> UserOutWithPassword:
@@ -155,22 +155,4 @@ class UserQueries:
                             record[column.name] = row[i]
                     return UserOutWithPassword(**record)
                 except Exception:
-                    return {"message": "Error"}
-
-    def get_my_info(self, user_id: int) -> UserOut:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                db.execute(
-                    """
-                    SELECT id, username, first_name, last_name, email, grad_class
-                    FROM users
-                    WHERE id = %s;
-                    """,
-                    [user_id],
-                )
-                record = None
-                for row in db.fetchall():
-                    record = {}
-                    for i, column in enumerate(db.description):
-                        record[column.name] = row[i]
-                return UserOut(**record)
+                    return {"message": "Error"} # type: ignore
