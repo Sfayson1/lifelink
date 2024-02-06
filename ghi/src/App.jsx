@@ -12,6 +12,7 @@ import Home from './Home.jsx'
 import UpdateUser from './updateUser.jsx'
 import Profile from './Profile.jsx'
 import Homepage from './Homepage.jsx'
+import MyProfile from './MyProfile.jsx'
 
 // All your environment variables in vite are in this object
 console.table(import.meta.env)
@@ -36,7 +37,7 @@ function App() {
                     <Route path="/ListOfUsers" element={<UserList />} />
                     <Route path="/user/update" element={<UpdateUser  />} />
                     <Route path="/profile/:user_id" Component={Profile} />
-                    <Route path="/users/profile/mine" element={<Profile />} />
+                    <Route path="/users/profile/mine" element={<MyProfile />} />
                     <Route path="/welcome" element={<Homepage />} />
                 </Routes>
             </div>

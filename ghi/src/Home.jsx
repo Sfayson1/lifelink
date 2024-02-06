@@ -32,6 +32,7 @@ const Home = () => {
             }
 
             setToken(data.access_token)
+            console.log(data)
         }
     }
 
