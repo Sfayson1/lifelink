@@ -1,6 +1,5 @@
-steps=[
+steps = [
     [
-        #step 1
         """
         CREATE TABLE posts (
             id SERIAL PRIMARY KEY,
@@ -10,9 +9,8 @@ steps=[
             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         );
         """,
-        #step 2
         """
         DROP TABLE posts;
-        """
+        """,
     ],
 ]

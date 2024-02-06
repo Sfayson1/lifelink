@@ -1,22 +1,24 @@
 from pydantic import BaseModel, Field
 from datetime import date, datetime
 from jwtdown_fastapi.authentication import Token
-from typing import Optional
+
 
 class UserIn(BaseModel):
-    username:str
+    username: str
     first_name: str
     last_name: str
-    password:str
+    password: str
     email: str
     grad_class: str
 
+
 class UserInNoPass(BaseModel):
-    username:str
+    username: str
     first_name: str
     last_name: str
     email: str
     grad_class: str
+
 
 class UserInNoPassOrUsername(BaseModel):
     first_name: str
@@ -24,12 +26,14 @@ class UserInNoPassOrUsername(BaseModel):
     email: str
     grad_class: str
 
+
 class UserForm(BaseModel):
     username: str
     password: str
 
+
 class UserOutWithPassword(BaseModel):
-    id:str
+    id: str
     username: str
     first_name: str
     last_name: str
@@ -37,13 +41,15 @@ class UserOutWithPassword(BaseModel):
     grad_class: str
     hashed_password: str
 
+
 class UserOut(BaseModel):
     id: int
-    username:str
+    username: str
     first_name: str
     last_name: str
     email: str
     grad_class: str
+
 
 class UserOutNoUsername(BaseModel):
     id: int
@@ -52,16 +58,20 @@ class UserOutNoUsername(BaseModel):
     email: str
     grad_class: str
 
+
 class UserToken(Token):
     user: UserOut
+
 
 class PostIn(BaseModel):
     content: str
     date_posted: date = Field(default_factory=lambda: datetime.utcnow().date())
 
+
 class PostOut(PostIn):
     id: int
     content: str
+
 
 class PostOutWithUser(PostIn):
     id: int
@@ -69,8 +79,6 @@ class PostOutWithUser(PostIn):
     user_id: int
     user_first_name: str
     user_last_name: str
-
-
 
 
 class PostList(BaseModel):

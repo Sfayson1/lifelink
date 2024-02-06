@@ -1,5 +1,11 @@
 # James Bratcher's journal
 
+## 14
+2/6/2024: Today's focus was CI/CD, following the steps, this led me to to have to complete the unit test first. Completed unit test around testing for if the get_all (users) endpoint worked. Back to CI/CD.
+
+## 13
+2/5/2024: Work done over the weekend changed the backend and broke some of the endpoints. Testing completed, I'd say 70% of endpoints didnt work properly now. Most of the day was spent debugging. Able to get it working by end of day, the models changed and such the endpoints needed to match the models appropriately. Started CI/CD, didnt get very far though.
+
 ## 12
 2/1/2024: Added delete to the update user page, may want to consider adding another page to confirm, right now its deleted the second you click. Login's redirect to home vs error message was a challenge, required thomas and eli to get it to work. The ultimate fix was to use the useAuthContext from '@galvanize-inc/jwtdown-for-react' and put the token finder/navigator in the useEffect. Sign up redirect needs to be done, pretty sure it'll be the same set up.
 
