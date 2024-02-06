@@ -16,31 +16,36 @@ const MyProfile = () => {
         if (response.ok) {
             const data = await response.json();
             if (!data) return null;
-            setAccount(data.user);
+            setAccount(data);
+
         }
     };
 
-    // Fetch posts with user
     const fetchPostsWithUser = async () => {
-        const postUrl = `http://localhost:8000/posts/${account.id}`;
-        const response = await fetch(postUrl);
-        if (response.ok) {
-            const data = await response.json();
-            if (data === undefined) return null;
-            setPosts(data.posts);
+        if (account.user) {
+            const user_id = parseInt(account.user.id, 10);
+            const postUrl = `http://localhost:8000/posts/${user_id}`;
+            const response = await fetch(postUrl);
+            if (response.ok) {
+                const data = await response.json();
+                if (data === undefined) return null;
+                setPosts(data.posts);
+            }
         }
     };
 
-    // Fetch user
     const fetchUser = async () => {
-        const userUrl = `http://localhost:8000/users/${account.id}`;
+    if (account.user) {
+        const user_id = parseInt(account.user.id, 10);
+        const userUrl = `http://localhost:8000/users/${user_id}`;
         const response = await fetch(userUrl);
         if (response.ok) {
             const users = await response.json();
             if (users === undefined) return null;
             setUsers([users]);
         }
-    };
+    }
+};
 
     // Handle new post submission
     const handleNewPostSubmit = async () => {
@@ -60,46 +65,83 @@ const MyProfile = () => {
             }),
         });
         if (response.ok) {
-            fetchPost();
+            fetchPostsWithUser();
             setNewPosts('');
             console.log('New post created');
         } else {
             console.error('Failed to create a new post');
         }
     };
+const Post = ({ post }) => {
+    // State variable for the current time
+    const [currentTime, setCurrentTime] = useState(new Date());
+    console.log(post.date_posted);
 
     // Calculate time difference
     const calculateTimeDifference = (postDate) => {
-        const currentDate = new Date();
-        const postDateTime = new Date(postDate);
+         const postDateTime = new Date(postDate.replace(' ', 'T') + 'Z');
         const timeDifference = Math.floor(
-            (currentDate - postDateTime) / (60 * 60 * 1000)
+            (currentTime - postDateTime) / (60 * 1000)
         );
         return timeDifference;
     };
 
-    // Format time difference
-    const formatTimeDifference = (hours) => {
-        if (hours < 1) return `${Math.floor(hours * 60)}m`;
-        if (hours < 24) return `${Math.floor(hours)}h`;
-        if (hours < 24 * 7) return `${Math.floor(hours / 24)}d`;
-        const postDateTime = new Date(postDate);
-        return postDateTime.toLocaleDateString('en-US', {
+    const formatTimeDifference = (minutes) => {
+        if (minutes < 60) return `${minutes}m`;
+        if (minutes < 24 * 60) return `${Math.floor(minutes / 60)}h`;
+        if (minutes < 24 * 7 * 60) return `${Math.floor(minutes / (24 * 60))}d`;
+        return currentTime.toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',
         });
     };
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 60 * 1000); // 60 * 1000 milliseconds = 1 minute
+
+        // Clean up the interval on unmount
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+    return (
+        <div className="card mb-3" key={post.id}>
+            <div className="card-body">
+                <h5>
+                    {post.user_first_name} {post.user_last_name}
+                </h5>
+                <span>
+                    <small>
+                        {formatTimeDifference(
+                            calculateTimeDifference(
+                                post.date_posted
+                            )
+                        )}
+                    </small>
+                </span>
+                <p className="card-text">{post.content}</p>
+            </div>
+        </div>
+    );
+};
+
+    // Fetch user and posts whenever account id changes
+    useEffect(() => {
+        if (account.user) {
+            fetchUser();
+            fetchPostsWithUser();
+        }
+    }, [account]);
+    // Update the current time every minute
 
     // Fetch account details on component mount
     useEffect(() => {
         fetchAccount();
     }, []);
 
-    // Fetch user and posts whenever account id changes
-    useEffect(() => {
-        fetchUser();
-        fetchPostsWithUser();
-    }, [account.id]);
+
 
     return (
         <div className="profile-container">
@@ -142,27 +184,9 @@ const MyProfile = () => {
                 </div>
             </div>
             <div className="posts-feed">
-                {posts.map((post) => {
-                    return (
-                        <div className="card mb-3" key={post.id}>
-                            <div className="card-body">
-                                <h5>
-                                    {post.user_first_name} {post.user_last_name}
-                                </h5>
-                                <span>
-                                    <small>
-                                        {formatTimeDifference(
-                                            calculateTimeDifference(
-                                                post.date_posted
-                                            )
-                                        )}
-                                    </small>
-                                </span>
-                                <p className="card-text">{post.content}</p>
-                            </div>
-                        </div>
-                    )
-                })}
+                {posts.map((post) => <Post key={post.id} post={post} />)}
+
+
             </div>
         </div>
         </div>
