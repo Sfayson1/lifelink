@@ -26,6 +26,7 @@ function Nav() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {isAuthenticatedFromToken ? (
               <>
+
                 <li> <NavLink className="nav-link" to="/ListOfUsers">List of Users</NavLink> </li>
                 <li> <NavLink className="nav-link" to="/users/profile/mine">My Profile</NavLink> </li>
                 <li> <NavLink className="nav-link" to="/user/update">Update Profile</NavLink> </li>
