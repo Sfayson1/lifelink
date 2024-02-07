@@ -102,6 +102,18 @@ function MyProfile () {
         setIsDeleted(true);
         }
     }
+    const handleDeletePost = async () => {
+        const userURL = `http://localhost:8000/posts/${post_id}/`;
+        const response = await fetch(userURL, {
+        method:"DELETE",
+        headers: {
+        'Authorization': `Bearer ${token}`,
+        },
+    });
+  if (response.ok){
+    navigate('/users/profile/mine');
+  }
+}
 
     useEffect(() => {
     if (isDeleted) {
@@ -166,7 +178,7 @@ const Post = ({ post }) => {
                 <button className="btn btn-primary" type="button">
                     <Link to={`/UpdatePost/${post.id}`}style={{ color: 'white' }}>Edit</Link>
                 </button>
-                <button className="btn btn-primary" type="button">Button</button>
+                <button onClick={handleDeletePost} className="btn btn-primary" type="button">Delete</button>
             </div>
 
         </div>

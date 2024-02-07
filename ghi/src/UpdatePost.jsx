@@ -1,18 +1,24 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-
+import { useParams, useNavigate } from 'react-router-dom'
 
 const UpdatePost = () => {
+    const navigate = useNavigate();
     const [token, setToken] = useState('');
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ("0" + currentDate.getDate()).slice(-2);
+
+    const formattedDate = `${year}-${month}-${day}`;
 
 
+    let { post_id } = useParams()
 
     const [formData, setFormData] = useState({
     content: '',
-    date_posted: ''
-  });
-  let { post_id } = useParams()
+    date_posted: formattedDate,
 
+  });
 
 
 
@@ -44,7 +50,7 @@ const UpdatePost = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userURL = `http://localhost:8000/posts/${post_id}`;
+    const userURL = `http://localhost:8000/posts/${post_id}/`;
     const response = await fetch(userURL, {
       method: "PUT",
       body: JSON.stringify(formData),
@@ -55,11 +61,13 @@ const UpdatePost = () => {
     });
     if (response.ok){
       navigate('/users/profile/mine');
-    }
+    } else {
+        console.log('error', response.status, 'postobject', formData)
+        }
   }
 
-  const handleDelete = async () => {
-    const userURL = `http://localhost:8000/posts/${post_id}`;
+  const handleDeletePost = async () => {
+    const userURL = `http://localhost:8000/posts/${post_id}/`;
     const response = await fetch(userURL, {
     method:"DELETE",
     headers: {
@@ -99,7 +107,7 @@ const UpdatePost = () => {
 
             <button type="submit" className='btn btn-primary'>Update Post</button>
           </form>
-          <button onClick={handleDelete} className='btn btn-danger mt-2'>Delete post</button>
+          <button onClick={handleDeletePost} className='btn btn-danger mt-2'>Delete post</button>
         </div>
       </div>
     </div>
