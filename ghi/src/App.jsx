@@ -28,6 +28,7 @@ function App() {
     return (
         <>
             <Nav />
+            <p>I am in nav</p>
             <div className="my-5 container">
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -46,9 +47,13 @@ function App() {
 
 function Root() {
     return (
+        <>
         <AuthProvider baseUrl={API_HOST}>
+            <p>I am inside authprovider</p>
             <App />
         </AuthProvider>
+        <p>I'm suppose to work</p>
+        </>
     )
 }
 
