@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '@galvanize-inc/jwtdown-for-react';
 import { Modal, Button } from 'react-bootstrap';
+import handleDeletePost from './UpdatePost.jsx';
 
 
 
@@ -91,6 +92,9 @@ function MyProfile () {
 
 
     const handleDelete = async () => {
+        setShow(true);
+        }
+    const confirmDelete = async () => {
         const userURL = `http://localhost:8000/users/${account.user.id}`;
         const response = await fetch(userURL, {
             method:"DELETE",
@@ -99,22 +103,11 @@ function MyProfile () {
             },
         });
         if (response.ok){
-        setIsDeleted(true);
+            setIsDeleted(true);
         }
-    }
-    const handleDeletePost = async () => {
-        const userURL = `http://localhost:8000/posts/${post_id}/`;
-        const response = await fetch(userURL, {
-        method:"DELETE",
-        headers: {
-        'Authorization': `Bearer ${token}`,
-        },
-    });
-  if (response.ok){
-    navigate('/users/profile/mine');
-  }
-}
+        setShow(false);
 
+    }
     useEffect(() => {
     if (isDeleted) {
         logout();
@@ -234,13 +227,13 @@ const Post = ({ post }) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Confirmation</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure?</Modal.Body>
+                <Modal.Body>Deleting this user is permanent. Pressing yes will also delete all the users posts. Are you sure?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        No
+                        Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleDelete}>
-                        Yes
+                    <Button variant="primary" onClick={confirmDelete}>
+                        🖕🏼
                     </Button>
                 </Modal.Footer>
             </Modal>
