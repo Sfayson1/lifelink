@@ -65,6 +65,7 @@ build-front-end-job:
     paths:
       - ghi/dist/
 
+
 # # Deploy the React/JavaScript front-end to GitLab pages
 pages:
   stage: deploy
