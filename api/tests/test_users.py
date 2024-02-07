@@ -43,5 +43,5 @@
 #         assert "email" in user
 #         assert "grad_class" in user
 
-def sample_test():
+def test_sample():
     pass
