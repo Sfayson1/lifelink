@@ -6,7 +6,7 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 
 const domain = /https:\/\/[^/]+/;
-const basename = import.meta.env.PUBLIC_URL.replace(domain, '');
+const basename = import.meta.env.VITE_PUBLIC_URL.replace(domain, '');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
