@@ -93,3 +93,6 @@ to implement the update post functionality, i had to create a 'get specific post
 
 development note:
 i learned today that in fastAPI, you can't have multiple identical paths that utilize the same method, for different purposes. python language being opinionated and defaulting to the first of the two identical paths caused a major headache for me today. the solution here was to make the route for get specific post unique, after that it was relatively smooth sailing.
+
+todos:
+still want to figure out the datetime functionality that tracks how much time has passed since the post was submitted. the logic is different in update post vs my profile. also like to move the buttons on my profile up off the input box a couple pixels. 

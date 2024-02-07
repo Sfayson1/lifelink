@@ -82,14 +82,15 @@ const Home = () => {
     }
 
     const calculateTimeDifference = (postDate) => {
-        const currentDate = new Date()
-        const postDateTime = new Date(postDate)
+        const postDateTime = new Date(postDate);
+        // Set the post's time to the current time
+        const currentTime = new Date();
+        postDateTime.setHours(currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
         const timeDifference = Math.floor(
-            (currentDate - postDateTime) / (60 * 60 * 1000)
-        )
-
-        return timeDifference
-    }
+            (currentTime - postDateTime) / (60 * 1000)
+        );
+        return timeDifference;
+    };
 
     return (
         <div className="home-container">

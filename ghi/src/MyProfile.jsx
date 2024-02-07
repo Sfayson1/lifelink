@@ -122,7 +122,7 @@ function MyProfile () {
 const Post = ({ post }) => {
     // State variable for the current time
     const [currentTime, setCurrentTime] = useState(new Date());
-    console.log(post.date_posted);
+
 
     const handleDeletePost = async () => {
 
@@ -141,19 +141,22 @@ const Post = ({ post }) => {
     // Calculate time difference
     const calculateTimeDifference = (postDate) => {
         const postDateTime = new Date(postDate);
-        // Set the post's time to the current time
         const currentTime = new Date();
         postDateTime.setHours(currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
         const timeDifference = Math.floor(
-            (currentTime - postDateTime) / (60 * 1000)
+            (currentTime - postDateTime) / 1000 // calculate time difference in seconds
         );
         return timeDifference;
     };
 
-    const formatTimeDifference = (minutes) => {
-        if (minutes < 60) return `${minutes}m`;
-        if (minutes < 24 * 60) return `${Math.floor(minutes / 60)}h`;
-        if (minutes < 24 * 7 * 60) return `${Math.floor(minutes / (24 * 60))}d`;
+    const formatTimeDifference = (seconds) => {
+        if (seconds < 60) return `${seconds}s`; // less than 1 minute
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return `${minutes}m`; // less than 1 hour
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return `${hours}h`; // less than 1 day
+        const days = Math.floor(hours / 24);
+        if (days < 7) return `${days}d`; // less than 1 week
         return currentTime.toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',
@@ -162,14 +165,17 @@ const Post = ({ post }) => {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentTime(new Date());
-        }, 60 * 1000); // 60 * 1000 milliseconds = 1 minute
+            setPosts(posts.map(post => ({
+                ...post,
+                timeDifference: calculateTimeDifference(post.date_posted)
+            })));
+        }, 1000); // update every second
 
         // Clean up the interval on unmount
         return () => {
             clearInterval(timer);
         };
-    }, []);
+    }, [posts]);
     return (
         <div className="card mb-3" key={post.id}>
             <div className="card-body">
