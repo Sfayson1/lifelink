@@ -1,10 +1,11 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import useToken from '@galvanize-inc/jwtdown-for-react';
 
 
 function Nav() {
   const { token, logout } = useToken();
   const isAuthenticatedFromToken = token !== null;
+  const navigate = useNavigate();
 
 
   return (
@@ -32,6 +33,7 @@ function Nav() {
                 <li> <NavLink className="nav-link" to="/user/update">Update Profile</NavLink> </li>
                 <li><button className="btn btn-danger" onClick={async () => {
                 await logout();
+                navigate('/welcome');
                 }}>Logout</button></li>
 
                 {/* Add links here that should be visible when the user IS logged in */}

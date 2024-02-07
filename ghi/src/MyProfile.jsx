@@ -135,6 +135,7 @@ const Post = ({ post }) => {
     });
     if (response.ok){
         navigate('/users/profile/mine');
+        fetchPostsWithUser();
     }
     }
     // Calculate time difference
