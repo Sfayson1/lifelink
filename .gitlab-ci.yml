@@ -52,7 +52,7 @@ build-front-end-job:
     # Don't forget to also replace PROJECT NAME in the npm run build line as well
     PROJECT_NAME: https://purveyors-of-progress.gitlab.io/life-link-project-gamma/
     VITE_API_HOST: https://oct-2023-8-et-api.mod3projects.com
-    VITE_PUBLIC_URL: https://purveyors-of-progress.gitlab.io/life-link-project-gamma/
+    VITE_PUBLIC_URL: https://life-link-project-gamma-purveyors-of-progress-cbd3ad7e97f6d732f.gitlab.io/
   script:
     - cd ghi
     - npm install
