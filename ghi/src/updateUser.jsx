@@ -15,7 +15,7 @@ function UpdateUser() {
   });
 
   const fetchToken = async () => {
-    const tokenURL = `http://${VITE_API_HOST}/token`;
+    const tokenURL = `http://${import.meta.env.VITE_API_HOST}/token`;
     const fetchConfig = {credentials:'include'};
     const response = await fetch(tokenURL, fetchConfig);
     if (response.ok) {
