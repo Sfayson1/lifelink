@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '@galvanize-inc/jwtdown-for-react';
 import { Modal, Button } from 'react-bootstrap';
-import handleDeletePost from './UpdatePost.jsx';
+
 
 
 
@@ -15,6 +15,7 @@ function MyProfile () {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const { logout } = useToken();
+
 
 
     // Fetch account details
@@ -108,6 +109,8 @@ function MyProfile () {
         setShow(false);
 
     }
+
+
     useEffect(() => {
     if (isDeleted) {
         logout();
@@ -121,6 +124,19 @@ const Post = ({ post }) => {
     const [currentTime, setCurrentTime] = useState(new Date());
     console.log(post.date_posted);
 
+    const handleDeletePost = async () => {
+
+        const userURL = `http://localhost:8000/posts/${post.id}/`;
+        const response = await fetch(userURL, {
+        method:"DELETE",
+        headers: {
+        'Authorization': `Bearer ${account.access_token}`,
+        },
+    });
+    if (response.ok){
+        navigate('/users/profile/mine');
+    }
+    }
     // Calculate time difference
     const calculateTimeDifference = (postDate) => {
          const postDateTime = new Date(postDate.replace(' ', 'T') + 'Z');
@@ -173,7 +189,6 @@ const Post = ({ post }) => {
                 </button>
                 <button onClick={handleDeletePost} className="btn btn-primary" type="button">Delete</button>
             </div>
-
         </div>
     );
 };
@@ -233,7 +248,7 @@ const Post = ({ post }) => {
                         Cancel
                     </Button>
                     <Button variant="primary" onClick={confirmDelete}>
-                        🖕🏼
+                        Yes
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 const UpdatePost = () => {
     const navigate = useNavigate();
     const [token, setToken] = useState('');
+    const [post, setPosts] = useState('');
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
@@ -23,7 +24,19 @@ const UpdatePost = () => {
 
 
 
-
+      const fetchPost = async () => {
+        const postUrl = `http://localhost:8000/posts/postID/${post_id}`
+        const response = await fetch(postUrl)
+        if (response.ok) {
+            const data = await response.json()
+            if (data === undefined) {
+                return null
+            }
+            console.log(data)
+            setPosts(data)
+            setFormData(prevState => ({...prevState, content: data.content}))
+        }
+    }
 
   const fetchToken = async () => {
     const tokenURL = "http://localhost:8000/token";
@@ -35,7 +48,7 @@ const UpdatePost = () => {
         return null;
       }
       setToken(data)
-      setUserId(data.user.id);
+
     }
   }
 
@@ -82,6 +95,7 @@ const UpdatePost = () => {
 
   useEffect(() => {
       fetchToken();
+      fetchPost();
   }, [])
 
 
