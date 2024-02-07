@@ -1,11 +1,20 @@
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import useToken from '@galvanize-inc/jwtdown-for-react';
+import { Modal, Button } from 'react-bootstrap';
 
-const MyProfile = () => {
+
+
+
+function MyProfile () {
     // State variables
     const [account, setAccount] = useState({});
     const [newPost, setNewPosts] = useState('');
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
+    const { logout } = useToken();
+
 
     // Fetch account details
     const fetchAccount = async () => {
@@ -75,19 +84,32 @@ const MyProfile = () => {
         }
     };
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const [isDeleted, setIsDeleted] = useState(false);
+
+
     const handleDelete = async () => {
         const userURL = `http://localhost:8000/users/${account.user.id}`;
         const response = await fetch(userURL, {
-        method:"DELETE",
-        headers: {
-        'Authorization': `Bearer ${account.access_token}`,
-        },
-    });
-    if (response.ok){
-        logout();
-        navigate('/Signup');
+            method:"DELETE",
+            headers: {
+                'Authorization': `Bearer ${account.access_token}`,
+            },
+        });
+        if (response.ok){
+        setIsDeleted(true);
+        }
     }
-}
+
+    useEffect(() => {
+    if (isDeleted) {
+        logout();
+        navigate('/welcome');
+    }
+    }, [isDeleted, logout, navigate]);
+
 
 const Post = ({ post }) => {
     // State variable for the current time
@@ -140,6 +162,13 @@ const Post = ({ post }) => {
                 </span>
                 <p className="card-text">{post.content}</p>
             </div>
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button className="btn btn-primary" type="button">
+                    <Link to={`/UpdatePost/${post.id}`}style={{ color: 'white' }}>Edit</Link>
+                </button>
+                <button className="btn btn-primary" type="button">Button</button>
+            </div>
+
         </div>
     );
 };
@@ -189,6 +218,20 @@ const Post = ({ post }) => {
                 </div>
                 <button className="btn btn-danger" onClick={handleDelete}>Delete Account</button>
             </div>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        No
+                    </Button>
+                    <Button variant="primary" onClick={handleDelete}>
+                        Yes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
                 <div className="home-container">
             <div className="new-post-container position-relative">
                 <div className="input-group mb-3">
