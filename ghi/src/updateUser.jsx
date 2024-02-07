@@ -53,19 +53,22 @@ function UpdateUser({ id }) {
     }
   }
 
-  const handleDelete = async () => {
-    const userURL = `http://localhost:8000/users/${userId}`;
-    const response = await fetch(userURL, {
-    method:"DELETE",
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-  if (response.ok){
-    logout();
-    navigate('/Signup');
+const handleDelete = async () => {
+    const confirmed = window.confirm("Are you sure you want to delete your profile?");
+    if (confirmed){
+      const userURL = `http://localhost:8000/users/${userId}`;
+      const response = await fetch(userURL, {
+        method:"DELETE",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (response.ok){
+        logout();
+        navigate('/Signup');
+      }
+    }
   }
-}
 
 
   useEffect(() => {

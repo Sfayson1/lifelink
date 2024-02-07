@@ -240,7 +240,7 @@ const Post = ({ post }) => {
             </div>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirmation</Modal.Title>
+                    <Modal.Title>woah there!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Deleting this user is permanent. Pressing yes will also delete all the users posts. Are you sure?</Modal.Body>
                 <Modal.Footer>
@@ -248,7 +248,7 @@ const Post = ({ post }) => {
                         Cancel
                     </Button>
                     <Button variant="primary" onClick={confirmDelete}>
-                        Yes
+                        🖕🏼
                     </Button>
                 </Modal.Footer>
             </Modal>
