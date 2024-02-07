@@ -140,7 +140,10 @@ const Post = ({ post }) => {
     }
     // Calculate time difference
     const calculateTimeDifference = (postDate) => {
-         const postDateTime = new Date(postDate.replace(' ', 'T') + 'Z');
+        const postDateTime = new Date(postDate);
+        // Set the post's time to the current time
+        const currentTime = new Date();
+        postDateTime.setHours(currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
         const timeDifference = Math.floor(
             (currentTime - postDateTime) / (60 * 1000)
         );
