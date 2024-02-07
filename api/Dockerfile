@@ -19,6 +19,7 @@ COPY authenticator.py authenticator.py
 COPY main.py main.py
 COPY models.py models.py
 COPY requirements.txt requirements.txt
+COPY migrations migrations
 
 # Installs all the python packages listed in our requirements.txt file
 RUN python -m pip install -r requirements.txt
