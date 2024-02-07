@@ -2,6 +2,7 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.users import UserQueries
 from models import UserIn
+from authenticator import authenticator
 
 client = TestClient(app)
 user_queries = UserQueries()
