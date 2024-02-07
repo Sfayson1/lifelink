@@ -2,15 +2,19 @@
 
 /* Navbar */
 .navbar {
-    background-color: #4267B2; 
+    background-color: #4267b2;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .navbar-brand,
 .nav-link {
     color: #fff;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 10px;
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 .navbar-toggler-icon {
