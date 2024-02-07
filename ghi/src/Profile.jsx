@@ -35,7 +35,7 @@ const Profile = () => {
     }
 
     const fetchPostsWithUser = async () => {
-        const postUrl = `http://localhost:8000/posts/${user_id}`
+        const postUrl = `http://${process.env.REACT_APP_API_HOST}/posts/${user_id}`
         const response = await fetch(postUrl)
         if (response.ok) {
             const data = await response.json()
@@ -47,7 +47,7 @@ const Profile = () => {
     }
 
     const fetchUser = async () => {
-        const userUrl = `http://localhost:8000/users/${user_id}`
+        const userUrl = `http://${process.env.REACT_APP_API_HOST}/users/${user_id}`
         const response = await fetch(userUrl)
         if (response.ok) {
             const users = await response.json()

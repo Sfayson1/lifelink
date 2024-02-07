@@ -15,7 +15,7 @@ function UpdateUser({ id }) {
   });
 
   const fetchToken = async () => {
-    const tokenURL = "http://localhost:8000/token";
+    const tokenURL = `http://${process.env.REACT_APP_API_HOST}/token`;
     const fetchConfig = {credentials:'include'};
     const response = await fetch(tokenURL, fetchConfig);
     if (response.ok) {
@@ -39,7 +39,7 @@ function UpdateUser({ id }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userURL = `http://localhost:8000/users/${userId}`;
+    const userURL = `http://${process.env.REACT_APP_API_HOST}/users/${userId}`;
     const response = await fetch(userURL, {
       method: "PUT",
       body: JSON.stringify(formData),
@@ -56,7 +56,7 @@ function UpdateUser({ id }) {
   const handleDelete = async () => {
     const confirmed = window.confirm("Are you sure you want to delete your profile?");
     if (confirmed){
-      const userURL = `http://localhost:8000/users/${userId}`;
+      const userURL = `http://${process.env.REACT_APP_API_HOST}/users/${userId}`;
       const response = await fetch(userURL, {
         method:"DELETE",
         headers: {

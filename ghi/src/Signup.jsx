@@ -28,7 +28,7 @@ function Signup() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userURL = 'http://localhost:8000/api/users/'
+    const userURL = `http://${process.env.REACT_APP_API_HOST}/api/users/`
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(formData),

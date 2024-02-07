@@ -5,7 +5,7 @@ function UserList() {
     const [users, setUsers] = useState([])
 
     const fetchUsers = async () => {
-        const userApiUrl = 'http://localhost:8000/users'
+        const userApiUrl = `http://${process.env.REACT_APP_API_HOST}/users`
         const response = await fetch(userApiUrl)
         if (response.ok) {
             const data = await response.json()
