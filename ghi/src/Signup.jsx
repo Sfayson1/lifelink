@@ -5,7 +5,7 @@ import { useAuthContext } from '@galvanize-inc/jwtdown-for-react';
 
 function Signup() {
   const { token } = useAuthContext();
-  const [errorMsg, setErrorMsg] = useState("");
+  // const [errorMsg, setErrorMsg] = useState("");
   const { login } = useToken();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ function Signup() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userURL = `http://${process.env.REACT_APP_API_HOST}/api/users/`
+    const userURL = `http://${VITE_API_HOST}/api/users/`
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(formData),
@@ -47,13 +47,14 @@ function Signup() {
         grad_class: ''
       });
       login(formData.username,formData.password);
-    };
+    }
   }
 
   useEffect(() => {
     if (token){
       navigate('/');
-    };
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
 
 
@@ -63,7 +64,7 @@ function Signup() {
       <div className='offset-3 col-6'>
         <div className='shadow p-4 mt-4'>
           <h1>Sign up</h1>
-          {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
+          {/* {errorMsg && <div className="alert alert-danger">{errorMsg}</div>} */}
           <form onSubmit={handleSubmit} id="signup">
             <div className='form-floating mb-3'>
               <input onChange={handleFormChange} value={formData.username} placeholder="Username" required type="text" name="username" id="username" className="form-control"/>

@@ -6,7 +6,7 @@ const Home = () => {
     const [token, setToken] = useState()
 
     const fetchPost = async () => {
-        const postUrl = `http://${process.env.REACT_APP_API_HOST}/posts/all`
+        const postUrl = `http://${VITE_API_HOST}/posts/all`
         const response = await fetch(postUrl)
         if (response.ok) {
             const data = await response.json()
@@ -19,7 +19,7 @@ const Home = () => {
     }
 
     const fetchToken = async () => {
-        const tokenUrl = `http://${process.env.REACT_APP_API_HOST}/token`
+        const tokenUrl = `http://${VITE_API_HOST}/token`
         const fetchConfig = { credentials: 'include' }
 
         const response = await fetch(tokenUrl, fetchConfig)
@@ -41,7 +41,7 @@ const Home = () => {
     }, [])
 
     const handleNewPostSubmit = async () => {
-        const createPostUrl = `http://${process.env.REACT_APP_API_HOST}/posts`
+        const createPostUrl = `http://${VITE_API_HOST}/posts`
         const currentDate = new Date()
         currentDate.setHours(currentDate.getHours() + 5)
         const datePosted = currentDate.toISOString().slice(0, 10)

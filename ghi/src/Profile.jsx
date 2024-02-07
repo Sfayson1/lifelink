@@ -9,7 +9,7 @@ const Profile = () => {
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
 
-    const formatTimeDifference = (hours) => {
+    const formatTimeDifference = (hours, postDate) => {
         if (hours < 1) {
             return `${Math.floor(hours * 60)}m`
         } else if (hours < 24) {
@@ -35,7 +35,7 @@ const Profile = () => {
     }
 
     const fetchPostsWithUser = async () => {
-        const postUrl = `http://${process.env.REACT_APP_API_HOST}/posts/${user_id}`
+        const postUrl = `http://${VITE_API_HOST}/posts/${user_id}`
         const response = await fetch(postUrl)
         if (response.ok) {
             const data = await response.json()
@@ -47,7 +47,7 @@ const Profile = () => {
     }
 
     const fetchUser = async () => {
-        const userUrl = `http://${process.env.REACT_APP_API_HOST}/users/${user_id}`
+        const userUrl = `http://${VITE_API_HOST}/users/${user_id}`
         const response = await fetch(userUrl)
         if (response.ok) {
             const users = await response.json()
@@ -60,6 +60,7 @@ const Profile = () => {
     useEffect(() => {
         fetchUser()
         fetchPostsWithUser()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user_id])
 
     return (
