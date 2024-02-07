@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import useToken from '@galvanize-inc/jwtdown-for-react';
+import './Navbar.css'
 
 
 function Nav() {
@@ -8,7 +9,7 @@ function Nav() {
 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
+    <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
         {isAuthenticatedFromToken ? (
         <>

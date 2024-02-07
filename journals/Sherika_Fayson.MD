@@ -1,4 +1,12 @@
 # Sherika Fayson's Journal
+## 12
+2/6/2024
+Today my main focus was to find the source of the red nav bar. I found that the navbar had a class of bg-danger. This caused the red background color once removed I was able to apply styling to the navbar. Once everyone is at a good stopping point we are going to make a decision about the color scheme and any further styling.
+
+## 11
+2/5/2024
+Started on the css for the project. I was unsure of the styling theme of the project. Some inspiration was borrowed from facebook and linkedin. Navbar is red and currently unsure how to remove the color.
+
 
 ## 10
 

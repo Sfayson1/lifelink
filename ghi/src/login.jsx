@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import  useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '@galvanize-inc/jwtdown-for-react';
+import './login.css'
 
 const Login = () => {
   const { token } = useAuthContext();
@@ -28,10 +29,10 @@ const Login = () => {
 
 
   return (
-    <div className="card text-bg-light mb-3">
+    <div className="card mb-3">
       <h5 className="card-header">Login</h5>
       <div className="card-body">
-        {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
+        {errorMsg && <div className="">{errorMsg}</div>}
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="mb-3">
             <label className="form-label">Username:</label>
