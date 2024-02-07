@@ -6,6 +6,7 @@ from models import UserIn
 client = TestClient(app)
 user_queries = UserQueries()
 
+
 def test_get_all_users():
     user1_data = UserIn(
         username="user1",
