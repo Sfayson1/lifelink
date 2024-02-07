@@ -28,7 +28,7 @@ function Signup() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userURL = `http://${VITE_API_HOST}/api/users/`
+    const userURL = `http://${import.meta.env.VITE_API_HOST}/api/users/`
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(formData),

@@ -39,7 +39,7 @@ function UpdateUser() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userURL = `http://${VITE_API_HOST}/users/${userId}`;
+    const userURL = `http://${import.meta.env.VITE_API_HOST}/users/${userId}`;
     const response = await fetch(userURL, {
       method: "PUT",
       body: JSON.stringify(formData),
@@ -56,7 +56,7 @@ function UpdateUser() {
   const handleDelete = async () => {
     const confirmed = window.confirm("Are you sure you want to delete your profile?");
     if (confirmed){
-      const userURL = `http://${VITE_API_HOST}/users/${userId}`;
+      const userURL = `http://${import.meta.env.VITE_API_HOST}/users/${userId}`;
       const response = await fetch(userURL, {
         method:"DELETE",
         headers: {
