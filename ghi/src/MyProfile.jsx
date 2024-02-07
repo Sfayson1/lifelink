@@ -237,6 +237,7 @@ const Post = ({ post }) => {
                     </p>
                 </div>
                 <button className="btn btn-danger" onClick={handleDelete}>Delete Account</button>
+                <button className="btn btn-primary"><Link to={'/user/update'} style={{color:'white'}}>Update Profile</Link> </button>
             </div>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
