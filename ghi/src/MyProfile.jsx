@@ -21,6 +21,8 @@ const MyProfile = () => {
         }
     };
 
+
+
     const fetchPostsWithUser = async () => {
         if (account.user) {
             const user_id = parseInt(account.user.id, 10);
@@ -72,6 +74,21 @@ const MyProfile = () => {
             console.error('Failed to create a new post');
         }
     };
+
+    const handleDelete = async () => {
+        const userURL = `http://localhost:8000/users/${account.user.id}`;
+        const response = await fetch(userURL, {
+        method:"DELETE",
+        headers: {
+        'Authorization': `Bearer ${account.access_token}`,
+        },
+    });
+    if (response.ok){
+        logout();
+        navigate('/Signup');
+    }
+}
+
 const Post = ({ post }) => {
     // State variable for the current time
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -164,6 +181,14 @@ const Post = ({ post }) => {
                     </div>
                 )
             })}
+            <div className="d-grid gap-4 d-md-flex justify-content-md-end">
+                <div className="btn-group">
+                    <p>
+
+                    </p>
+                </div>
+                <button className="btn btn-danger" onClick={handleDelete}>Delete Account</button>
+            </div>
                 <div className="home-container">
             <div className="new-post-container position-relative">
                 <div className="input-group mb-3">
