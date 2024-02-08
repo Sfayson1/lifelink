@@ -25,13 +25,13 @@ mock_post_data = PostListWithUser(posts=[
     )
 ])
 
+
 class MockPostQueries:
     def get_all(self):
         return mock_post_data
 
 
-def test_get_all_posts():
-    
+def test_get_all_posts():   
     app.dependency_overrides[PostQueries] = MockPostQueries
 
     response = client.get("/posts/all")
