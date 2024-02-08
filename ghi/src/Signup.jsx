@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import useToken from '@galvanize-inc/jwtdown-for-react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '@galvanize-inc/jwtdown-for-react'
-import './signup.css'
+
 
 function Signup() {
     const { token } = useAuthContext()
