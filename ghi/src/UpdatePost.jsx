@@ -32,7 +32,7 @@ const UpdatePost = () => {
             if (data === undefined) {
                 return null
             }
-            console.log(data)
+
             setPosts(data)
             setFormData(prevState => ({...prevState, content: data.content}))
         }

@@ -80,7 +80,7 @@ function MyProfile () {
         if (response.ok) {
             fetchPostsWithUser();
             setNewPosts('');
-            console.log('New post created');
+
         } else {
             console.error('Failed to create a new post');
         }
@@ -121,7 +121,7 @@ function MyProfile () {
 
 const Post = ({ post }) => {
     // State variable for the current time
-    const [currentTime, setCurrentTime] = useState(new Date());
+
 
 
     const handleDeletePost = async () => {
@@ -139,43 +139,11 @@ const Post = ({ post }) => {
     }
     }
     // Calculate time difference
-    const calculateTimeDifference = (postDate) => {
-        const postDateTime = new Date(postDate);
-        const currentTime = new Date();
-        postDateTime.setHours(currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
-        const timeDifference = Math.floor(
-            (currentTime - postDateTime) / 1000 // calculate time difference in seconds
-        );
-        return timeDifference;
+    const formatPostDate = (postDate) => {
+        const date = new Date(postDate);
+        const options = { month: 'short', day: 'numeric' };
+        return new Intl.DateTimeFormat('en-US', options).format(date);
     };
-
-    const formatTimeDifference = (seconds) => {
-        if (seconds < 60) return `${seconds}s`; // less than 1 minute
-        const minutes = Math.floor(seconds / 60);
-        if (minutes < 60) return `${minutes}m`; // less than 1 hour
-        const hours = Math.floor(minutes / 60);
-        if (hours < 24) return `${hours}h`; // less than 1 day
-        const days = Math.floor(hours / 24);
-        if (days < 7) return `${days}d`; // less than 1 week
-        return currentTime.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-        });
-    };
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setPosts(posts.map(post => ({
-                ...post,
-                timeDifference: calculateTimeDifference(post.date_posted)
-            })));
-        }, 1000); // update every second
-
-        // Clean up the interval on unmount
-        return () => {
-            clearInterval(timer);
-        };
-    }, [posts]);
     return (
         <div className="card mb-3" key={post.id}>
             <div className="card-body">
@@ -184,11 +152,7 @@ const Post = ({ post }) => {
                 </h5>
                 <span>
                     <small>
-                        {formatTimeDifference(
-                            calculateTimeDifference(
-                                post.date_posted
-                            )
-                        )}
+                        {formatPostDate(post.date_posted)}
                     </small>
                 </span>
                 <p className="card-text">{post.content}</p>
