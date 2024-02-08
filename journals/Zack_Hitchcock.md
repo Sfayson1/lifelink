@@ -102,10 +102,15 @@ still want to figure out the datetime functionality that tracks how much time ha
 thanks to james, we have a fully deployed, and mostly functional full stack web application. our project is almost complete.
 
 my most recent development branch is called version 1.1, where we will fix all the issues i am aware of up to this point. they are:
-1. signup: hide password
+1. login: show/hide password
+1. signup: hide password (currently a text field)
 2. CSS/Bootstrap corrections to:
 - main page: cards stack to over the top of the browser
 - list of user page: cards overlap
 - forms for update post/user to fit content
-- homepage after signin,
+- homepage after signin, text escapes card if longer than the margins allowed in the browser
+- homepage after signin, submit post input field covers navbar if there are too many posts in the field, then navbar is not useable
+- navbar does not run the length of the page
+- modal on delete user from the my profile page is not centered
+- modal 
 3. need to change the browser tab title, currently says "Vite+React"
