@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 const domain = /https:\/\/[^/]+/;
 const basename = import.meta.env.VITE_PUBLIC_URL.replace(domain, '');
+// const basename = import.meta.env.VITE_API_HOST
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

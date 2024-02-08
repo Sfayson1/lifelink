@@ -63,12 +63,15 @@ function Signup() {
     }, [token])
 
     return (
-        <div className="row  mt-8">
-            <div className="mt-4">
-                <div className="shadow p-4 mt-4">
-                    <h1>Sign up</h1>
-                    <form onSubmit={handleSubmit} id="signup">
-                        <div className="form-floating ">
+
+    <div className="container">
+        <div className="row justify-content-center">
+            <div className="col-lg-6">
+                <div className="card mb-3">
+                    <h3 className="card-header">Sign Up</h3>
+                    <div className="card-body">
+                        <form onSubmit={handleSubmit} id="signup">
+                        <div className="form-floating mb-3">
                             <input
                                 onChange={handleFormChange}
                                 value={formData.username}
@@ -81,7 +84,7 @@ function Signup() {
                             />
                             <label htmlFor="username">Username</label>
                         </div>
-                        <div className="form-floating">
+                        <div className="form-floating mb-3">
                             <input
                                 onChange={handleFormChange}
                                 value={formData.password}
@@ -93,11 +96,8 @@ function Signup() {
                                 className="form-control"
                             />
                             <label htmlFor="password">Password</label>
-                            <button onClick={togglePasswordVisibility} type="button" className="btn btn-secondary btn-sm">
-                                {showPassword ? "Hide" : "Show"}
-                            </button>
                         </div>
-                        <div className="form-floating">
+                        <div className="form-floating mb-3">
                             <input
                                 onChange={handleFormChange}
                                 value={formData.first_name}
@@ -110,7 +110,7 @@ function Signup() {
                             />
                             <label htmlFor="first_name">First Name</label>
                         </div>
-                        <div className="form-floating">
+                        <div className="form-floating mb-3">
                             <input
                                 onChange={handleFormChange}
                                 value={formData.last_name}
@@ -123,7 +123,7 @@ function Signup() {
                             />
                             <label htmlFor="last_name">Last Name</label>
                         </div>
-                        <div className="form-floating">
+                        <div className="form-floating mb-3">
                             <input
                                 onChange={handleFormChange}
                                 value={formData.email}
@@ -136,7 +136,7 @@ function Signup() {
                             />
                             <label htmlFor="email">Email</label>
                         </div>
-                        <div className="form-floating">
+                        <div className="form-floating mb-3">
                             <input
                                 onChange={handleFormChange}
                                 value={formData.grad_class}
@@ -149,11 +149,18 @@ function Signup() {
                             />
                             <label htmlFor="grad_class">Graduating Class</label>
                         </div>
-                        <button className="btn btn-primary">Sign up</button>
-                    </form>
+                        <button onClick={togglePasswordVisibility} type="button" className="btn btn-secondary btn-sm mt-2">
+                                {showPassword ? "Hide Password" : "Show Password"}
+                        </button>
+                        <div className="d-flex justify-content-end">
+                            <button className="btn btn-primary">Sign up</button>
+                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     )
 }
 

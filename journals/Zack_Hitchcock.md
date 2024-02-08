@@ -112,5 +112,5 @@ my most recent development branch is called version 1.1, where we will fix all t
 - homepage after signin, submit post input field covers navbar if there are too many posts in the field, then navbar is not useable
 - navbar does not run the length of the page
 - modal on delete user from the my profile page is not centered
-- modal 
+- modal add to the delete function on update user page
 3. need to change the browser tab title, currently says "Vite+React"

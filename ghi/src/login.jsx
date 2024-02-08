@@ -34,40 +34,50 @@ const Login = () => {
   };
 
   return (
-    <div className="card mb-3">
-      <h5 className="card-header">Login</h5>
-      <div className="card-body">
-        {errorMsg && <div className="">{errorMsg}</div>}
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="mb-3">
-            <label className="form-label">Username:</label>
-            <input
-              name="username"
-              type="text"
-              className="form-control"
-              onChange={(e) => setUsername(e.target.value)}
-            />
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-lg-6">
+          <div className="card mb-3">
+            <h3 className="card-header">Login</h3>
+            <div className="card-body">
+              {errorMsg && <div className="">{errorMsg}</div>}
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <div className="form-floating mb-3">
+                  <input
+                    name="username"
+                    type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder="Username"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <label htmlFor="username">Username:</label>
+                </div>
+                <div className="form-floating mb-3">
+                  <input
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <label htmlFor="password">Password:</label>
+                </div>
+                <button onClick={togglePasswordVisibility} type="button" className="btn btn-secondary btn-sm mt-2">
+                  {showPassword ? "Hide Password" : "Show Password"}
+                </button>
+                <div className="d-flex justify-content-end">
+                  <input
+                    className="btn btn-primary"
+                    type="submit"
+                    value="Login"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
-          <div className="mb-3">
-            <label className="form-label">Password:</label>
-            <input
-              name="password"
-              type={showPassword ? "text" : "password"}
-              className="form-control"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={togglePasswordVisibility} type="button" className="btn btn-secondary btn-sm">
-              {showPassword ? "Hide" : "Show"}
-            </button>
-          </div>
-          <div>
-            <input
-            className="btn btn-primary"
-            type="submit"
-            value="Login"
-            />
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );

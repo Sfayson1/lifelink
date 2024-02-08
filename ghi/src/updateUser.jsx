@@ -17,12 +17,31 @@ function UpdateUser() {
     grad_class: ''
   });
 
+  const fetchUser = async () => {
+    const userUrl = `${import.meta.env.VITE_API_HOST}/users/${token.user.id}/`
+    const response = await fetch(userUrl)
+    if (response.ok) {
+      const data = await response.json()
+      if (data === undefined) {
+          return null
+      }
+      setFormData(prevState => ({
+        ...prevState,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        grad_class: data.grad_class,
+      }))
+    }
+  }
+
   const fetchToken = async () => {
     const tokenURL = `${import.meta.env.VITE_API_HOST}/token`;
     const fetchConfig = {credentials:'include'};
     const response = await fetch(tokenURL, fetchConfig);
     if (response.ok) {
       const data = await response.json();
+      console.log(data)
       if (!data){
         return null;
       }
@@ -76,9 +95,13 @@ function UpdateUser() {
         setShow(false);
 
     }
-
     useEffect(() => {
       fetchToken();
+      fetchUser();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
     if (isDeleted) {
         logout();
         navigate('/welcome');
@@ -88,7 +111,7 @@ function UpdateUser() {
 
   return (
     <div className="row">
-      <div className=''>
+      <div className='col-lg-6 mx-auto'>
         <div className='shadow p-4 mt-4'>
           <h1>Update User</h1>
           <form onSubmit={handleSubmit} id="updateUser">
@@ -140,7 +163,7 @@ function UpdateUser() {
               className="form-control"/>
               <label htmlFor="grad_class">Graduating Class</label>
             </div>
-            <button type="submit" className='btn btn-primary'>Update User</button>
+            <button type="submit" className='btn btn-primary mb-3'>Update User</button>
           </form>
           <button onClick={handleDelete} className='btn btn-danger'>Delete User</button>
           <Modal show={show} onHide={handleClose}>
