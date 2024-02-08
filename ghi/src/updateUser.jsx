@@ -88,7 +88,7 @@ function UpdateUser() {
 
   return (
     <div className="row">
-      <div className=''>
+      <div className='col-lg-6 mx-auto'>
         <div className='shadow p-4 mt-4'>
           <h1>Update User</h1>
           <form onSubmit={handleSubmit} id="updateUser">
@@ -140,7 +140,7 @@ function UpdateUser() {
               className="form-control"/>
               <label htmlFor="grad_class">Graduating Class</label>
             </div>
-            <button type="submit" className='btn btn-primary'>Update User</button>
+            <button type="submit" className='btn btn-primary mb-3'>Update User</button>
           </form>
           <button onClick={handleDelete} className='btn btn-danger'>Delete User</button>
           <Modal show={show} onHide={handleClose}>

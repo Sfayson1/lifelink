@@ -207,14 +207,14 @@ const Post = ({ post }) => {
             <div className="new-post-container position-relative">
                 <div className="input-group mb-3">
                     <textarea
-                        className="form-control"
+                        className="form-control mt-2"
                         placeholder="What's new?"
                         value={newPost}
                         onChange={(e) => setNewPosts(e.target.value)}
                     />
                     <button
                         type="button"
-                        className="btn btn-outline-primary"
+                        className="btn btn-outline-primary mt-2"
                         onClick={handleNewPostSubmit}
                     >
                         Submit
