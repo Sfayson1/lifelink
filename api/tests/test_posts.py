@@ -14,6 +14,7 @@ mock_post_data = PostListWithUser(posts=[
         content="Content of post 1",
         user_id=1,
         user_first_name="John",
+        date_posted="2024-02-07",
         user_last_name="Doe",
     ),
     PostOutWithUser(
@@ -41,7 +42,7 @@ def test_get_all_posts():
     assert len(response.json()['posts']) == 2
     assert response.json()['posts'][0]['user_first_name'] == "John"
     assert response.json()['posts'][0]['user_last_name'] == "Doe"
-    assert response.json()['posts'][0]['date_posted'] == "2024-02-08"
+    assert response.json()['posts'][0]['date_posted'] == "2024-02-07"
     assert response.json()['posts'][0]['content'] == "Content of post 1"
     assert response.json()['posts'][0]['id'] == 1
     assert response.json()['posts'][0]['user_id'] == 1
