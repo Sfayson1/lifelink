@@ -1,13 +1,15 @@
+import os
 from fastapi.testclient import TestClient
 from main import app
 from queries.users import UserQueries
 from models import UserOut
 from authenticator import authenticator
-from unittest.mock import patch
 
 
-with patch.dict('os.environ', {'SIGNING_KEY': 'ThisIsATestSigningKey123!'}):
-    client = TestClient(app)
+os.environ["SIGNING_KEY"] = "ThisIsATestSigningKey123!"
+
+
+client = TestClient(app)
 
 
 class MockUserQueries:
