@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import  useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from 'react-router-dom'
-import './updateuser.css'
+import { Modal, Button } from 'react-bootstrap';
+
 
 
 function UpdateUser() {
@@ -55,27 +56,34 @@ function UpdateUser() {
     }
   }
 
-  const handleDelete = async () => {
-    const confirmed = window.confirm("Are you sure you want to delete your profile?");
-    if (confirmed){
-      const userURL = `${import.meta.env.VITE_API_HOST}/users/${userId}`;
-      const response = await fetch(userURL, {
-        method:"DELETE",
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      if (response.ok){
-        logout();
-        navigate('/Signup');
-      }
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const [isDeleted, setIsDeleted] = useState(false);
+    const handleDelete = async () => {
+        setShow(true);
+        }
+    const confirmDelete = async () => {
+        const userURL = `${import.meta.env.VITE_API_HOST}/users/${userId}`;
+        const response = await fetch(userURL, {
+            method:"DELETE",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (response.ok){
+            setIsDeleted(true);
+        }
+        setShow(false);
+
     }
-  }
 
-
-  useEffect(() => {
+    useEffect(() => {
       fetchToken();
-  }, [])
+    if (isDeleted) {
+        logout();
+        navigate('/welcome');
+    }
+    }, [isDeleted, logout, navigate]);
 
 
   return (
@@ -134,7 +142,21 @@ function UpdateUser() {
             </div>
             <button type="submit" className='btn btn-primary'>Update User</button>
           </form>
-          <button onClick={handleDelete} className='btn btn-danger mt-2'>Delete User</button>
+          <button onClick={handleDelete} className='btn btn-danger'>Delete User</button>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>woah there!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Deleting this user is permanent. Pressing yes will also delete all the users posts. Are you sure?</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={confirmDelete}>
+                🖕🏼
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </div>

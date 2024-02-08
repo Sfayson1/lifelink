@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import useToken from '@galvanize-inc/jwtdown-for-react';
-import './Navbar.css'
+
 
 
 function Nav() {

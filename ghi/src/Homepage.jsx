@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import './Homepage.css'
+
 
 const Homepage = () => {
     const navigate = useNavigate()
@@ -15,19 +15,20 @@ const Homepage = () => {
             <button onClick={navigateToSignup}> submit </button>
             <div className="card">
                 <div className="cardbody">
-                    <h5>Johnnyeta2024</h5>
+                    <h5>Johnny Appleseed</h5>
                     <span>
                         <small>1h</small>
                     </span>
                     <p>
-                        This is how life is going after Hack Reactor. Tell us a
-                        great story or two and where you are at in life.
+                        Ever since I signed up for LifeLink, I&apos;ve been winning on scratch tickets every day.
+                        I got a sick job at google, and they let me nap in the pods all day.
+                        I&apos;m living the dream!
                     </p>
                 </div>
             </div>
             <div className="card">
                 <div className="cardbody">
-                    <h5>Johnnyeta2024</h5>
+                    <h5>Sherika Fayson</h5>
                     <span>
                         <small>1h</small>
                     </span>
@@ -39,12 +40,23 @@ const Homepage = () => {
             </div>
             <div className="card">
                 <div className="cardbody">
-                    <h5>Johnnyeta2024</h5>
+                    <h5>James Bratcher</h5>
                     <span>
                         <small>1h</small>
                     </span>
                     <p>
                         Tell us if you are enjoying life after Hack Reactor!
+                    </p>
+                </div>
+            </div>
+            <div className="card">
+                <div className="cardbody">
+                    <h5>Zack Hitchcock</h5>
+                    <span>
+                        <small>1h</small>
+                    </span>
+                    <p>
+                        Share a link to your project, on our project!
                     </p>
                 </div>
             </div>

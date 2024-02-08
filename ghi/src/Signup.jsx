@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import useToken from '@galvanize-inc/jwtdown-for-react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '@galvanize-inc/jwtdown-for-react'
-import './signup.css'
+
 
 function Signup() {
     const { token } = useAuthContext()
@@ -50,6 +50,11 @@ function Signup() {
         }
     }
 
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     useEffect(() => {
         if (token) {
             navigate('/')
@@ -82,12 +87,15 @@ function Signup() {
                                 value={formData.password}
                                 placeholder="Password"
                                 required
-                                type="text"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 id="password"
                                 className="form-control"
                             />
                             <label htmlFor="password">Password</label>
+                            <button onClick={togglePasswordVisibility} type="button" className="btn btn-secondary btn-sm">
+                                {showPassword ? "Hide" : "Show"}
+                            </button>
                         </div>
                         <div className="form-floating">
                             <input

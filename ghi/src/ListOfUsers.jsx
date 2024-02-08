@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
-import './ListofUsers.css'
+
 
 function UserList() {
     const [users, setUsers] = useState([])
