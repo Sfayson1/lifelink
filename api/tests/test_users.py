@@ -4,12 +4,11 @@ from main import app
 from queries.users import UserQueries
 from models import UserOut
 from authenticator import authenticator
-
-if "SIGNING_KEY" not in os.environ:
-    os.environ["SIGNING_KEY"] = "ThisIsATestSigningKey123!"
+from unittest.mock import patch
 
 
-client = TestClient(app)
+with patch.dict('os.environ', {'SIGNING_KEY': 'ThisIsATestSigningKey123!'}):
+    client = TestClient(app)
 
 
 class MockUserQueries:
