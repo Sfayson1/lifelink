@@ -2,11 +2,9 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.posts import PostQueries
 from models import PostOutWithUser, PostListWithUser
-from unittest.mock import patch
 
 
-with patch.dict('os.environ', {'SIGNING_KEY': 'test_signing_key'}):
-    client = TestClient(app)
+client = TestClient(app)
 
 mock_post_data = PostListWithUser(posts=[
     PostOutWithUser(
