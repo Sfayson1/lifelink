@@ -1,12 +1,8 @@
-import os
 from fastapi.testclient import TestClient
 from main import app
 from queries.users import UserQueries
 from models import UserOut
 from authenticator import authenticator
-
-
-os.environ["SIGNING_KEY"] = "ThisIsATestSigningKey123!"
 
 
 client = TestClient(app)
