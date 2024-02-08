@@ -62,9 +62,6 @@ function Signup() {
             <div className="mt-4">
                 <div className="shadow p-4 mt-4">
                     <h1>Sign up</h1>
-                    {error && (
-                        <div className="alert alert-danger">{error}</div>
-                    )}
                     <form onSubmit={handleSubmit} id="signup">
                         <div className="form-floating ">
                             <input

@@ -163,8 +163,6 @@ class PostQueries:
             print(e)
             return {"message": "Could not update post"}
 
-
-
     def get_specific_post(self, post_id: int) -> dict:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -177,4 +175,7 @@ class PostQueries:
                     (post_id,),
                 )
                 result = db.fetchone()
-                return {description[0]: column for description, column in zip(db.description, result)} if result else {}
+                return {
+                    description[0]: column for description,
+                    column in zip(db.description, result)
+                } if result else {}

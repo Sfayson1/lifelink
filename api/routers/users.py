@@ -96,4 +96,4 @@ async def get_token(
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",
             "user": user,
-        } # type: ignore
+        }  # type: ignore

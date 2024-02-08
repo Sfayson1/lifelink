@@ -4,7 +4,6 @@ import { useParams, useNavigate } from 'react-router-dom'
 const UpdatePost = () => {
     const navigate = useNavigate();
     const [token, setToken] = useState('');
-    const [post, setPosts] = useState('');
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
@@ -25,21 +24,19 @@ const UpdatePost = () => {
 
 
       const fetchPost = async () => {
-        const postUrl = `http://localhost:8000/posts/postID/${post_id}`
+        const postUrl = `${import.meta.env.VITE_API_HOST}/posts/postID/${post_id}`
         const response = await fetch(postUrl)
         if (response.ok) {
             const data = await response.json()
             if (data === undefined) {
                 return null
             }
-
-            setPosts(data)
             setFormData(prevState => ({...prevState, content: data.content}))
         }
     }
 
   const fetchToken = async () => {
-    const tokenURL = "http://localhost:8000/token";
+    const tokenURL = `${import.meta.env.VITE_API_HOST}/token`;
     const fetchConfig = {credentials:'include'};
     const response = await fetch(tokenURL, fetchConfig);
     if (response.ok) {
@@ -63,7 +60,7 @@ const UpdatePost = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userURL = `http://localhost:8000/posts/${post_id}/`;
+    const userURL = `${import.meta.env.VITE_API_HOST}/posts/${post_id}/`;
     const response = await fetch(userURL, {
       method: "PUT",
       body: JSON.stringify(formData),
@@ -80,7 +77,7 @@ const UpdatePost = () => {
   }
 
   const handleDeletePost = async () => {
-    const userURL = `http://localhost:8000/posts/${post_id}/`;
+    const userURL = `${import.meta.env.VITE_API_HOST}/posts/${post_id}/`;
     const response = await fetch(userURL, {
     method:"DELETE",
     headers: {
@@ -96,6 +93,7 @@ const UpdatePost = () => {
   useEffect(() => {
       fetchToken();
       fetchPost();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
