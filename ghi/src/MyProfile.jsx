@@ -153,10 +153,11 @@ const Post = ({ post }) => {
             fetchUser();
             fetchPostsWithUser();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [account]);
 
     useEffect(() => {
-        fetchAccount(); // eslint-disable-next-line react-hooks/exhaustive-deps
+        fetchAccount();
     }, []);
 
     return (
