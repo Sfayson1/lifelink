@@ -50,6 +50,11 @@ function Signup() {
         }
     }
 
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     useEffect(() => {
         if (token) {
             navigate('/')
@@ -82,12 +87,15 @@ function Signup() {
                                 value={formData.password}
                                 placeholder="Password"
                                 required
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 id="password"
                                 className="form-control"
                             />
                             <label htmlFor="password">Password</label>
+                            <button onClick={togglePasswordVisibility} type="button" className="btn btn-secondary btn-sm">
+                                {showPassword ? "Hide" : "Show"}
+                            </button>
                         </div>
                         <div className="form-floating">
                             <input
