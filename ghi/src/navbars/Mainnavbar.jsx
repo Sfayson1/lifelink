@@ -10,7 +10,7 @@ function Nav() {
 
 
   return (
-     <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
+     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
         {isAuthenticatedFromToken ? (
         <>
@@ -32,7 +32,7 @@ function Nav() {
                 <li> <NavLink className="nav-link" to="/ListOfUsers">List of Users</NavLink> </li>
                 <li> <NavLink className="nav-link" to="/users/profile/mine">My Profile</NavLink> </li>
                 <li> <NavLink className="nav-link" to="/user/update">Update Profile</NavLink> </li>
-                <li><button className="btn btn-danger" onClick={async () => {
+                <li><button className="btn btn-primary" onClick={async () => {
                 await logout();
                 navigate('/welcome');
                 }}>Logout</button></li>

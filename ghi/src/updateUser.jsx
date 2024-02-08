@@ -17,12 +17,31 @@ function UpdateUser() {
     grad_class: ''
   });
 
+  const fetchUser = async () => {
+    const userUrl = `${import.meta.env.VITE_API_HOST}/users/${token.user.id}/`
+    const response = await fetch(userUrl)
+    if (response.ok) {
+      const data = await response.json()
+      if (data === undefined) {
+          return null
+      }
+      setFormData(prevState => ({
+        ...prevState,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        grad_class: data.grad_class,
+      }))
+    }
+  }
+
   const fetchToken = async () => {
     const tokenURL = `${import.meta.env.VITE_API_HOST}/token`;
     const fetchConfig = {credentials:'include'};
     const response = await fetch(tokenURL, fetchConfig);
     if (response.ok) {
       const data = await response.json();
+      console.log(data)
       if (!data){
         return null;
       }
@@ -76,9 +95,12 @@ function UpdateUser() {
         setShow(false);
 
     }
-
     useEffect(() => {
       fetchToken();
+      fetchUser();
+    }, []);
+
+    useEffect(() => {
     if (isDeleted) {
         logout();
         navigate('/welcome');
