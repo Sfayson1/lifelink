@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 const domain = /https:\/\/[^/]+/;
 const basename = import.meta.env.VITE_PUBLIC_URL.replace(domain, '');
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter basename={basename}>
