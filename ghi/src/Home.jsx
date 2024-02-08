@@ -65,32 +65,11 @@ const Home = () => {
         }
     }
 
-    const formatTimeDifference = (hours, postDate) => {
-        if (hours < 1) {
-            return `${Math.floor(hours * 60)}m`
-        } else if (hours < 24) {
-            return `${Math.floor(hours)}h`
-        } else if (hours < 24 * 7) {
-            return `${Math.floor(hours / 24)}d`
-        } else {
-            const postDateTime = new Date(postDate)
-            return postDateTime.toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-            })
-        }
+    const formatPostDate = (postDate) => {
+        const date = new Date(postDate);
+        const options = { month: 'short', day: 'numeric' };
+        return new Intl.DateTimeFormat('en-US', options).format(date);
     }
-
-    const calculateTimeDifference = (postDate) => {
-        const postDateTime = new Date(postDate);
-        // Set the post's time to the current time
-        const currentTime = new Date();
-        postDateTime.setHours(currentTime.getHours(), currentTime.getMinutes(), currentTime.getSeconds(), currentTime.getMilliseconds());
-        const timeDifference = Math.floor(
-            (currentTime - postDateTime) / (60 * 1000)
-        );
-        return timeDifference;
-    };
 
     return (
         <div className="home-container">
@@ -127,12 +106,7 @@ const Home = () => {
                                     </Link>
                                     <span>
                                         <small>
-                                            {formatTimeDifference(
-                                                calculateTimeDifference(
-                                                    post.date_posted
-                                                ),
-                                                post.date_posted
-                                            )}
+                                            {formatPostDate(post.date_posted)}
                                         </small>
                                     </span>
                                     <p className="card-text">{post.content}</p>
@@ -144,4 +118,5 @@ const Home = () => {
         </div>
     )
 }
+
 export default Home
