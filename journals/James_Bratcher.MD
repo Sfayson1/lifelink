@@ -1,5 +1,16 @@
 # James Bratcher's journal
 
+## 16
+2/8/2024: Filled the group in on deploying, how much fun it was, and the necessary changes that will be needed to ensure their new .jsx files are ready for deployment. Zack worked on fixing the clash of CSS and bootstrap that made our application fail (sizing of elements were wrong and overlapping, navbar would disapear when too many posts were made, text box was bigger than what appeared as the text would wrap, but a good few inches past the end of the box). Sherika and I worked on our unit tests, we both had our tests pass locally, but when sent to the pipeline for deployment we got an "ERROR tests/test_users.py - KeyError: 'SIGNING_KEY'". Sherika saved the day when she made a small change to the authenticator file, changing the code from
+
+authenticator = LifeLinkAuthenticator(os.environ["SIGNING_KEY"])
+
+to
+
+authenticator = LifeLinkAuthenticator(os.environ.get("SIGNING_KEY"))
+
+I was reluctant at first about this change as I was worried it would change the way the app behaved with login and sign ups, but with further testing it seemed to have made no real change, and the token/cookie still remained in the developer tools. 
+
 ## 15
 2/7/2024: Today's theme is CI/CD. Spent all day working on it, followed the learn card step by step to set it up but ended up with a 404 error. Enlisted the help of Eli and we were able to get a black page going with no errors, mainly involved the VITE_API_HOST, VITE_PUBLIC_HOST, and baseUrl. Marce entered to assist with troubleshooting why we were getting an error-less black page. VITE_PUBLIC_URL has to be the URL that loads when you load your page, VITE_API_HOST replaces your localhost:8000 in your front end endpoints, and theres much more that I cant really remember off the top of my head, I'll remember and update when I explain it to Sherika and Zack tomorrow. We are deployed. Need to redo my unit tests, they kept failing the pipeline and ultimately failed the front end from loading.
 
