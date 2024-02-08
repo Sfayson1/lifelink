@@ -6,7 +6,6 @@ import './signup.css'
 
 function Signup() {
     const { token } = useAuthContext()
-    const [errorMsg, setErrorMsg] = useState('')
     const { login } = useToken()
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
@@ -55,6 +54,7 @@ function Signup() {
         if (token) {
             navigate('/')
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token])
 
     return (
@@ -62,8 +62,8 @@ function Signup() {
             <div className="mt-4">
                 <div className="shadow p-4 mt-4">
                     <h1>Sign up</h1>
-                    {errorMsg && (
-                        <div className="alert alert-danger">{errorMsg}</div>
+                    {error && (
+                        <div className="alert alert-danger">{error}</div>
                     )}
                     <form onSubmit={handleSubmit} id="signup">
                         <div className="form-floating ">

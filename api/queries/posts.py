@@ -162,3 +162,19 @@ class PostQueries:
         except Exception as e:
             print(e)
             return {"message": "Could not update post"}
+
+
+
+    def get_specific_post(self, post_id: int) -> dict:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                db.execute(
+                    """
+                    SELECT *
+                    FROM posts
+                    WHERE posts.id = %s
+                    """,
+                    (post_id,),
+                )
+                result = db.fetchone()
+                return {description[0]: column for description, column in zip(db.description, result)} if result else {}

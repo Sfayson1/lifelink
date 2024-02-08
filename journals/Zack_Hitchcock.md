@@ -78,3 +78,21 @@ recreate volumes=
 change database_url_from_env_file to database_url (to match everything else, including __main__.py in api/migrations)
 
 fixed migrations, you need a nested list inside steps= for a migration file with a comma at the end for python sql injection to work. i had to completely recreate the project from a docker and pgadmin perspective.
+
+
+# y
+today, i worked on the my_profile frontend page. it was a challenge, as there are a lot of little features and embedded functionality. from your profile page, you can now:
+1. update profile, which will redirect you to a form.
+2. delete profile, where youll be prompted with a model, reminding you that deletion is permanent and will also delete all associated posts. if you confirm, youll be redirected to the welcome page.
+3. update post, which brings you to another form, but with the post content pre loaded in the input box.
+4. delete post, which deletes an individual post, and rerenders the page to reflect the changes.
+5. create and submit a new post
+6. view your existing profile information
+
+to implement the update post functionality, i had to create a 'get specific post' backend endpoint, which we didn't originally need. now that we have it, we are able to grab the content to preload the input box. that makes the user experience more efficient, because you can see the string you want to change in front of you. it would have been clunky to have the user just try to remember what was wrong. a stretch goal regarding this feature may be to implement inline editing, similar to slack, so the users attention isnt redirected to an entirely separate page.
+
+development note:
+i learned today that in fastAPI, you can't have multiple identical paths that utilize the same method, for different purposes. python language being opinionated and defaulting to the first of the two identical paths caused a major headache for me today. the solution here was to make the route for get specific post unique, after that it was relatively smooth sailing.
+
+todos:
+still want to figure out the datetime functionality that tracks how much time has passed since the post was submitted. the logic is different in update post vs my profile. also like to move the buttons on my profile up off the input box a couple pixels. 

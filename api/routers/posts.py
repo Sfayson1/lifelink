@@ -75,3 +75,10 @@ def update_post(
     repo: PostQueries = Depends(),
 ) -> Union[Error, PostOut]:
     return repo.update_post(post_id, post)
+
+@router.get("/posts/postID/{post_id}", response_model=PostOut)
+async def get_specific_post(
+    post_id: int,
+    repo: PostQueries = Depends(),
+) -> PostOut:
+    return repo.get_specific_post(post_id)
