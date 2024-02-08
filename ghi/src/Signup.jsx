@@ -82,7 +82,7 @@ function Signup() {
                                 value={formData.password}
                                 placeholder="Password"
                                 required
-                                type="text"
+                                type="password"
                                 name="password"
                                 id="password"
                                 className="form-control"
