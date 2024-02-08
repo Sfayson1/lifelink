@@ -12,8 +12,8 @@ const Homepage = () => {
         <div>
             {' '}
             <input placeholder="What's happening now?!" />
-            <button onClick={navigateToSignup}> submit </button>
-            <div className="card">
+            <button onClick={navigateToSignup} className="btn btn-sm btn-primary"> submit </button>
+            <div className="card mb-3">
                 <div className="cardbody">
                     <h5>Johnny Appleseed</h5>
                     <span>
@@ -26,7 +26,7 @@ const Homepage = () => {
                     </p>
                 </div>
             </div>
-            <div className="card">
+            <div className="card mb-3">
                 <div className="cardbody">
                     <h5>Sherika Fayson</h5>
                     <span>
@@ -38,7 +38,7 @@ const Homepage = () => {
                     </p>
                 </div>
             </div>
-            <div className="card">
+            <div className="card mb-3">
                 <div className="cardbody">
                     <h5>James Bratcher</h5>
                     <span>

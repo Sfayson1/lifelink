@@ -26,4 +26,4 @@ class LifeLinkAuthenticator(Authenticator):
         return account.username, UserOut(**account.dict())
 
 
-authenticator = LifeLinkAuthenticator(os.environ["SIGNING_KEY"])
+authenticator = LifeLinkAuthenticator(os.environ.get("SIGNING_KEY"))

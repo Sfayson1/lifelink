@@ -10,7 +10,7 @@ function Nav() {
 
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark">
+     <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
       <div className="container-fluid">
         {isAuthenticatedFromToken ? (
         <>
