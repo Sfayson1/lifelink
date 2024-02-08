@@ -28,6 +28,10 @@ const Login = () => {
   }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+  };
 
   return (
     <div className="card mb-3">
@@ -48,10 +52,13 @@ const Login = () => {
             <label className="form-label">Password:</label>
             <input
               name="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               className="form-control"
               onChange={(e) => setPassword(e.target.value)}
             />
+            <button onClick={togglePasswordVisibility} type="button" className="btn btn-secondary btn-sm">
+              {showPassword ? "Hide" : "Show"}
+            </button>
           </div>
           <div>
             <input
