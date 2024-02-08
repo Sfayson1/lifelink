@@ -7,6 +7,7 @@ from authenticator import authenticator
 
 client = TestClient(app)
 
+
 class MockUserQueries:
     def get_all(self):
         return [
@@ -26,6 +27,7 @@ class MockUserQueries:
                 grad_class="2022")
         ]
 
+
 def mock_get_current_account_data():
     return {
         "id": 111,
@@ -35,6 +37,7 @@ def mock_get_current_account_data():
         "email": "email",
         "grad_class": "grad_class"
     }
+
 
 def test_get_users():
     app.dependency_overrides[
@@ -59,13 +62,14 @@ def test_get_users():
             "grad_class": "2022"
         },
         {
-            "id":2,
-            "username":"user2",
-            "first_name":"Jane",
-            "last_name":"Doe",
-            "email":"jane.doe@example.com",
-            "grad_class":"2022"
+            "id": 2,
+            "username": "user2",
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "email": "jane.doe@example.com",
+            "grad_class": "2022"
         }
     ]
+
 
 app.dependency_overrides = {}
