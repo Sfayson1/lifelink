@@ -5,7 +5,6 @@ import { Modal, Button } from 'react-bootstrap';
 
 
 
-
 function UpdateUser() {
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
@@ -64,7 +63,7 @@ function UpdateUser() {
         setShow(true);
         }
     const confirmDelete = async () => {
-        const userURL = `${import.meta.env.VITE_API_HOST}/users/${token}`;
+        const userURL = `${import.meta.env.VITE_API_HOST}/users/${userId}`;
         const response = await fetch(userURL, {
             method:"DELETE",
             headers: {
