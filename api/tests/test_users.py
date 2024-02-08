@@ -27,32 +27,36 @@ class MockUserQueries:
         ]
 
 def mock_get_current_account_data():
-    return{
+    return {
         "id": 111,
         "username": "username",
-        "first_name":"first_name",
-        "last_name":"last_name",
-        "email":"email",
-        "grad_class":"grad_class"
+        "first_name": "first_name",
+        "last_name": "last_name",
+        "email": "email",
+        "grad_class": "grad_class"
     }
 
 def test_get_users():
-    app.dependency_overrides[authenticator.get_account_getter] = mock_get_current_account_data
-    app.dependency_overrides[UserQueries] = MockUserQueries
+    app.dependency_overrides[
+        authenticator.get_account_getter
+    ] = mock_get_current_account_data
+    app.dependency_overrides[
+        UserQueries
+    ] = MockUserQueries
 
-    response = client.get(f"/users/")
+    response = client.get("/users/")
 
     assert response.status_code == 200
     users = response.json()
     assert len(users) == 2
     assert response.json() == [
         {
-            "id":1,
-            "username":"user1",
-            "first_name":"John",
-            "last_name":"Doe",
-            "email":"john.doe@example.com",
-            "grad_class":"2022"
+            "id": 1,
+            "username": "user1",
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "john.doe@example.com",
+            "grad_class": "2022"
         },
         {
             "id":2,
@@ -64,4 +68,4 @@ def test_get_users():
         }
     ]
 
-app.dependency_overrides= {}
+app.dependency_overrides = {}
