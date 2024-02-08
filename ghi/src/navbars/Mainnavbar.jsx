@@ -42,7 +42,7 @@ function Nav() {
               <>
                 <li> <NavLink className="nav-link" to="/signup">Sign Up</NavLink> </li>
                 <li> <NavLink className="nav-link" to="/login">Login</NavLink> </li>
-                <li> <NavLink className="nav-link" to="/ListOfUsers">Who's Here?</NavLink> </li>
+                <li> <NavLink className="nav-link" to="/ListOfUsers">Who is Here?</NavLink> </li>
 
 
 

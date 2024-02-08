@@ -1,9 +1,6 @@
 from fastapi import (
     Depends,
-    HTTPException,
-    status,
     APIRouter,
-
 )
 from models import PostIn, PostOut, PostOutWithUser, PostList, PostListWithUser
 from queries.posts import PostQueries
@@ -20,8 +17,10 @@ router = APIRouter()
 class Error(BaseModel):
     message: str
 
+
 class HttpError(BaseModel):
     detail: str
+
 
 @router.get("/posts/all", response_model=PostListWithUser)
 async def list_all_posts(
@@ -36,7 +35,8 @@ async def list_my_posts(
     repo: PostQueries = Depends(),
 ):
     # return repo.get_user_posts(account_data['username'])
-    return repo.get_user_posts(user_id=account_data['id'])
+    return repo.get_user_posts(user_id=account_data["id"])
+
 
 @router.post("/posts", response_model=PostOutWithUser)
 async def create_post(
@@ -44,20 +44,21 @@ async def create_post(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: PostQueries = Depends(),
 ):
-    print('****ACCOUNT DATA****', account_data)
-    post_out = repo.create_post(data=post, user_id=account_data['id'])
-
+    print("****ACCOUNT DATA****", account_data)
+    post_out = repo.create_post(data=post, user_id=account_data["id"])
 
     logging.info(f"Inside create_post, PostOut: {post_out}")
 
     return post_out
 
+
 @router.delete("/posts/{post_id}/", response_model=bool)
 async def delete_post(
     post_id: int,
     repo: PostQueries = Depends(),
-) ->bool:
+) -> bool:
     return repo.delete_post(post_id)
+
 
 @router.get("/posts/{user_id}", response_model=PostList)
 async def list_users_posts(

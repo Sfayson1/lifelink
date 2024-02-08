@@ -49,7 +49,7 @@ services:
       HOST_OS: ${OS}
       NODE_ENV: development
       HOST: "0.0.0.0"
-      # PUBLIC_URL: http://localhost:3000
+      VITE_PUBLIC_URL: https://life-link-project-gamma-purveyors-of-progress-cbd3ad7e97f6d732f.gitlab.io/
       VITE_API_HOST: ${VITE_API_HOST}
 volumes:
     postgres-data:

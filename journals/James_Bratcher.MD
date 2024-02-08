@@ -1,5 +1,14 @@
 # James Bratcher's journal
 
+## 15
+2/7/2024: Today's theme is CI/CD. Spent all day working on it, followed the learn card step by step to set it up but ended up with a 404 error. Enlisted the help of Eli and we were able to get a black page going with no errors, mainly involved the VITE_API_HOST, VITE_PUBLIC_HOST, and baseUrl. Marce entered to assist with troubleshooting why we were getting an error-less black page. VITE_PUBLIC_URL has to be the URL that loads when you load your page, VITE_API_HOST replaces your localhost:8000 in your front end endpoints, and theres much more that I cant really remember off the top of my head, I'll remember and update when I explain it to Sherika and Zack tomorrow. We are deployed. Need to redo my unit tests, they kept failing the pipeline and ultimately failed the front end from loading.
+
+## 14
+2/6/2024: Today's focus was CI/CD, following the steps, this led me to to have to complete the unit test first. Completed unit test around testing for if the get_all (users) endpoint worked. Back to CI/CD.
+
+## 13
+2/5/2024: Work done over the weekend changed the backend and broke some of the endpoints. Testing completed, I'd say 70% of endpoints didnt work properly now. Most of the day was spent debugging. Able to get it working by end of day, the models changed and such the endpoints needed to match the models appropriately. Started CI/CD, didnt get very far though.
+
 ## 12
 2/1/2024: Added delete to the update user page, may want to consider adding another page to confirm, right now its deleted the second you click. Login's redirect to home vs error message was a challenge, required thomas and eli to get it to work. The ultimate fix was to use the useAuthContext from '@galvanize-inc/jwtdown-for-react' and put the token finder/navigator in the useEffect. Sign up redirect needs to be done, pretty sure it'll be the same set up.
 

@@ -1,6 +1,5 @@
-steps=[
+steps = [
     [
-        #step 1
         """
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
@@ -12,9 +11,8 @@ steps=[
             hashed_password VARCHAR(255)
         );
         """,
-        #step 2
         """
         DROP TABLE users;
-        """
+        """,
     ],
 ]

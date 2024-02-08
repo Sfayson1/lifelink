@@ -4,18 +4,14 @@ import os
 from routers import users, posts
 from authenticator import authenticator
 
-app = FastAPI(debug=True)
-app.include_router(posts.router, tags=['Posts'])
-app.include_router(authenticator.router, tags=['Auth'])
-app.include_router(users.router, tags=['Auth'])
+app = FastAPI()
+app.include_router(posts.router, tags=["Posts"])
+app.include_router(authenticator.router, tags=["Auth"])
+app.include_router(users.router, tags=["Auth"])
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        os.environ.get("CORS_HOST"),
-        "http://localhost:5173",
-        "http://localhost:8000",
-    ],
+    allow_origins=[os.environ.get("CORS_HOST"), "http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -30,6 +26,6 @@ def launch_details():
             "week": 17,
             "day": 5,
             "hour": 19,
-            "min": "00"
+            "min": "00",
         }
     }
