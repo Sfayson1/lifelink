@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import  useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from 'react-router-dom'
+import './updateuser.css'
+
 
 function UpdateUser() {
   const [token, setToken] = useState('');
@@ -78,7 +80,7 @@ function UpdateUser() {
 
   return (
     <div className="row">
-      <div className='offset-3 col-6'>
+      <div className=''>
         <div className='shadow p-4 mt-4'>
           <h1>Update User</h1>
           <form onSubmit={handleSubmit} id="updateUser">

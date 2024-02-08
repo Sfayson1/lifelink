@@ -1,0 +1,51 @@
+/* ListofUsers.css */
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Card styles */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Card header styles */
+.card-header {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.card-header a {
+    text-decoration: none;
+    color: #333;
+}
+
+.card-header a:hover {
+    text-decoration: underline;
+}
+
+/* Card body styles */
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}

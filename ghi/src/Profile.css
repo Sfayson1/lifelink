@@ -1,68 +1,78 @@
+/* Profile.css */
 
-/* Profile container styles */
+/* Profile container */
 .profile-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
+    padding: 20px;
 }
 
-/* User info styles */
+/* User info section */
 .user-info {
-  text-align: center;
-}
-
-.user-info img {
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .user-info h2 {
-  color: #1877f2; 
-  margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .user-info p {
-  color: #333;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
-/* Posts feed styles */
+/* Posts feed */
 .posts-feed {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .card {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .card-body {
-  padding: 15px;
+    padding: 15px;
 }
 
-.card h5 {
-  color: #1877f2; 
+.card-body h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.card span small {
-  color: #888;
+.card-body p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333; /* Adjust font color */
+    line-height: 1.4; /* Adjust line height */
 }
 
-.card p {
-  color: #333;
+.card-body small {
+    font-size: 14px;
+    color: #999;
 }
 
-/* Responsive styles for smaller screens */
-@media screen and (max-width: 600px) {
-  .user-info img {
-    width: 80px;
-    height: 80px;
-  }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .user-info h2 {
+        font-size: 20px;
+    }
 
-  .user-info h2 {
-    font-size: 1.5rem;
-  }
+    .user-info p {
+        font-size: 14px;
+    }
+
+    .card-body h5 {
+        font-size: 16px;
+    }
+
+    .card-body p {
+        font-size: 14px;
+    }
+
+    .card-body small {
+        font-size: 12px;
+    }
 }

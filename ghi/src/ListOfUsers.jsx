@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
+import './ListofUsers.css'
 
 function UserList() {
     const [users, setUsers] = useState([])
@@ -23,7 +24,7 @@ function UserList() {
     }, [])
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-4">
             {users.map((user) => (
                 <div className="card mb-3" key={user.id}>
                     <div className="card-header">
