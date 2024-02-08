@@ -21,8 +21,6 @@ const UpdatePost = () => {
   });
 
 
-
-
       const fetchPost = async () => {
         const postUrl = `${import.meta.env.VITE_API_HOST}/posts/postID/${post_id}`
         const response = await fetch(postUrl)
