@@ -20,9 +20,9 @@ const Homepage = () => {
                         <small>1h</small>
                     </span>
                     <p>
-                        Ever since I signed up for LifeLink, I've been winning on scratch tickets every day.
+                        Ever since I signed up for LifeLink, I&apos;ve been winning on scratch tickets every day.
                         I got a sick job at google, and they let me nap in the pods all day.
-                        I'm living the dream!
+                        I&apos;m living the dream!
                     </p>
                 </div>
             </div>

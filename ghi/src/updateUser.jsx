@@ -64,11 +64,11 @@ function UpdateUser() {
         setShow(true);
         }
     const confirmDelete = async () => {
-        const userURL = `${import.meta.env.VITE_API_HOST}/users/${account.user.id}`;
+        const userURL = `${import.meta.env.VITE_API_HOST}/users/${token}`;
         const response = await fetch(userURL, {
             method:"DELETE",
             headers: {
-                'Authorization': `Bearer ${account.access_token}`,
+                'Authorization': `Bearer ${token}`,
             },
         });
         if (response.ok){
