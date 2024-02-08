@@ -9,8 +9,10 @@ app = FastAPI(debug=True)
 
 pool = ConnectionPool(conninfo=os.environ.get("DATABASE_URL"))
 
+
 class DuplicateAccountError(ValueError):
     pass
+
 
 class PostQueries:
     def list_my_posts(self, post_id: int) -> Optional[PostOutWithUser]:
@@ -33,11 +35,12 @@ class PostQueries:
                 )
                 row = db.fetchone()
                 if row:
-                    record = dict(zip([column[0] for column in db.description], row))
+                    record = dict(
+                        zip([column[0] for column in db.description], row)
+                    )
                     return PostOutWithUser(**record)
                 else:
                     return None
-
 
     def create_post(self, data, user_id: int) -> PostOutWithUser:
         try:
@@ -54,7 +57,6 @@ class PostQueries:
                     )
                     post = db.fetchone()
                     if post is not None:
-                        # Fetch the user's first and last name using an INNER JOIN
                         db.execute(
                             """
                             SELECT u.first_name, u.last_name
@@ -62,28 +64,28 @@ class PostQueries:
                             INNER JOIN posts p ON p.user_id = u.id
                             WHERE p.id = %s;
                             """,
-                            [post['id']],
+                            [post["id"]],
                         )
                         user = db.fetchone()
                         if user is not None:
-                            # Combine the post data with the user's first and last name
                             post_out = PostOutWithUser(
-                                id=post['id'],
-                                content=post['content'],
-                                date_posted=post['date_posted'],
-                                user_id=post['user_id'],
-                                user_first_name=user['first_name'],
-                                user_last_name=user['last_name']
+                                id=post["id"],
+                                content=post["content"],
+                                date_posted=post["date_posted"],
+                                user_id=post["user_id"],
+                                user_first_name=user["first_name"],
+                                user_last_name=user["last_name"],
                             )
                             return post_out
                         else:
-                            raise ValueError("Failed to fetch user information")
+                            raise ValueError(
+                                "Failed to fetch user information"
+                            )
                     else:
                         raise ValueError("Failed to create post")
         except Exception as e:
             print(f"Error creating post: {e}")
             raise
-
 
     def delete_post(self, post_id: int) -> bool:
         with pool.connection() as conn:
@@ -122,7 +124,6 @@ class PostQueries:
                     records.append(PostOutWithUser(**record))
                 return {"posts": records}
 
-
     def get_user_posts(self, user_id: int) -> dict:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -154,11 +155,7 @@ class PostQueries:
                         WHERE id = %s
                         RETURNING id, content, date_posted;
                         """,
-                        [
-                            data.content,
-                            data.date_posted,
-                            post_id
-                        ]
+                        [data.content, data.date_posted, post_id],
                     )
                     old_data = data.dict()
                     return PostOut(id=post_id, **old_data)

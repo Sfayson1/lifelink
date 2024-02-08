@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import  useToken from "@galvanize-inc/jwtdown-for-react";
 import { useNavigate } from 'react-router-dom'
+import './updateuser.css'
 
-function UpdateUser({ id }) {
+
+function UpdateUser() {
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
   const { logout } = useToken();
@@ -15,7 +17,7 @@ function UpdateUser({ id }) {
   });
 
   const fetchToken = async () => {
-    const tokenURL = "http://localhost:8000/token";
+    const tokenURL = `${import.meta.env.VITE_API_HOST}/token`;
     const fetchConfig = {credentials:'include'};
     const response = await fetch(tokenURL, fetchConfig);
     if (response.ok) {
@@ -39,7 +41,7 @@ function UpdateUser({ id }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userURL = `http://localhost:8000/users/${userId}`;
+    const userURL = `${import.meta.env.VITE_API_HOST}/users/${userId}`;
     const response = await fetch(userURL, {
       method: "PUT",
       body: JSON.stringify(formData),
@@ -53,10 +55,10 @@ function UpdateUser({ id }) {
     }
   }
 
-const handleDelete = async () => {
+  const handleDelete = async () => {
     const confirmed = window.confirm("Are you sure you want to delete your profile?");
     if (confirmed){
-      const userURL = `http://localhost:8000/users/${userId}`;
+      const userURL = `${import.meta.env.VITE_API_HOST}/users/${userId}`;
       const response = await fetch(userURL, {
         method:"DELETE",
         headers: {
@@ -78,7 +80,7 @@ const handleDelete = async () => {
 
   return (
     <div className="row">
-      <div className='offset-3 col-6'>
+      <div className=''>
         <div className='shadow p-4 mt-4'>
           <h1>Update User</h1>
           <form onSubmit={handleSubmit} id="updateUser">

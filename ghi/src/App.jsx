@@ -36,7 +36,7 @@ function App() {
                     <Route path="/Login" element={<Login />} />
                     <Route path="/Signup" element={<Signup />} />
                     <Route path="/ListOfUsers" element={<UserList />} />
-                    <Route path="/user/update" element={<UpdateUser  />} />
+                    <Route path="/user/update" element={<UpdateUser />} />
                     <Route path="/profile/:user_id" Component={Profile} />
                     <Route path="/users/profile/mine" element={<MyProfile />} />
                     <Route path="/welcome" element={<Homepage />} />

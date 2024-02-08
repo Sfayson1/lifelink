@@ -6,7 +6,14 @@ from fastapi import (
     APIRouter,
     Request,
 )
-from models import UserInNoPassOrUsername, UserOutNoUsername, UserToken, UserIn, UserForm, UserOut
+from models import (
+    UserInNoPassOrUsername,
+    UserOutNoUsername,
+    UserToken,
+    UserIn,
+    UserForm,
+    UserOut,
+)
 from queries.users import UserQueries, DuplicateAccountError
 from authenticator import authenticator
 from pydantic import BaseModel
@@ -15,11 +22,14 @@ from typing import List, Optional, Union
 
 router = APIRouter()
 
+
 class Error(BaseModel):
     message: str
 
+
 class HttpError(BaseModel):
     detail: str
+
 
 @router.get("/users/{user_id}/", response_model=Optional[UserOut])
 async def get_user(
@@ -28,11 +38,13 @@ async def get_user(
 ) -> UserOut:
     return repo.get_user(user_id)
 
+
 @router.get("/users", response_model=Optional[Union[List[UserOut], Error]])
 def get_all(
     repo: UserQueries = Depends(),
 ):
     return repo.get_all()
+
 
 @router.post("/api/users/", response_model=UserToken | HttpError)
 async def create_user(
@@ -53,7 +65,10 @@ async def create_user(
     token = await authenticator.login(response, request, form, repo)
     return UserToken(user=user, **token.dict())
 
-@router.put("/users/{user_id}/", response_model=Union[UserOutNoUsername, Error])
+
+@router.put(
+    "/users/{user_id}/", response_model=Union[UserOutNoUsername, Error]
+)
 def update_user(
     user_id: int,
     user: UserInNoPassOrUsername,
@@ -61,12 +76,14 @@ def update_user(
 ) -> Union[Error, UserOutNoUsername]:
     return repo.update_user(user_id, user)
 
+
 @router.delete("/users/{user_id}/", response_model=bool)
 def delete_user(
-    user_id:int,
+    user_id: int,
     repo: UserQueries = Depends(),
-) ->bool:
+) -> bool:
     return repo.delete_user(user_id)
+
 
 @router.get("/token", response_model=UserToken | None)
 async def get_token(
@@ -79,6 +96,4 @@ async def get_token(
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",
             "user": user,
-        }
-
-
+        } # type: ignore

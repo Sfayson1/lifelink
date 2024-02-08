@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import './Home.css'
 const Home = () => {
     const [posts, setPosts] = useState([])
     const [newPost, setNewPosts] = useState('')
     const [token, setToken] = useState()
 
     const fetchPost = async () => {
-        const postUrl = `http://localhost:8000/posts/all`
+        const postUrl = `${import.meta.env.VITE_API_HOST}/posts/all`
         const response = await fetch(postUrl)
         if (response.ok) {
             const data = await response.json()
@@ -19,7 +20,7 @@ const Home = () => {
     }
 
     const fetchToken = async () => {
-        const tokenUrl = 'http://localhost:8000/token'
+        const tokenUrl = `${import.meta.env.VITE_API_HOST}/token`
         const fetchConfig = { credentials: 'include' }
 
         const response = await fetch(tokenUrl, fetchConfig)
@@ -42,7 +43,7 @@ const Home = () => {
     }, [])
 
     const handleNewPostSubmit = async () => {
-        const createPostUrl = 'http://localhost:8000/posts'
+        const createPostUrl = `${import.meta.env.VITE_API_HOST}/posts`
         const currentDate = new Date()
         currentDate.setHours(currentDate.getHours() + 5)
         const datePosted = currentDate.toISOString().slice(0, 10)
