@@ -3,24 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import useToken from '@galvanize-inc/jwtdown-for-react';
 import { Modal, Button } from 'react-bootstrap';
 
-
-
-
-
 function MyProfile () {
-    // State variables
     const [account, setAccount] = useState({});
     const [newPost, setNewPosts] = useState('');
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const { logout } = useToken();
-
-
-
-    // Fetch account details
     const fetchAccount = async () => {
-        const tokenUrl = 'http://localhost:8000/token';
+        const tokenUrl = `${import.meta.env.VITE_API_HOST}/token`;
         const fetchConfig = { credentials: 'include' };
         const response = await fetch(tokenUrl, fetchConfig);
 
@@ -32,12 +23,10 @@ function MyProfile () {
         }
     };
 
-
-
     const fetchPostsWithUser = async () => {
         if (account.user) {
             const user_id = parseInt(account.user.id, 10);
-            const postUrl = `http://localhost:8000/posts/${user_id}`;
+            const postUrl = `${import.meta.env.VITE_API_HOST}/posts/${user_id}`;
             const response = await fetch(postUrl);
             if (response.ok) {
                 const data = await response.json();
@@ -50,7 +39,7 @@ function MyProfile () {
     const fetchUser = async () => {
     if (account.user) {
         const user_id = parseInt(account.user.id, 10);
-        const userUrl = `http://localhost:8000/users/${user_id}`;
+        const userUrl = `${import.meta.env.VITE_API_HOST}/users/${user_id}`;
         const response = await fetch(userUrl);
         if (response.ok) {
             const users = await response.json();
@@ -60,9 +49,8 @@ function MyProfile () {
     }
 };
 
-    // Handle new post submission
     const handleNewPostSubmit = async () => {
-        const createPostUrl = 'http://localhost:8000/posts';
+        const createPostUrl = `${import.meta.env.VITE_API_HOST}/posts`;
         const currentDate = new Date();
         currentDate.setHours(currentDate.getHours() + 5);
         const datePosted = currentDate.toISOString().slice(0, 10);
@@ -87,16 +75,13 @@ function MyProfile () {
     };
 
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const [isDeleted, setIsDeleted] = useState(false);
-
-
     const handleDelete = async () => {
         setShow(true);
         }
     const confirmDelete = async () => {
-        const userURL = `http://localhost:8000/users/${account.user.id}`;
+        const userURL = `${import.meta.env.VITE_API_HOST}/users/${account.user.id}`;
         const response = await fetch(userURL, {
             method:"DELETE",
             headers: {
@@ -110,7 +95,6 @@ function MyProfile () {
 
     }
 
-
     useEffect(() => {
     if (isDeleted) {
         logout();
@@ -120,13 +104,10 @@ function MyProfile () {
 
 
 const Post = ({ post }) => {
-    // State variable for the current time
-
-
 
     const handleDeletePost = async () => {
 
-        const userURL = `http://localhost:8000/posts/${post.id}/`;
+        const userURL = `${import.meta.env.VITE_API_HOST}/posts/${post.id}/`;
         const response = await fetch(userURL, {
         method:"DELETE",
         headers: {
@@ -138,7 +119,7 @@ const Post = ({ post }) => {
         fetchPostsWithUser();
     }
     }
-    // Calculate time difference
+
     const formatPostDate = (postDate) => {
         const date = new Date(postDate);
         const options = { month: 'short', day: 'numeric' };
@@ -167,21 +148,16 @@ const Post = ({ post }) => {
     );
 };
 
-    // Fetch user and posts whenever account id changes
     useEffect(() => {
         if (account.user) {
             fetchUser();
             fetchPostsWithUser();
         }
     }, [account]);
-    // Update the current time every minute
 
-    // Fetch account details on component mount
     useEffect(() => {
-        fetchAccount();
+        fetchAccount(); // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-
 
     return (
         <div className="profile-container">
@@ -192,7 +168,6 @@ const Post = ({ post }) => {
                     </div>
                 </div>
             </div>
-
             {users.map((user) => {
                 return (
                     <div className="user-info" key={user.id}>
@@ -236,7 +211,6 @@ const Post = ({ post }) => {
                         value={newPost}
                         onChange={(e) => setNewPosts(e.target.value)}
                     />
-
                     <button
                         type="button"
                         className="btn btn-outline-primary"
@@ -248,13 +222,10 @@ const Post = ({ post }) => {
             </div>
             <div className="posts-feed">
                 {posts.map((post) => <Post key={post.id} post={post} />)}
-
-
             </div>
         </div>
         </div>
     )
 }
-
 
 export default MyProfile
