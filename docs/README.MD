@@ -1,203 +1,206 @@
 # Project Documentation
 
 ## API
-Delete user Modal:<br>
-![Delete User](./pics/Delete%20User.png)
+FastAPI - Swagger is a Python web framework used for building APIs. The sections to notice when using swagger are:
 
+- Request body
+- Responses
+  - Server response
+  - Responses
 
+#### Request body
+Request body is where you will input the data that you want to be processed
 
+#### Responses
+Responses is where you will get the response to the data you just inputted. Two sections to pay attention to are:
 
-1.
-1.
-1.
-1.
--
--
--
+- Server response: this is the live response from server with the data you inputted
+- Responses: this shows the possible responses and associated codes
 
-# big
-## less big
-### medium
-#### smaller
+#### Response meanings
 
-[link to something](https://www.google.com)
+200: Successful Response<br>
+The endpoing functioned properly with the input supplied
 
-<h1>big</h1>
+422: Validation Error<br>
+The request cannot be fulfilled due to incorrect input
 
+500: Internal Server Error<br>
+The server encountered an unexpected condition that prevented it from fulfilling the request
 
-this is a sentence, ill press enter now
+### Buttons
 
-and you wont see it. need two enters or an HTML line break <br> , on the bottom
+Buttons that are commonly used are:
 
+- Try it out: allows access to inputting data<br>
+![Img](/docs/pics/buttons/try%20it%20out.png)
+- Execute: runs the endpoint based on the data supplied in Request body<br>
+![Img](/docs/pics/buttons/execute.png)
+- Reset: returns the Request body to default position<br>
+![Img](/docs/pics/buttons/reset.png)
 
+## Instructions key
+Function: description of function.
 
-[markdown basic syntax](https://www.markdownguide.org/basic-syntax/) <br>
-[markdown extended syntax](https://www.markdownguide.org/extended-syntax/) <br>
-[markdown cheat sheet](https://www.youtube.com/@VisualPKM) just use this one !** <br>
+Image of the swagger screenshot.
 
-# title
+Request body: <br>
+input to be inserted into the Request body text box.
 
+Image of the swagger screenshot after execute is clicked.
 
 
-## section
+## Endpoint Tags
 
-a buncah shit
-## anohta
+### <u>Auth: affects user functionality.</u>
 
-### small section
+#### <u>Create User: used to create a user.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Create%20user%20before.png)
 
+Request body:<br>
+{<br>
+  "username": "string",<br>
+  "first_name": "string",<br>
+  "last_name": "string",<br>
+  "password": "string",<br>
+  "email": "string",<br>
+  "grad_class": "string"<br>
+}
 
-#### smaller section
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Create%20user%20after.png)
 
+#### <u>Get User: used to get a user.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Get%20User%20before.png)
 
-psrsgrsph by typingh
+Request body: id of user you want to see
 
-new line with two spaces in above line
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Get%20User%20after.png)
 
-```python
+#### <u>Get All: used to get all user information.</u>
 
-code block print(codes)
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Get%20All%20Users%20before.png)
 
-```
+Request body: N/A
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Get%20All%20Users%20after.png)
 
+#### <u>Update User: used to update user information.</u>
 
-#### links
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Update%20User%20before.png)
 
-[Learning](https://www.google.com/search?q=learning&rlz=1C5CHFA_enUS1076US1076&oq=learning&gs_lcrp=EgZjaHJvbWUyDAgAEEUYORixAxiABDIQCAEQLhjHARixAxjRAxiABDITCAIQLhiDARjHARixAxjRAxiABDIKCAMQABixAxiABDIQCAQQLhivARjHARixAxiABDIGCAUQRRhBMgYIBhBFGDwyBggHEEUYPNIBCDE4ODhqMGo5qAIAsAIA&sourceid=chrome&ie=UTF-8) to `code`
+Request body:<br>
+{<br>
+  "first_name": "string",<br>
+  "last_name": "string",<br>
+  "email": "string",<br>
+  "grad_class": "string"<br>
+}
 
->quote
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Update%20User%20after.png)
 
-  > skdjksjdkjsdkjsd
+#### <u>Delete User: Delete a user and all posts associated with that user.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Delete%20user%20before.png)
 
+Request body:<br>
+id of user you want to delete
 
-1. numbered list
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Delete%20user%20after.png)
 
+#### <u>Login: login a user.</u>
 
-3. can be done with ones
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Login%20before.png)
 
-4. or any number
+Request body:<br>
+username: enter username<br>
+password: enter password
 
-5. editor will figure it out
-6. (that doesnt work in obsidian)
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Login%20after.png)
 
+#### <u>Logout: logout a user.</u>
 
+![Img](/docs/pics/Logout.png)
 
+Request body: N/A
 
-* bullet list
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Logout%20after.png)
 
-* more bullets
+#### <u>Get Token: check if a user is logged in.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Get%20Token%20before.png)
 
+Request body: N/A
 
-*italic*
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Get%20Token%20after.png)
 
-**bold**
+### <u> Posts: affects post functionality </u>
 
-***italic and bold***
+#### <u>Create Post: used to create a post.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Create%20post%20before.png)
 
+Request body:<br>
+{<br>
+  "content": "string",<br>
+  "date_posted": "2024-02-09"<br>
+}
 
-this
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Create%20post%20after.png)
 
+#### <u>Get Specific Post: used to get a specific post.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Get%20specific%20post%20before.png)
 
-is
+Request body: <br>
+id of post you want to see
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Get%20specific%20post%20after.png)
 
+#### <u>List All Posts: used to get all posts.</u>
 
-the
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20List%20all%20posts%20before.png)
 
+Request body: N/A
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20List%20all%20posts%20after.png)
 
-easier
+#### <u>List My Posts: used to get all posts of the logged in user.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20List%20my%20posts%20before.png)
 
+Request body: N/A
 
-way
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20List%20my%20posts%20after.png)
 
-## tables
-#tabletemplate
+#### <u>List Users Posts: used to get all posts of a specific user.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20List%20User%20post%20before.png)
 
-|             |             |
-| ----------- | ----------- |
-|             |             |
-|             |             |
+Request body:<br>
+user_id: id of the user you want to get all posts for
 
-hit "edit this block" to see how it works
-### alignment
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20List%20User%20post%20after.png)
 
-| Syntax      | Description | Test Text     |
-| :---        |    :----:   |          ---:|
-| Header      | Title       | Here's this   |
-| Paragraph   | Text        |        And more      |
-[markdown basic syntax](https://www.markdownguide.org/basic-syntax/)
-[markdown extended syntax](https://www.markdownguide.org/extended-syntax/)
-[markdown cheat sheet](https://www.youtube.com/@VisualPKM) just use this one !**
+#### <u>Update Post: used to update user information.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20update%20post%20before.png)
 
-```
-link format :[name shown on page](www.link.com)
-```
+Request body:<br>
+post_id: the id of the post you want to change<br>
+{<br>
+  "content": "string",<br>
+  "date_posted": "2024-02-09"<br>
+}
 
-```
-link to another page : [[page name]]
-```
-[[markdown]]
-[[Python Shell]]
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20update%20post%20after.png)
 
-### strikethrough
-~~The world is flat.~~ We now know that the world is round.
-```
-~~The world is flat.~~ We now know that the world is round.
-```
+#### <u>Delete Post: Delete a post.</u>
 
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Delete%20post%20before.png)
 
-### checklist
-```
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
-```
+Request body:<br>
+post_id: id of post you want to delete
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
-- [ ]
-
-
-### emojis
-```
-Gone camping! :tent: Be back soon.
-```
-
-Gone camping! :tent: Be back soon. ==(doesn't work in obsidian)==
-Gone camping! ⛺ Be back soon.
-
-### highlight
-
-
-```
-I need to highlight these ==very important words==.
-```
-
-I need to highlight these ==very important words==.
-
-
-```python
-print("Hello Python!")
-```
-```javascript
-let x = 2
-```
-```sql
-SELECT *
-FROM posts;
-```
-
-
-
+![Img](/docs/pics/FastAPI%20-%20Swagger%20-%20Delete%20post%20after.png)
