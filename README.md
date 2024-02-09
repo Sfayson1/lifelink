@@ -53,9 +53,10 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#get-it-running">Get it Running</a></li>
         <li><a href="#local-setup">Local Setup</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#configure-the-database">Configure the Database</a></li>
+        <li><a href="#navigation">Navigation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -97,24 +98,8 @@
 ### Local Setup
 
 1. fork & clone this project:
-    - https://gitlab.com/your_namespace/life-link-project-gamma.git
 
-### Prerequisites
 
-Our project was developed using docker, and postgresql through pgadmin. <br>
-to begin:
-1. open [pgadmin](http://localhost:8082/login?next=%2F)
-2. enter the credentials:
-    - Email: 'admin@admin.com'
-    - Password: 'admin'
-3. right click ***'servers'***
-4. select ***'register'***
-5. select ***'server'***
-6. name the database (name can be anything)
-7. select ***'connection'*** tab
-8. enter ***'postgres'*** for hostname
-9. enter ***'admin'*** for password
-10. select ***'save'*** on the bottom right of the popup window
 
 ### Get it running
 
@@ -127,7 +112,7 @@ installed. We do this inside docker, but not in the workspace.
 
 So we need to create a virtual environment and pip install the requirements.
 
-3. cd to the `api` folder and execute these commands:
+'cd' to the `api` folder and execute these commands:
 
 ```bash
 python -m venv .venv
@@ -136,7 +121,13 @@ python -m venv .venv
 Then activate the virtual environment
 
 ```bash
-source .venv/bin/activate
+source ./.venv/bin/activate
+```
+
+Upgrade pip
+
+```bash
+python -m pip install --upgrade pip
 ```
 
 And finally install the dependencies
@@ -169,14 +160,36 @@ DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
 ```bash
 docker compose up
 ```
-7. in docker desktop: ensure you have the following volumes:
+7. in docker desktop: ensure you have the following volumes: <br>
 ![](./docs/pics/Screen%20Shot%202024-02-09%20at%2013.16.09%20PM.png)
-8. if the fast API container doesnt start running automatically, you will just need to start it manually. migrations run automatically for this project upon container startup, but we all know docker. It might need some manual persuasion.
-
-At this point, you are running the local version of our project!
 
 
+### Configure the database:
+1. [click here to open pgadmin](http://localhost:8082/browser)
+2. enter the credentials:
+    - Email: 'admin@admin.com'
+    - Password: 'admin'
+3. right click ***'servers'***
+4. select ***'register'***
+5. select ***'server'***
+6. name the database (name can be anything)
+7. select ***'connection'*** tab
+8. enter ***'postgres'*** for hostname
+9. enter ***'admin'*** for password
+10. select ***'save'*** on the bottom right of the popup window
 
+11. if the fast API container doesnt start running automatically, you will just need to start it manually. migrations run automatically for this project upon container startup, but we all know docker. It might need some manual persuasion.
+
+
+
+***At this point, you are running the local version of our project!***
+
+## Navigation
+
+To navigate the local application, you will need the following endpoints saved:
+1. backend API: http://localhost:8000/docs#/
+2. frontend navigation: (Start here) http://localhost:5173/welcome
+    - documentation for the frontend web page can be viewed here: [click me](./docs/README.MD)
 
 
 
