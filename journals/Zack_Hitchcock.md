@@ -114,3 +114,7 @@ my most recent development branch is called version 1.1, where we will fix all t
 - modal on delete user from the my profile page is not centered
 - modal add to the delete function on update user page
 3. need to change the browser tab title, currently says "Vite+React"
+
+# note:
+to convert the app back to "development mode" now that we are deployed, youll need to:
+1. change .env param -> VITE_API_HOST=http://localhost:8000
