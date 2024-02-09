@@ -61,7 +61,7 @@ today was a big day for production. we got a lot of the frontend issues taken ca
 i was also able to make the homepage show differently when the user is logged in, using a ternary style operator logic identical to the one i mentioned above for the navbar. now, the home page for a new (non authenticated) user is a dummy page, with intriguing false posts designed to make you want to interact. when you do interact, youre redirected to the signup page. cool!
 
 notes from today:
-!!!!!!!!!!!  if NOT data! FFS!!!!!!!!!!!!!!!!
+pay attention to logical operators in regards to fetch in the frontend  'if NOT data!'
 
 ```javascript
 const fetchConfig = {credentials: 'include'};

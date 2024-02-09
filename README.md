@@ -190,6 +190,8 @@ To navigate the local application, you will need the following endpoints saved:
 1. backend API: http://localhost:8000/docs#/
 2. frontend navigation: (Start here) http://localhost:5173/welcome
     - documentation for the frontend web page can be viewed here: [click me](./docs/README.MD)
+3. pgadmin database: http://localhost:8082/browser
+
 
 
 
