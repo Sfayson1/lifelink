@@ -30,9 +30,7 @@ const Home = () => {
             if (!data) {
                 return null
             }
-
             setToken(data.access_token)
-            console.log(data)
         }
     }
 

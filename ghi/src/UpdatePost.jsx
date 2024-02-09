@@ -20,7 +20,6 @@ const UpdatePost = () => {
 
   });
 
-
       const fetchPost = async () => {
         const postUrl = `${import.meta.env.VITE_API_HOST}/posts/postID/${post_id}`
         const response = await fetch(postUrl)
@@ -42,8 +41,7 @@ const UpdatePost = () => {
       if (!data){
         return null;
       }
-      setToken(data)
-
+      setToken(data.access_token)
     }
   }
 
@@ -89,10 +87,15 @@ const UpdatePost = () => {
 
 
   useEffect(() => {
-      fetchToken();
-      fetchPost();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    const fetchData = async () => {
+      await fetchToken();
+      await fetchPost();
+    };
+
+    fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   return (
@@ -113,8 +116,6 @@ const UpdatePost = () => {
               className="form-control"/>
               <label htmlFor="content">Edit your post:</label>
             </div>
-
-
             <button type="submit" className='btn btn-primary'>Update Post</button>
           </form>
           <button onClick={handleDeletePost} className='btn btn-danger mt-2'>Delete post</button>
