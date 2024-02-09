@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from typing import Optional
 from psycopg.rows import dict_row
 
-app = FastAPI(debug=True)
+app = FastAPI()
 
 pool = ConnectionPool(conninfo=os.environ.get("DATABASE_URL"))
 
