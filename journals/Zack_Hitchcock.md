@@ -118,3 +118,17 @@ my most recent development branch is called version 1.1, where we will fix all t
 # note:
 to convert the app back to "development mode" now that we are deployed, youll need to:
 1. change .env param -> VITE_API_HOST=http://localhost:8000
+
+
+issues:
+
+doesnt work on phone
+
+successful login still momentarily populates the failed login popup, even if successful
+
+signup redirect is slow
+
+form population works in development but not deployed page, fixes with vite hot update? maybe a useeffect problem
+
+
+https://life-link-project-gamma-purveyors-of-progress-cbd3ad7e97f6d732f.gitlab.io/

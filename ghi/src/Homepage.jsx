@@ -11,7 +11,7 @@ const Homepage = () => {
     return (
         <div>
             {' '}
-            <input placeholder="What's happening now?!" className />
+            <input placeholder="What's happening now?!" />
             <button onClick={navigateToSignup} className="btn btn-sm btn-primary mb-2"> submit </button>
             <div className="card mb-3">
                 <div className="cardbody">

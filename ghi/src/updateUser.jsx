@@ -17,8 +17,24 @@ function UpdateUser() {
     grad_class: ''
   });
 
+  const fetchToken = async () => {
+    const tokenURL = `${import.meta.env.VITE_API_HOST}/token`;
+    const fetchConfig = {credentials:'include'};
+    const response = await fetch(tokenURL, fetchConfig);
+    if (response.ok) {
+      const data = await response.json();
+
+      if (!data){
+        return null;
+      }
+      setToken(data
+        .access_token)
+      setUserId(data.user.id);
+
+    }
+  }
   const fetchUser = async () => {
-    const userUrl = `${import.meta.env.VITE_API_HOST}/users/${token.user.id}/`
+    const userUrl = `${import.meta.env.VITE_API_HOST}/users/${userId}/`
     const response = await fetch(userUrl)
     if (response.ok) {
       const data = await response.json()
@@ -32,21 +48,6 @@ function UpdateUser() {
         email: data.email,
         grad_class: data.grad_class,
       }))
-    }
-  }
-
-  const fetchToken = async () => {
-    const tokenURL = `${import.meta.env.VITE_API_HOST}/token`;
-    const fetchConfig = {credentials:'include'};
-    const response = await fetch(tokenURL, fetchConfig);
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data)
-      if (!data){
-        return null;
-      }
-      setToken(data)
-      setUserId(data.user.id);
     }
   }
 
@@ -93,13 +94,18 @@ function UpdateUser() {
             setIsDeleted(true);
         }
         setShow(false);
-
     }
+
     useEffect(() => {
       fetchToken();
-      fetchUser();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    useEffect(() => {
+      if (token) {
+      fetchUser();
+    }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token]);
 
     useEffect(() => {
     if (isDeleted) {
@@ -107,7 +113,6 @@ function UpdateUser() {
         navigate('/welcome');
     }
     }, [isDeleted, logout, navigate]);
-
 
   return (
     <div className="row">
