@@ -1,6 +1,9 @@
 # James Bratcher's journal
 
 ## 16
+2/9/2024: Worked on Documentation for API And Front end, Zack did the rest of the readme. Finally done
+
+## 16
 2/8/2024: Filled the group in on deploying, how much fun it was, and the necessary changes that will be needed to ensure their new .jsx files are ready for deployment. Zack worked on fixing the clash of CSS and bootstrap that made our application fail (sizing of elements were wrong and overlapping, navbar would disapear when too many posts were made, text box was bigger than what appeared as the text would wrap, but a good few inches past the end of the box). Sherika and I worked on our unit tests, we both had our tests pass locally, but when sent to the pipeline for deployment we got an "ERROR tests/test_users.py - KeyError: 'SIGNING_KEY'". Sherika saved the day when she made a small change to the authenticator file, changing the code from
 
 authenticator = LifeLinkAuthenticator(os.environ["SIGNING_KEY"])
