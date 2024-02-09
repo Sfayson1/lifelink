@@ -98,7 +98,6 @@ function UpdateUser() {
 
     useEffect(() => {
       fetchToken();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     useEffect(() => {
       if (token) {
