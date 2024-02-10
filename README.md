@@ -53,8 +53,11 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#get-it-running">Get it Running</a></li>
+        <li><a href="#functionality">Functionality</a></li>
+        <li><a href="#goals-for-the-project">Goals for the project</a></li>
+        <li><a href="#unit-testing">Unit tests</a></li>
         <li><a href="#local-setup">Local Setup</a></li>
+        <li><a href="#get-it-running">Get it Running!</a></li>
         <li><a href="#configure-the-database">Configure the Database</a></li>
         <li><a href="#navigation">Navigation</a></li>
       </ul>
@@ -70,13 +73,34 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+This project showcases our abilities in full life-cycle software development. From just an idea, all the way to a deployed, functioning full stack web application. We created a design, underwent a thorough planning process, and executed each step sequentially until it was done.
 
+## Functionality
+- Before login, you are intially directed to a "welcome" page, where you're able to view a sample set of posts, which are static and placed ironically as a hook to grab the potential users attention.<br>
+<br>
+- As a non-logged in user, you have the ability to see all other users, and their respective posts.<br>
+<br>
+- As a logged in user, you will have accessibility to four main pages, the homepage, list of users, my profile, and update user.
+    - Home page will allow you to view the most current posts within the LifeLink Feed as well as publish your own posts.
+    - Within list of users, you'll be able to view a list of currently registered users as well as view their individual profile.
+    - The my profile page will allow you to Update or delete either your profile or your posts.
 
+## Goals for the project
+This project was developed from start to finish within a 4 week time-frame. Our product is in its first production version, which is a living solution to the problem of struggling to keep up with who's who on linkedin, and what graduating class they're from, mixed in with the ever-evolving other details of their lives. As Hack Reactor students, we are focused on one thing, *networking.* We want to know who, from what class, did what to get what interview or what job, and share helpful insights as they see fit.
+<br>
+<br>
+We have hopes to continue forward on this journey, improving the app experience as our skillset grows.<br>
+<br>
+Our goals for this project are as follows:
 
+1. Links shared in a post made to be clickable. This will facilitate a good user experience when other students are sharing their projects.
+2. Ability to post photos/implement profile photos.
+3. Individual chatrooms which are category-specific. For example, a 'jobs board' could be an independant feed where we talk about employment opportunities, tips, etc.
 
-
-
-
+## Unit testing:
+- ***test_post.py*** completed by Zack Hitchcock. tests 'get_specific_post' query
+- ***test_posts.py*** completed by Sherika Fayson. tests 'get_all_posts' query
+- ***test_users.py*** completed by James Bratcher tests 'get_all_users' query
 
 ### Built With
 
@@ -144,12 +168,16 @@ code .
 Then make sure the venv is selected in VSCode by checking the lower right of the
 VSCode status bar
 
-4. in VSCode, create a `.env` file in the root directory and enter the following:
+4. in VSCode, create a `.env` file in the root directory and enter the following:<br>
+*note: signing keys are unique. below is a sample for your convenience*<br>
 ```bash
 DATABASE_URL=postgresql://admin:admin@postgres:5432/postgres-data
-SIGNING_KEY_FROM_ENV_FILE=oi2j3f-oijoisjfeihf3iu2-hpslijwelihf
+SIGNING_KEY_FROM_ENV_FILE=oi4j7f-oijoisjfeihf1iu1-rdghlijwelihf
 VITE_API_HOST=http://localhost:8000
 ```
+5. in VSCode, in a file: ghi/src/main.jsx,
+youll need to comment out lines 8&9, and uncomment line #10. This will leave the code in good condition to run in the docker environment.<br>
+![main](./docs/pics/mainjsx.png)
 5. Now, open docker desktop
 6. back in your terminal, in the root directory, enter these commands:
 ```bash
