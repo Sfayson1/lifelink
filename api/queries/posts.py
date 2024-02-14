@@ -143,6 +143,7 @@ class PostQueries:
                         record[column.name] = row[i]
                     records.append(PostOut(**record))
                 return {"posts": records}
+                
 
     def update_post(self, post_id: int, data) -> Optional[PostOut]:
         try:
