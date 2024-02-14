@@ -1,72 +1,134 @@
-# Module3 Project Gamma
+# LifeLink
 
-## Getting started
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+<a name="readme-top"></a>
 
-## Install Extensions
 
--   Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
--   Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+[![Pipeline Status](https://img.shields.io/gitlab/pipeline-status/purveyors-of-progress/life-link-project-gamma?label=Pipeline&labelColor=blue&logo=gitlab)](https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/pipelines)
+[![Last Commit](https://img.shields.io/gitlab/last-commit/purveyors-of-progress/life-link-project-gamma?label=Last%20Commit&labelColor=blue&logo=gitlab)](https://gitlab.com/purveyors-of-progress/life-link-project-gamma)
+[![Merge Requests](https://img.shields.io/badge/Merge%20Requests-Check%20Here-blue)](https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/merge_requests)
+[![Forks](https://img.shields.io/gitlab/forks/purveyors-of-progress/life-link-project-gamma)](https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/forks)
+[![Stars](https://img.shields.io/gitlab/stars/purveyors-of-progress/life-link-project-gamma)](https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/starrers)
+[![Open Issues](https://img.shields.io/gitlab/issues/open/purveyors-of-progress/life-link-project-gamma?label=Open%20Issues&labelColor=blue&logo=gitlab)](https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/issues)
 
-## Deliverables
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
--   [ ] Wire-frame diagrams
--   [ ] API documentation
--   [ ] Project is deployed to Caprover (BE, DB) & GitLab-pages (FE)
--   [ ] GitLab issue board is setup and in use (or project management tool of choice)
--   [ ] Journals
 
-## Project layout
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://gitlab.com/purveyors-of-progress/life-link-project-gamma">
+    <img src="./docs/pics/Screen Shot 2024-02-09 at 12.46.50 PM.png" alt="Logo" >
+  </a>
 
-### Directories
+<h3 align="center">LifeLink</h3>
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+  <p align="center">
+    This project is aimed at creating an open-source communication platform for alumni members of the Hack Reactor Advanced Immersive Software Engineering Program. <br> <br><i>Share a link to your project, on our project</i>
+    <br /><br>
+    <a href="./docs/README.MD"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://life-link-project-gamma-purveyors-of-progress-cbd3ad7e97f6d732f.gitlab.io/">View Demo</a>
+    ·
+    <a href="https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/issues">Report Bug</a>
+    ·
+    <a href="https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/issues">Request Feature</a>
+  </p>
+</div>
 
-The other directories, `ghi` and `api`, are services, that
-you can start building off of.
 
-Inside of `ghi` is a minimal React app that has an "under construction" page.
-This app is written using the [Vite](https://vitejs.dev/) bundler. The example
-code is also using [jsdoc](https://jsdoc.app/) to provide type hints for
-JavaScript. You are not required to use JSDoc yourself, and you will be removing
-these examples and providing your own code for `App.jsx`
 
-Inside of `api` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#functionality">Functionality</a></li>
+        <li><a href="#goals-for-the-project">Goals for the project</a></li>
+        <li><a href="#unit-testing">Unit tests</a></li>
+        <li><a href="#local-setup">Local Setup</a></li>
+        <li><a href="#get-it-running">Get it Running!</a></li>
+        <li><a href="#configure-the-database">Configure the Database</a></li>
+        <li><a href="#navigation">Navigation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-Also in `api` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
 
-The Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
 
-### Installing python dependencies locally
+<!-- ABOUT THE PROJECT -->
+## About The Project
+This project showcases our abilities in full life-cycle software development. From just an idea, all the way to a deployed, functioning full stack web application. We created a design, underwent a thorough planning process, and executed each step sequentially until it was done.
+
+## Functionality
+- Before login, you are intially directed to a "welcome" page, where you're able to view a sample set of posts, which are static and placed ironically as a hook to grab the potential users attention.<br>
+<br>
+- As a non-logged in user, you have the ability to see all other users, and their respective posts.<br>
+<br>
+- As a logged in user, you will have accessibility to four main pages, the homepage, list of users, my profile, and update user.
+    - Home page will allow you to view the most current posts within the LifeLink Feed as well as publish your own posts.
+    - Within list of users, you'll be able to view a list of currently registered users as well as view their individual profile.
+    - The my profile page will allow you to Update or delete either your profile or your posts.
+
+## Goals for the project
+This project was developed from start to finish within a 4 week time-frame. Our product is in its first production version, which is a living solution to the problem of struggling to keep up with who's who on linkedin, and what graduating class they're from, mixed in with the ever-evolving other details of their lives. As Hack Reactor students, we are focused on one thing, *networking.* We want to know who, from what class, did what to get what interview or what job, and share helpful insights as they see fit.
+<br>
+<br>
+We have hopes to continue forward on this journey, improving the app experience as our skillset grows.<br>
+<br>
+Our goals for this project are as follows:
+
+1. Links shared in a post made to be clickable. This will facilitate a good user experience when other students are sharing their projects.
+2. Ability to post photos/implement profile photos.
+3. Individual chatrooms which are category-specific. For example, a 'jobs board' could be an independant feed where we talk about employment opportunities, tips, etc.
+
+## Unit testing:
+- ***test_post.py*** completed by Zack Hitchcock. tests 'get_specific_post' query
+- ***test_posts.py*** completed by Sherika Fayson. tests 'get_all_posts' query
+- ***test_users.py*** completed by James Bratcher tests 'get_all_users' query
+
+### Built With
+
+* [![Fast][fastapi]][fastapi-url]
+* [![React][React.js]][React-url]
+* [![Vite][vite.js]][Vite-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* ![Postgresql][postgresql-url]
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+*Our project is deployed! you can visit the production version here:* **[LifeLink](https://life-link-project-gamma-purveyors-of-progress-cbd3ad7e97f6d732f.gitlab.io/)**
+
+### Local Setup
+
+1. fork & clone this project:
+
+
+
+### Get it running
+
+1. in your terminal, cd to this projects directory.
+2. Install python dependencies locally
 
 In order for VSCode's built in code completion and intelligence to
 work correctly, it needs the dependencies from the requirements.txt file
@@ -74,7 +136,7 @@ installed. We do this inside docker, but not in the workspace.
 
 So we need to create a virtual environment and pip install the requirements.
 
-From inside the `api` folder:
+'cd' to the `api` folder and execute these commands:
 
 ```bash
 python -m venv .venv
@@ -83,7 +145,13 @@ python -m venv .venv
 Then activate the virtual environment
 
 ```bash
-source .venv/bin/activate
+source ./.venv/bin/activate
+```
+
+Upgrade pip
+
+```bash
+python -m pip install --upgrade pip
 ```
 
 And finally install the dependencies
@@ -92,81 +160,146 @@ And finally install the dependencies
 pip install -r requirements.txt
 ```
 
+Now open the project in VSCode
+```bash
+code .
+```
+
 Then make sure the venv is selected in VSCode by checking the lower right of the
 VSCode status bar
 
-### Other files
+4. in VSCode, create a `.env` file in the root directory and enter the following:<br>
+*note: signing keys are unique. below is a sample for your convenience*<br>
+```bash
+DATABASE_URL=postgresql://admin:admin@postgres:5432/postgres-data
+SIGNING_KEY_FROM_ENV_FILE=oi4j7f-oijoisjfeihf1iu1-rdghlijwelihf
+VITE_API_HOST=http://localhost:8000
+```
+5. in VSCode, in a file: ghi/src/main.jsx,
+youll need to comment out lines 8&9, and uncomment line #10. This will leave the code in good condition to run in the docker environment.<br>
+![main](./docs/pics/mainjsx.png)
+5. Now, open docker desktop
+6. back in your terminal, in the root directory, enter these commands:
+```bash
+docker compose build
+# IF RUNNING ON A MAC WITH SILICON PROCESSOR:
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose build
+```
+```bash
+docker compose up
+```
+7. in docker desktop: ensure you have the following volumes: <br>
+![](./docs/pics/Screen%20Shot%202024-02-09%20at%2013.16.09%20PM.png)
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
 
--   `docker-compose.yaml`: there isn't much in here, just a
-    **really** simple UI and FastAPI service. Add services
-    (like a database) to this file as you did with previous
-    projects in module #2.
--   `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-    configure automated unit tests, code quality checks, and
-    the building and deployment of your production system.
-    Currently, all it does is deploy an "under construction"
-    page to your production UI on GitLab and a sample backend
-    to CapRover. We will learn much more about this file.
--   `.gitignore`: This is a file that prevents unwanted files
-    from getting added to your repository, files like
-    `pyc` files, `__pycache__`, etc. We've set it up so that
-    it has a good default configuration for Python projects.
--   `.env.sample`: This file is a template to copy when
-    creating environment variables for your team. Create a
-    copy called `.env` and put your own passwords in here
-    without fear of it being committed to git (see `.env`
-    listed in `.gitignore`). You can also put team related
-    environment variables in here, things like api and signing
-    keys that shouldn't be committed; these should be
-    duplicated in your deployed environments.
+### Configure the database:
+1. [click here to open pgadmin](http://localhost:8082/browser)
+2. enter the credentials:
+    - Email: 'admin@admin.com'
+    - Password: 'admin'
+3. right click ***'servers'***
+4. select ***'register'***
+5. select ***'server'***
+6. name the database (name can be anything)
+7. select ***'connection'*** tab
+8. enter ***'postgres'*** for hostname
+9. enter ***'admin'*** for password
+10. select ***'save'*** on the bottom right of the popup window
 
-## How to complete the initial deploy
+11. if the fast API container doesnt start running automatically, you will just need to start it manually. migrations run automatically for this project upon container startup, but we all know docker. It might need some manual persuasion.
 
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
 
-### Setup GitLab repo/project
 
--   make sure this project is in a group. If it isn't, stop
-    now and move it to a GitLab group
--   remove the fork relationship: In GitLab go to:
+***At this point, you are running the local version of our project!***
 
-    Settings -> General -> Advanced -> Remove fork relationship
+## Navigation
 
--   add these GitLab CI/CD variables:
-    -   PUBLIC_URL : this is your gitlab pages URL
-    -   VITE_APP_API_HOST: enter "blank" for now
+To navigate the local application, you will need the following endpoints saved:
+1. backend API: http://localhost:8000/docs#/
+2. frontend navigation: (Start here) http://localhost:5173/welcome
+    - documentation for the frontend web page can be viewed here: [click me](./docs/README.MD)
+3. pgadmin database: http://localhost:8082/browser
 
-#### Your GitLab pages URL
 
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
 
-If this is your project URL
 
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
 
-then your GitLab pages URL will be
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
 
-### Initialize CapRover
 
-1. Attain IP address and domain from an instructor
-1. Follow the steps in the CD Cookbook in Learn.
+<!-- USAGE EXAMPLES -->
+## Usage
 
-### Update GitLab CI/CD variables
+Here, you will find all API documentation, and examples of the projects frontend as it functions at the time of writing this readme.
 
-Copy the service URL for your CapRover service and then paste
-that into the value for the REACT_APP_API_HOST CI/CD variable
-in GitLab.
+_For more examples, please refer to the [Documentation](./docs/README.MD)_
 
-### Deploy it
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Added an AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Merge Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+
+<!-- CONTACT -->
+## Contact
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/zack-hitchcock-17841a219">
+    <img src="./docs/pics/zack.png" width="200" height="200">
+  </a><br>
+  <a href="https://www.linkedin.com/in/zack-hitchcock-17841a219">Zack Hitchcock - LinkedIn</a><br>
+  <a href="mailto:hitchcockzack@gmail.com">hitchcockzack@gmail.com</a>
+</p>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/james-kenji-bratcher/">
+    <img src="./docs/pics/james.png" width="200" height="200">
+  </a><br>
+  <a href="https://www.linkedin.com/in/james-kenji-bratcher/">James Bratcher - LinkedIn</a>
+</p>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/sherika-fayson/">
+    <img src="./docs/pics/sherika.png" width="200" height="200">
+  </a><br>
+  <a href="https://www.linkedin.com/in/sherika-fayson/">Sherika Fayson - LinkedIn</a>
+</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: www.linkedin.com/in/zack-hitchcock-17841a219/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[Vite-url]: https://vitejs.dev/
+[vite.js]: https://img.shields.io/badge/vite-js-000000?style=for-the-badge&logo=vite&logoColor=white
+[fastapi]: https://img.shields.io/badge/fastapi-000000?style=for-the-badge&logo=fastapi&logoColor=white
+[fastapi-url]: https://fastapi.tiangolo.com/
+[postgresql]: https://www.postgresql.org/
+[postgresql-url]: https://img.shields.io/badge/postgres-000000?style=for-the-badge&logo=postgresql&logoColor=white

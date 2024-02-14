@@ -1,0 +1,78 @@
+/* Profile.css */
+
+/* Profile container */
+.profile-container {
+    padding: 20px;
+}
+
+/* User info section */
+.user-info {
+    margin-bottom: 20px;
+}
+
+.user-info h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.user-info p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Posts feed */
+.posts-feed {
+    margin-top: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-body h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-body p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333; /* Adjust font color */
+    line-height: 1.4; /* Adjust line height */
+}
+
+.card-body small {
+    font-size: 14px;
+    color: #999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .user-info h2 {
+        font-size: 20px;
+    }
+
+    .user-info p {
+        font-size: 14px;
+    }
+
+    .card-body h5 {
+        font-size: 16px;
+    }
+
+    .card-body p {
+        font-size: 14px;
+    }
+
+    .card-body small {
+        font-size: 12px;
+    }
+}

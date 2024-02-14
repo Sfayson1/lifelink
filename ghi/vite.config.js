@@ -7,10 +7,8 @@ export default defineConfig({
     server: {
         host: true,
         strictPort: true,
-    },
-    resolve: {
-        alias: {
-            'react-router-dom': 'react-router-dom@6',
-        },
-    },
+        watch: {
+          usePolling: true
+        }
+    }
 })
