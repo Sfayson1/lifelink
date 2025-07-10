@@ -117,7 +117,7 @@ Our goals for this project are as follows:
 
 <!-- GETTING STARTED -->
 ## Getting Started
-*Our project is deployed! you can visit the production version here:* **[LifeLink](https://life-link-project-gamma-purveyors-of-progress-cbd3ad7e97f6d732f.gitlab.io/)**
+*Our project is deployed! you can visit the production version here:* **[LifeLink](https://lifelink-mv0n.onrender.com)**
 
 ### Local Setup
 
