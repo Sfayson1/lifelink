@@ -13,11 +13,7 @@ app.include_router(users.router, tags=["Auth"])
 # Fixed CORS configuration - only one allow_origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://lifelink-mv0n.onrender.com",  
-        "http://localhost:5173",             
-        "http://localhost:3000",             
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
