@@ -26,8 +26,8 @@ class LifeLinkAuthenticator(Authenticator):
         return account.username, UserOut(**account.dict())
 
   
-    def get_auth_router(self, output_schema) -> APIRouter:
-        return super().get_auth_router(output_schema)
+    def get_auth_router(self, output_schema):
+        return Authenticator.get_auth_router(self, output_schema)
 
 
 authenticator = LifeLinkAuthenticator(os.environ["SIGNING_KEY"])
