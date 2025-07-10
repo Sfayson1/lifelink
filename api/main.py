@@ -20,7 +20,7 @@ app.add_middleware(
 )
 
 app.include_router(posts.router, tags=["Posts"])
-app.include_router(authenticator.router, prefix="/api/auth", tags=["Auth"])
+app.include_router(authenticator.get_auth_router(UserOut), prefix="/api/auth", tags=["Auth"])
 app.include_router(users.router, prefix="/api/users", tags=["Auth"])
 
 @app.get("/test-token")
