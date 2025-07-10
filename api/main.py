@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from models import UserOut
-from routers import users, posts
+from routers import users, posts, auth_routes
 from authenticator import authenticator
 
 app = FastAPI()
@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(posts.router, tags=["Posts"])
-app.include_router(authenticator.get_auth_router(UserOut), prefix="/api/auth", tags=["Auth"])
+app.include_router(auth_routes.router, prefix="/api/auth", tags=["Auth"])
 app.include_router(users.router, prefix="/api/users", tags=["Auth"])
 
 @app.get("/test-token")
