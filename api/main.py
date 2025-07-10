@@ -6,10 +6,6 @@ from authenticator import authenticator
 
 app = FastAPI()
 
-app.include_router(posts.router, tags=["Posts"])
-app.include_router(authenticator.router, tags=["Auth"])
-app.include_router(users.router, tags=["Auth"])
-
 # Fixed CORS configuration - only one allow_origins
 app.add_middleware(
     CORSMiddleware,
@@ -18,6 +14,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(posts.router, tags=["Posts"])
+app.include_router(authenticator.router, tags=["Auth"])
+app.include_router(users.router, tags=["Auth"])
 
 @app.get("/api/launch-details")
 def launch_details():
