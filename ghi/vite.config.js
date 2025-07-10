@@ -1,14 +1,11 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react()],
-    server: {
-        host: true,
-        strictPort: true,
-        watch: {
-          usePolling: true
-        }
-    }
+  plugins: [react()],
+  base: '/lifelink/', 
+  build: {
+    outDir: 'dist'
+  }
 })
