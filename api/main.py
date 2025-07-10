@@ -12,9 +12,9 @@ app.include_router(users.router, tags=["Auth"])
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://your-frontend-name.onrender.com",  # You'll replace this later
-        "http://localhost:5173",  # For local development
-        "http://localhost:3000",  # Alternative local port
+        "https://lifelink-mv0n.onrender.com",  
+        "http://localhost:5173",             
+        "http://localhost:3000",             
     ],
     allow_credentials=True,
     allow_methods=["*"],
