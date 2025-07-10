@@ -11,7 +11,11 @@ app.include_router(users.router, tags=["Auth"])
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.environ.get("CORS_HOST"), "http://localhost:5173"],
+    allow_origins=[
+        "https://your-frontend-name.onrender.com",  # You'll replace this later
+        "http://localhost:5173",  # For local development
+        "http://localhost:3000",  # Alternative local port
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
