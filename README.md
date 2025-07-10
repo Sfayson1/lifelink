@@ -30,11 +30,11 @@
     <a href="./docs/README.MD"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://life-link-project-gamma-purveyors-of-progress-cbd3ad7e97f6d732f.gitlab.io/">View Demo</a>
+    <a href="https://lifelink-mv0n.onrender.com">View Demo</a>
     ·
-    <a href="https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/issues">Report Bug</a>
+    <a href="https://github.com/Sfayson1/lifelink/issues">Report Bug</a>
     ·
-    <a href="https://gitlab.com/purveyors-of-progress/life-link-project-gamma/-/issues">Request Feature</a>
+    <a href="https://github.com/Sfayson1/lifelink/issues">Request Feature</a>
   </p>
 </div>
 
