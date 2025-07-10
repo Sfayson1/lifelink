@@ -46,7 +46,7 @@ def get_all(
     return repo.get_all()
 
 
-@router.post("/api/users/", response_model=UserToken | HttpError)
+@router.post("/users/", response_model=UserToken | HttpError)
 async def create_user(
     info: UserIn,
     request: Request,
