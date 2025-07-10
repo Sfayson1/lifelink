@@ -31,6 +31,10 @@ app.include_router(posts.router, tags=["Posts"])
 app.include_router(authenticator.router, tags=["Auth"])
 app.include_router(users.router, tags=["Auth"])
 
+@app.get("/test-token")
+def test_token():
+    return {"message": "CORS is working"}
+
 @app.get("/api/launch-details")
 def launch_details():
     return {
