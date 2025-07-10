@@ -3,7 +3,7 @@ from fastapi import Depends
 from jwtdown_fastapi.authentication import Authenticator
 from queries.users import UserQueries
 from models import UserOutWithPassword, UserOut
-from fastapi.routing import APIRouter  
+
 
 class LifeLinkAuthenticator(Authenticator):
     async def get_account_data(
@@ -24,10 +24,6 @@ class LifeLinkAuthenticator(Authenticator):
 
     def get_account_data_for_cookie(self, account: UserOutWithPassword):
         return account.username, UserOut(**account.dict())
-
-  
-    def get_auth_router(self, output_schema):
-        return Authenticator.get_auth_router(self, output_schema)
 
 
 authenticator = LifeLinkAuthenticator(os.environ["SIGNING_KEY"])
