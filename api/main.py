@@ -20,7 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(posts.router, tags=["Posts"])
+app.include_router(posts.router, prefix="/api/posts", tags=["Posts"])
 app.include_router(auth_routes.router, prefix="/api/auth", tags=["Auth"])
 app.include_router(users.router, prefix="/api/users", tags=["Auth"])
 
