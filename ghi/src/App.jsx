@@ -25,6 +25,8 @@ const API_HOST = import.meta.env.VITE_API_HOST
 if (!API_HOST) {
     throw new Error('VITE_API_HOST is not defined')
 }
+console.log("Calling:", `${import.meta.env.VITE_API_HOST}/api/posts/all`);
+
 
 function App() {
     return (
